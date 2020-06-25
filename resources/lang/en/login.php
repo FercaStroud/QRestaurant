@@ -3,7 +3,7 @@
 return [
 
     'confirm_password' => 'Confirm password',
-    'description' => 'A Laravel 6 Single Page Application boilerplate using Vue.js 2.6, Bootstrap 4, TypeScript, Sass and Pug.',
+    'description' => 'Activated charcoal squid brunch retro messenger bag hashtag 90\'s wayfarers jianbing mustache banh mi fanny pack PBR&B adaptogen. Master cleanse normcore XOXO, neutra meh asymmetrical lumbersexual humblebrag umami af. ',
     'forgot_password' => 'Forgot Your Password?',
     'login' => 'Login',
     'keep_connected' => 'Keep me connected',

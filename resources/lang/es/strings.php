@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'project_title'=>'QRestaurant',
     'admin' => 'Administrador',
     'email' => 'E-mail',
     'image' => 'Imagen',
@@ -18,6 +18,7 @@ return [
     'welcome' => 'Bienvenido',
 
     // Pages
+    'dashboard'=>'Panel de Administración',
     'example' => 'Ejemplo',
     'home' => 'Home',
     'messages' => 'Mensajes',

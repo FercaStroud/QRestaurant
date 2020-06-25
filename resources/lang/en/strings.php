@@ -2,6 +2,7 @@
 
 return [
 
+    'project_title'=>'QRestaurant',
     'admin' => 'Administrator',
     'email' => 'E-mail',
     'image' => 'Image',
@@ -18,6 +19,7 @@ return [
     'welcome' => 'Welcome',
 
     // Pages
+    'dashboard'=>'Admin Panel',
     'example' => 'Example',
     'home' => 'Home',
     'messages' => 'Messages',

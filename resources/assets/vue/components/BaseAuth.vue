@@ -12,10 +12,9 @@ export default class BaseAuth extends Vue {
     b-col.login-col(cols=12, md=6, sm=12, lg=4)
       router-link(to='/login')
         .logo
-          img.d-inline-block.align-top(
-            src='/images/logo.png',
-            alt='Logo'
-            height=36,
+          img.d-inline-block.img-fluid(
+            src='/images/logo.svg',
+            alt='Logo QRestaurant'
           )
 
       router-view
@@ -28,15 +27,9 @@ export default class BaseAuth extends Vue {
       :style="{ background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/background-login.jpg) no-repeat center / cover' }"
     )
       .welcome
-        h1 {{ $t('strings.welcome') }}!
+        h1.font-caveat(style={fontSize:'5em'}) {{ $t('strings.project_title') }}!
         .sub-text {{ $t('login.description') }}
 
-  a(href='https://github.com/alefesouza/laravel-vue-boilerplate', target='_blank')
-    img(
-      src='https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png',
-      alt='Fork me on GitHub',
-      class='fork-me',
-    )
 </template>
 
 <style lang="scss" scoped>
@@ -69,6 +62,7 @@ form {
 .login-screen,
 .login-row {
   height: 100%;
+  background-color: white;
 }
 
 .logo {
@@ -88,11 +82,12 @@ form {
 }
 
 .welcome {
-  color: #ffffff;
+  color: #f7f7f8;
   max-width: 555px;
   margin-bottom: 65px;
   margin-top: 65px;
   padding-right: 55px;
+
   h1 {
     font-size: 60px;
   }

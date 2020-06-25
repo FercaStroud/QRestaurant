@@ -50,7 +50,7 @@ export default class AuthRegister extends Vue {
 
 <template lang="pug">
 b-form(@submit='register')
-  .title {{ $t('login.register') }}
+  .title.font-caveat(style={fontSize:'2em'}) {{ $t('login.register') }}
 
   b-form-group(
     :label='$t("strings.name")'

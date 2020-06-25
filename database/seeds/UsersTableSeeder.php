@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
 
         // Users pagination
         // I know how to use factories, I just wanted to add it.
-        $people = [
+        /*$people = [
             'Alefe Souza',
             'Ada Lovelace', 'Charles Babbage', 'George Boole', 'Alan Turing', 'Dennis Ritchie',
             'Rasmus Lerdorf', 'Brendan Eich', 'James Gosling', 'Anders Hejlsberg', 'Rob Pike', 'Ken Thompson',
@@ -44,6 +44,6 @@ class UsersTableSeeder extends Seeder
                 'password' => bcrypt('secret'),
                 'type_id' => 2,
             ]);
-        }
+        }*/
     }
 }

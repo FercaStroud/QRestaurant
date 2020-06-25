@@ -3,7 +3,7 @@
 return [
 
     'confirm_password' => 'Confirmar contraseña',
-    'description' => 'Una plantilla repetitiva de Laravel 6 Single Page Application utilizando Vue.js 2.6, Bootstrap 4, TypeScript, Sass y Pug.',
+    'description' => 'Activated charcoal squid brunch retro messenger bag hashtag 90\'s wayfarers jianbing mustache banh mi fanny pack PBR&B adaptogen. Master cleanse normcore XOXO, neutra meh asymmetrical lumbersexual humblebrag umami af. ',
     'forgot_password' => '¿Olvidaste tu contraseña?',
     'login' => 'Iniciar sesión',
     'keep_connected' => 'Mantenme conectado',

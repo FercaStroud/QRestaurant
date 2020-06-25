@@ -1,4 +1,14 @@
 // Just an example of how to change Bootstrap theme colors, it's the default values
 $danger_color: #dc3545;
-$primary_color: #007bff;
+$primary_color: #f16338;
 $theme-colors: ("danger": $danger_color, "primary": $primary_color);
+
+::-moz-selection { /* Code for Firefox */
+  color: #f16338;
+  background: #5a5c5c;
+}
+
+::selection {
+  color: #f16338;
+  background: #5a5c5c;
+}

@@ -6,7 +6,7 @@ const AuthRegister = () => import('../views/AuthRegister.vue');
 const AuthResetLink = () => import('../views/AuthResetLink.vue');
 const AuthResetForm = () => import('../views/AuthResetForm.vue');
 
-const Example = () => import('../views/Example.vue');
+const Dashboard = () => import('../views/Dashboard.vue');
 const Home = () => import('../views/Home.vue');
 const Messages = () => import('../views/Messages.vue');
 const Users = () => import('../views/Users.vue');
@@ -27,16 +27,16 @@ const router = new Router({
         title: Vue.i18n.translate('strings.home', null),
         auth: {
           roles: userTypes.ADMIN,
-          forbiddenRedirect: '/example',
+          forbiddenRedirect: '/dashboard',
         },
       },
     },
     {
-      path: '/example',
-      name: 'example',
-      component: Example,
+      path: '/dashboard',
+      name: 'dashboard',
+      component: Dashboard,
       meta: {
-        title: Vue.i18n.translate('strings.example', null),
+        title: Vue.i18n.translate('strings.dashboard', null),
         auth: true,
       },
     },

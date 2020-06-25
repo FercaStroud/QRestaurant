@@ -28,7 +28,7 @@ class Language
     public function handle($request, Closure $next)
     {
         $locale = Locale::acceptFromHttp(Request::server('HTTP_ACCEPT_LANGUAGE'));
-        $language = substr($locale, 0, 2) == 'pt' ? 'pt' : 'en';
+        $language = substr($locale, 0, 2) == 'pt' ? 'pt' : 'es';
 
         App::setLocale($language);
 
