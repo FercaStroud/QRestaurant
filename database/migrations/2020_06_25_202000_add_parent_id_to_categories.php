@@ -17,9 +17,9 @@ class AddParentIdToCategories extends Migration
 
         Schema::table('categories', function (Blueprint $table) use ($driver) {
             if ($driver === 'sqlite') {
-                $table->unsignedSmallInteger('parent_id')->default(0)->after('id');
+                $table->unsignedBigInteger('parent_id')->default(0)->after('id');
             } else {
-                $table->unsignedSmallInteger('parent_id')->after('id');
+                $table->unsignedBigInteger('parent_id')->after('id');
             }
 
             $table->foreign('parent_id')->references('id')->on('categories');

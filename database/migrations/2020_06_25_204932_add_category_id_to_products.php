@@ -17,9 +17,9 @@ class AddCategoryIdToProducts extends Migration
 
         Schema::table('products', function (Blueprint $table) use ($driver) {
             if ($driver === 'sqlite') {
-                $table->unsignedSmallInteger('category_id')->default(0)->after('id');
+                $table->unsignedBigInteger('category_id')->default(0)->after('id');
             } else {
-                $table->unsignedSmallInteger('category_id')->after('id');
+                $table->unsignedBigInteger('category_id')->after('id');
             }
 
             $table->foreign('category_id')->references('id')->on('categories');

@@ -17,9 +17,9 @@ class AddUserIdToCategories extends Migration
 
         Schema::table('categories', function (Blueprint $table) use ($driver) {
             if($driver === 'sqlite') {
-                $table->unsignedSmallInteger('user_id')->default(0)->after('id');
+                $table->unsignedBigInteger('user_id')->default(0)->after('id');
             } else {
-                $table->unsignedSmallInteger('user_id')->after('id');
+                $table->unsignedBigInteger('user_id')->after('id');
             }
 
             $table->foreign('user_id')->references('id')->on('users');
