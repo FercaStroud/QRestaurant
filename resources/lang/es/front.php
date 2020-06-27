@@ -8,6 +8,7 @@ return [
     'settings' => 'Configuraciones',
 
     'delete_user_confirmation' => '¿Seguro que quieres eliminar a este usuario?',
+    'delete_category_confirmation' => '¿Seguro que quieres eliminar a esta categoría?',
     'language' => 'Español',
 
 ];

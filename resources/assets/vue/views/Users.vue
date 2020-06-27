@@ -4,8 +4,8 @@ import { Action, State, namespace } from 'vuex-class';
 
 import dialog from '@/utils/dialog';
 
-import UsersCard from '@/components/UsersCard.vue';
-import UsersModal from '@/components/UsersModal.vue';
+import UsersCard from '@/components/users/UsersCard.vue';
+import UsersModal from '@/components/users/UsersModal.vue';
 
 const uStore = namespace('users');
 

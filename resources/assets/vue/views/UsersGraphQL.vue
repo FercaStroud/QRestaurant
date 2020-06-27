@@ -4,9 +4,9 @@ import { Action, State, namespace } from 'vuex-class';
 
 import dialog from '@/utils/dialog';
 
-import UsersCard from '@/components/UsersCard.vue';
-import UsersModalGraphQL from '@/components/UsersModalGraphQL.vue';
-import deleteUserMutation from '@/graphql/mutations/deleteUser.gql';
+import UsersCard from '@/components/users/UsersCard.vue';
+import UsersModalGraphQL from '@/components/users/UsersModalGraphQL.vue';
+import deleteUserMutation from '@/graphql/mutations/users/deleteUser.gql';
 
 @Component({
   components: {

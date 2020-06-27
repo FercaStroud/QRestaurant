@@ -10,6 +10,7 @@ const Dashboard = () => import('../views/Dashboard.vue');
 const Home = () => import('../views/Home.vue');
 const Messages = () => import('../views/Messages.vue');
 const Users = () => import('../views/Users.vue');
+const Categories = () => import('../views/Categories.vue');
 const UsersGraphQL = () => import('../views/UsersGraphQL.vue');
 
 import userTypes from '@/utils/userTypes';
@@ -41,6 +42,19 @@ const router = new Router({
       },
     },
     {
+      path: '/categories',
+      name: 'categories',
+      component: Categories,
+      meta: {
+        title: Vue.i18n.translate('categories.text', null),
+        auth: {
+          roles: userTypes.NORMAL,
+          forbiddenRedirect: '/',
+        },
+      },
+
+    },
+    /*{
       path: '/messages',
       name: 'messages',
       component: Messages,
@@ -48,7 +62,7 @@ const router = new Router({
         title: Vue.i18n.translate('strings.messages', null),
         auth: true,
       },
-    },
+    },*/
     {
       path: '/users',
       name: 'users',
@@ -57,7 +71,7 @@ const router = new Router({
         title: Vue.i18n.translate('strings.users', null),
         auth: {
           roles: userTypes.ADMIN,
-          forbiddenRedirect: '/example',
+          forbiddenRedirect: '/dashboard',
         },
       },
     },
@@ -69,7 +83,7 @@ const router = new Router({
         title: Vue.i18n.translate('strings.users', null),
         auth: {
           roles: userTypes.ADMIN,
-          forbiddenRedirect: '/example',
+          forbiddenRedirect: '/dashboard',
         },
       },
     },

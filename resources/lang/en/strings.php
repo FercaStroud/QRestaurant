@@ -17,6 +17,7 @@ return [
     'title' => 'Title',
     'user' => 'User',
     'welcome' => 'Welcome',
+    'description'=>'Description',
 
     // Pages
     'dashboard'=>'Admin Panel',

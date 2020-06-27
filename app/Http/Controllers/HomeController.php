@@ -24,26 +24,21 @@ class HomeController extends Controller
     public function vue()
     {
         $homeItems = [
-            [
+            /*[
                 'name' => 'strings.users',
                 'icon' => 'users',
                 'link' => 'users',
-            ],
+            ],*/
             [
-                'name' => 'strings.users_graphql',
+                'name' => 'strings.users',
                 'icon' => 'users',
                 'link' => 'users/graphql',
             ],
-            [
+            /*[
                 'name' => 'strings.messages',
                 'icon' => 'envelope',
                 'link' => 'messages',
-            ],
-            [
-                'name' => 'strings.example',
-                'icon' => 'lightbulb',
-                'link' => 'example',
-            ],
+            ],*/
         ];
 
         $settingsFile = Utils::getSettingsFile();

@@ -20,16 +20,16 @@ export default class Home extends Vue {
   mounted() {
     this.setBackUrl('/');
     this.setMenu([{
-      text: 'strings.example',
+      text: 'products.text',
       key: 1,
       handler: () => {
-        this.setDialogMessage('strings.clicked');
+        this.$router.push({path: '/products'})
       },
     }, {
-      text: 'strings.example2',
+      text: 'categories.text',
       key: 2,
       handler: () => {
-        this.setDialogMessage('strings.clicked2');
+        this.$router.push({path: '/categories'})
       },
     }]);
   }
@@ -38,5 +38,5 @@ export default class Home extends Vue {
 
 <template lang="pug">
 b-container(tag='main')
-  h1 {{ $t('strings.example') }}
+  p {{ $t('dashboard.dashboard_description') }}
 </template>

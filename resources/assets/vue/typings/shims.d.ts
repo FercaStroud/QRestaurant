@@ -4,5 +4,6 @@ declare module '*.vue' {
 }
 
 declare module '*.gql' {
+  // @ts-ignore
   export default {};
 }

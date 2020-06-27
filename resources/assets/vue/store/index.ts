@@ -8,14 +8,16 @@ import getters from './getters';
 import mutations from './mutations';
 import state from './state';
 
-import messages from './messages';
+//import messages from './messages';
 import users from './users';
+import categories from './categories';
 
 Vue.use(Vuex);
 
 const modules = {
-  messages,
+  //messages,
   users,
+  categories,
 };
 
 const store = new Vuex.Store({

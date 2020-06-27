@@ -2,8 +2,8 @@
 import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
 import { Action } from 'vuex-class';
 
-import addUserMutation from '@/graphql/mutations/addUser.gql';
-import editUserMutation from '@/graphql/mutations/editUser.gql';
+import addUserMutation from '@/graphql/mutations/users/addUser.gql';
+import editUserMutation from '@/graphql/mutations/users/editUser.gql';
 
 import checkPassword from '@/utils/checkPassword';
 import checkGraphQLError from '@/utils/checkGraphQLError';

@@ -14,6 +14,7 @@ return [
     'required' => 'Necesario',
     'text' => 'Texto',
     'title' => 'Título',
+    'description' => 'Descripción',
     'user' => 'Usuario',
     'welcome' => 'Bienvenido',
 

@@ -8,6 +8,7 @@ return [
     'settings' => 'Settings',
 
     'delete_user_confirmation' => 'Are you sure you want want to delete this user?',
+    'delete_category_confirmation' => 'Are you sure you want want to delete this category?',
     'language' => 'English',
 
 ];

@@ -1,0 +1,9 @@
+mutation AddCategory($input: UserInput!) {
+  addCategory(input: $input) {
+    id
+    user_id
+    parent_id
+    name
+    image_src
+  }
+}
