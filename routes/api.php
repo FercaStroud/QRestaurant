@@ -26,12 +26,14 @@ Route::group([
     Route::post('register', 'RegisterController@register');
 });
 
-Route::group([
-    'middleware' => ['jwt.auth'],
-], function () {
-    Route::get('vue', 'HomeController@vue');
+Route::group(['middleware' => ['jwt.auth'],], function () {
 
+    Route::get('vue', 'HomeController@vue');
     Route::post('settings', 'SettingController@saveSettings');
+
+    Route::resource('categories', 'Resources\CategoryController', [
+        'except' => ['create', 'edit', 'show'],
+    ]);
 });
 
 Route::group([

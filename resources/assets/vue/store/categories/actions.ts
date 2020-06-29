@@ -22,8 +22,8 @@ const loadCategories = async ({ commit }, payload) => {
 
 const addCategory = async ({ commit }, payload) => {
   const category = {
-    user_id: payload.user_id,
-    parent_id: payload.parent_id,
+    user_id: 2,
+    parent_id: 0,
     name: payload.name,
     description: payload.description,
     image_src: payload.image_src,

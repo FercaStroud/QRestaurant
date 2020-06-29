@@ -1,214 +1,120 @@
 <script lang="ts">
-import {Component, Vue, Watch} from 'vue-property-decorator';
-import {Action} from 'vuex-class';
+  import { Component, Vue, Watch } from 'vue-property-decorator';
+  import { Action, State, namespace } from 'vuex-class';
 
-import dialog from '@/utils/dialog';
+  import dialog from '@/utils/dialog';
 
-import CategoriesCard from '@/components/categories/CategoriesCard.vue';
-import CategoriesModalGraphQL from '@/components/categories/CategoriesModalGraphQL.vue';
-import deleteCategoryMutation from '@/graphql/mutations/categories/deleteCategory.gql';
+  import CategoriesCard from '@/components/categories/CategoriesCard.vue';
+  import CategoriesModal from '@/components/categories/CategoriesModal.vue';
 
-@Component({
-  components: {
-    CategoriesCard,
-    'category-modal': CategoriesModalGraphQL,
-  },
-})
-export default class Categories extends Vue {
-  @Action setBackUrl;
-  @Action setMenu;
-  @Action setDialogMessage;
-  isModalVisible = false;
-  isModalAdd = true;
+  const uStore = namespace('categories');
 
-  perPage = 10;
-  currentPage = 1;
-  form: Partial<Category> = {};
+  @Component({
+    components: {
+      CategoriesCard,
+      CategoriesModal,
+    },
+  })
 
-  searchText = '';
-  actualName = '';
+  export default class Categories extends Vue {
+    @Action setBackUrl;
+    @Action setMenu;
+    @uStore.State categories;
+    @uStore.State pagination;
+    @uStore.State isLoading;
+    @uStore.State isModalVisible;
+    @uStore.Action deleteCategory;
+    @uStore.Action loadCategories;
+    @uStore.Action setModalVisible;
 
-  search: string | null = null;
+    currentPage = 1;
+    form: Partial<Category> = {};
+    isModalAdd = true;
 
-  perPageOptions = [
-    { value: 5, text: '5' },
-    { value: 10, text: '10' },
-    { value: 15, text: '15' },
-    { value: 20, text: '20' },
-  ];
-
-  async created() {
-    this.setBackUrl('/');
-    this.setMenu([
-      {
-        key: 'add_category',
-        text: 'categories.add_category',
-        handler: this.addCategory,
-      },
-    ]);
-
-    this.loadRoute(null);
-
-    this.$router.afterEach((to, from) => {
-      this.loadRoute(null);
-    });
-  }
-
-  addCategory(): void {
-    this.isModalVisible = true;
-    this.isModalAdd = true;
-
-    this.form = {
-      //type_id: 2,
-    };
-  }
-
-  editCategory(category: Category): void {
-    this.isModalVisible = true;
-    this.isModalAdd = false;
-
-    this.form = {...category};
-  }
-
-  loadRoute(e) {
-    const id = this.$route.params.id;
-    const { page, limit, search } = this.$route.query;
-
-    this.currentPage = Number(page) || 1;
-    this.perPage = Number(limit) || 10;
-    this.search = <string>search || null;
-    this.searchText = <string>search || '';
-
-    if (search) {
-      this.setBackUrl('/categories');
-    } else {
+    async created() {
       this.setBackUrl('/');
-    }
-  }
-
-  changePage(e) {
-    this.$router.push({
-      query: {
-        ...this.$route.query,
-        page: e,
-      },
-    });
-  }
-
-  doSearch() {
-    this.$router.push({
-      query: {
-        ...this.$route.query,
-        search: this.searchText,
-      },
-    });
-  }
-
-  @Watch('perPage')
-  onPerPageChange(newVal) {
-    this.$router.push({
-      query: {
-          ...this.$route.query,
-          limit: newVal,
+      this.setMenu([
+        {
+          key: 'add_category',
+          text: 'categories.add_category',
+          handler: this.addCategory,
         },
-      });
-    }
+      ]);
 
-    closeModal(query) {
-      if (this.isModalAdd) {
-        query.refetch();
+      this.currentPage = this.pagination.currentPage;
+
+      if (this.categories.length == 0) {
+        await this.getCategories(1);
       }
-
-      this.isModalVisible = false;
-
-      this.form = {};
     }
 
-    getPaginationTo(to, total) {
-      if (to < total) {
-        return to;
-      }
+    addCategory(): void {
+      this.isModalAdd = true;
+      this.setModalVisible(true);
 
-      return total;
+      /*this.form = {
+        type_id: 2,
+      };*/
     }
 
-    async deleteCategoryConfirm({ id }: Category, query): Promise<void> {
+    editCategory(category: Category, index: number): void {
+      this.isModalAdd = false;
+      this.setModalVisible(true);
+
+      this.form = { ...category };
+    }
+
+    async deleteCategoryConfirm(category: Category): Promise<void> {
       if (!(await dialog('front.delete_category_confirmation', true))) {
         return;
       }
 
-      const result = await this.$apollo.mutate({
-        mutation: deleteCategoryMutation, variables: {id,},
-      });
+      this.deleteCategory(category);
+    }
 
-      if (result.data.deleteCategory.status) {
-        query.refetch();
-      }
+    async getCategories(page: number): Promise<void> {
+      this.loadCategories({ page });
     }
   }
 </script>
 
 <template lang="pug">
   b-container(tag='main')
-    ApolloQuery(
-      :query="require('@/graphql/queries/fetchCategories.gql')",
-      :variables='{ limit: perPage, page: currentPage, search }'
+    b-pagination(
+      align='center',
+      v-if='pagination.totalCategories > pagination.perPage',
+      v-model='currentPage',
+      :per-page='pagination.perPage',
+      :total-rows='pagination.totalCategories',
+      @change='getCategories',
     )
-      template(slot-scope='{ result: { loading, error, data }, query }')
-        // Loading
-        .loading.apollo(v-if='loading') {{ $t('strings.loading') }}...
-        // Error
-        .error.apollo(v-else-if='error') {{ $t('strings.error_occurred') }}
-        // Result
-        .result.apollo(v-else-if='data')
-          .row
-            .offset-lg-8
-            form.input-group.mb-3.col-lg-4(@submit.prevent='doSearch')
-              b-form-input(type='text', v-model='searchText', :placeholder="$t('categories.search')")
-              .input-group-append
-                b-button(type='submit', variant='outline-secondary') {{ $t('strings.search') }}
 
-          | {{ $t('strings.items_to_show') }}
+    .categories(v-if='categories.length > 0')
+      categories-card(
+        v-for='category, i in categories',
+        :key='category.id',
+        :category='category',
+        @edit-category='editCategory(category, i)',
+        @delete-category='deleteCategoryConfirm(category)',
+      )
 
-          b-form-select.mb-3(v-model="perPage", :options="perPageOptions")
+    div(v-else-if='isLoading') {{ $t('strings.loading') }}...
 
-          b-pagination(
-            align='center',
-            v-if='data.categories.total > data.categories.per_page',
-            v-model='currentPage',
-            :per-page='data.categories.per_page',
-            :total-rows='data.categories.total',
-            @change='changePage',
-          )
+    div(v-else) {{ $t('categories.no_categories') }}
 
-          .text-center.mb-3 {{ $t('strings.showing_results', { from: ((currentPage - 1) * perPage) + 1, to: getPaginationTo(currentPage * perPage, data.categories.total), total: data.categories.total }) }}
+    b-pagination(
+      align='center',
+      v-if='pagination.totalCategories > pagination.perPage',
+      v-model='currentPage',
+      :per-page='pagination.perPage',
+      :total-rows='pagination.totalCategories',
+      @change='getCategories',
+    )
 
-          .categories
-            categories-card(
-              v-for='category in data.categories.data',
-              :key='category.id',
-              :category='category',
-              @edit-category='editCategory(category)',
-              @delete-category='deleteCategoryConfirm(category, query)',
-            )
-
-          .text-center.mb-3 {{ $t('strings.showing_results', { from: ((currentPage - 1) * perPage) + 1, to: getPaginationTo(currentPage * perPage, data.categories.total), total: data.categories.total }) }}
-
-          b-pagination(
-            align='center',
-            v-if='data.category.total > data.category.per_page',
-            v-model='currentPage',
-            :per-page='data.category.per_page',
-            :total-rows='data.category.total',
-            @change='changePage',
-          )
-
-          categories-modal(
-            ref='categories_modal',
-            :form='form',
-            :is-add='isModalAdd',
-            :is-visible='isModalVisible',,
-            @close-modal='closeModal(query)'
-          )
+    categories-modal(
+      ref='categories_modal',
+      :form='form',
+      :is-add='isModalAdd',
+      :is-visible='isModalVisible',
+    )
 </template>
-
