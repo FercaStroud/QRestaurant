@@ -16,19 +16,16 @@ class CategoryController extends Controller
     use UploadTrait;
 
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return mixed
      */
     public function index(Request $request)
     {
-        return Category::where("user_id", "=", $request->user()->id)->paginate(5);
+        return Category::where("user_id", "=", $request->user()->id)->paginate(25);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
+     * @param Request $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
@@ -61,11 +58,9 @@ class CategoryController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \App\Category $category
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Category $category
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update(Request $request, Category $category)
     {
@@ -92,11 +87,11 @@ class CategoryController extends Controller
         return response()->json($category, 201);
     }
 
+
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param \App\Category $category
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy(Category $category)
     {

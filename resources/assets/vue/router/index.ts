@@ -8,9 +8,10 @@ const AuthResetForm = () => import('../views/AuthResetForm.vue');
 
 const Dashboard = () => import('../views/Dashboard.vue');
 const Home = () => import('../views/Home.vue');
-const Messages = () => import('../views/Messages.vue');
+//const Messages = () => import('../views/Messages.vue');
 const Users = () => import('../views/Users.vue');
 const Categories = () => import('../views/Categories.vue');
+const Products = () => import('../views/Products.vue');
 const UsersGraphQL = () => import('../views/UsersGraphQL.vue');
 
 import userTypes from '@/utils/userTypes';
@@ -52,7 +53,18 @@ const router = new Router({
           forbiddenRedirect: '/',
         },
       },
-
+    },
+    {
+      path: '/products',
+      name: 'products',
+      component: Products,
+      meta: {
+        title: Vue.i18n.translate('products.text', null),
+        auth: {
+          roles: userTypes.NORMAL,
+          forbiddenRedirect: '/',
+        },
+      },
     },
     /*{
       path: '/messages',

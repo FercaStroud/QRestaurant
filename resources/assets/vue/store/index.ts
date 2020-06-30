@@ -10,6 +10,7 @@ import state from './state';
 
 //import messages from './messages';
 import users from './users';
+import products from './products';
 import categories from './categories';
 
 Vue.use(Vuex);
@@ -17,6 +18,7 @@ Vue.use(Vuex);
 const modules = {
   //messages,
   users,
+  products,
   categories,
 };
 
