@@ -9,6 +9,7 @@ import ApolloClient from 'apollo-boost';
 import VueApollo from 'vue-apollo';
 
 import store from './store';
+import VueQrcode from '@chenfengyuan/vue-qrcode';
 
 // Import it before vue-router because it uses i18n strings
 import './utils/i18n';
@@ -24,6 +25,7 @@ import App from './App.vue';
 (<any>window).Pusher = Pusher;
 
 Vue.component('v-icon', Icon);
+Vue.component(VueQrcode.name, VueQrcode);
 
 Vue.config.productionTip = false;
 

@@ -17,6 +17,8 @@ export default class Home extends Vue {
   @Action setMenu;
   @Action setDialogMessage;
 
+  urlHost;
+
   mounted() {
     this.setBackUrl('/');
     this.setMenu([{
@@ -32,6 +34,12 @@ export default class Home extends Vue {
         this.$router.push({path: '/categories'})
       },
     }]);
+    this.urlHost = window.location.host;
+
+  }
+
+  get actualUser() {
+    return this.$auth.user();
   }
 }
 </script>
@@ -39,4 +47,9 @@ export default class Home extends Vue {
 <template lang="pug">
 b-container(tag='main')
   p {{ $t('dashboard.dashboard_description') }}
+  b-row
+    b-col
+      h2 {{ $t('dashboard.your_code') }}
+      p URL: {{ urlHost + '/menu/' + actualUser.id }}
+      qrcode(:value="urlHost + '/menu/' + actualUser.id", tag="img", :options="{ width: 500 }")
 </template>
