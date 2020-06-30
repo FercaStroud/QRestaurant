@@ -21,18 +21,21 @@ const loadCategories = async ({ commit }, payload) => {
 };
 
 const addCategory = async ({ commit }, payload) => {
-  const category = {
-    user_id: 2,
-    parent_id: 0,
-    name: payload.name,
-    description: payload.description,
-    image_src: payload.image_src,
-  };
+
+  if(payload.description === undefined){
+    payload.description = "";
+  }
+
+  let formData = new FormData();
+  formData.append('parent_id', payload.parent_id);
+  formData.append('name', payload.name);
+  formData.append('description', payload.description);
+  formData.append('image_src', payload.image_src);
 
   commit('SET_MODAL_LOADING', true);
 
   try {
-    const response = await axios.post('categories', category);
+    const response = await axios.post('categories', formData);
     const checkErrors = checkResponse(response);
 
     if (checkErrors) {
@@ -49,18 +52,21 @@ const addCategory = async ({ commit }, payload) => {
 };
 
 const editCategory = async ({ commit }, payload) => {
-  const category = {
-    user_id: payload.user_id,
-    parent_id: payload.parent_id,
-    name: payload.name,
-    description: payload.description,
-    image_src: payload.image_src,
-  };
+  if(payload.description === undefined){
+    payload.description = "";
+  }
+
+  let formData = new FormData();
+  formData.append('id', payload.id);
+  formData.append('parent_id', payload.parent_id);
+  formData.append('name', payload.name);
+  formData.append('description', payload.description);
+  formData.append('image_src', payload.image_src);
 
   commit('SET_MODAL_LOADING', true);
 
   try {
-    const response = await axios.put(`categories/${payload.id}`, category);
+    const response = await axios.post(`categories/${payload.id}?_method=PUT`, formData);
     const checkErrors = checkResponse(response);
 
     if (checkErrors) {

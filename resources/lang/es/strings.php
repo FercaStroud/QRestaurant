@@ -17,6 +17,11 @@ return [
     'description' => 'Descripción',
     'user' => 'Usuario',
     'welcome' => 'Bienvenido',
+    'choose_img'=>'Elije una imagen o arrástrala hasta aquí...',
+    'drop_img'=>'Arrastra tu imagen aquí...',
+    'browse'=>'Buscar',
+    'no_parent_category'=>'Sin categoría padre',
+
 
     // Pages
     'dashboard'=>'Panel de Administración',

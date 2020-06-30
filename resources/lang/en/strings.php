@@ -18,7 +18,10 @@ return [
     'user' => 'User',
     'welcome' => 'Welcome',
     'description'=>'Description',
-
+    'choose_img'=>'Choose a image or drop it here...',
+    'drop_img'=>'Drop image here...',
+    'browse'=>'Browse',
+    'no_parent_category'=>'No parent category',
     // Pages
     'dashboard'=>'Admin Panel',
     'example' => 'Example',

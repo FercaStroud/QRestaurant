@@ -13,6 +13,7 @@ import {
   BBadge,
   BLink,
   BFormSelect,
+  BFormSelectOption,
   BFormInput,
   BPagination,
   BFormGroup,
@@ -41,6 +42,7 @@ Vue.component('b-badge', BBadge);
 Vue.component('b-link', BLink);
 Vue.component('b-form-input', BFormInput);
 Vue.component('b-form-select', BFormSelect);
+Vue.component('b-form-select-option', BFormSelectOption);
 Vue.component('b-form-group', BFormGroup);
 Vue.component('b-form-textarea', BFormTextarea);
 Vue.component('b-form-file', BFormFile);

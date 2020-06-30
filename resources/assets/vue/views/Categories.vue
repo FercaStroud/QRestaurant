@@ -51,10 +51,6 @@
     addCategory(): void {
       this.isModalAdd = true;
       this.setModalVisible(true);
-
-      /*this.form = {
-        type_id: 2,
-      };*/
     }
 
     editCategory(category: Category, index: number): void {
@@ -90,13 +86,14 @@
     )
 
     .categories(v-if='categories.length > 0')
-      categories-card(
-        v-for='category, i in categories',
-        :key='category.id',
-        :category='category',
-        @edit-category='editCategory(category, i)',
-        @delete-category='deleteCategoryConfirm(category)',
-      )
+      b-row
+        categories-card(
+          v-for='(category, i) in categories',
+          :key='category.id',
+          :category='category',
+          @edit-category='editCategory(category, i)',
+          @delete-category='deleteCategoryConfirm(category)',
+        )
 
     div(v-else-if='isLoading') {{ $t('strings.loading') }}...
 
@@ -114,6 +111,7 @@
     categories-modal(
       ref='categories_modal',
       :form='form',
+      :categories='categories'
       :is-add='isModalAdd',
       :is-visible='isModalVisible',
     )

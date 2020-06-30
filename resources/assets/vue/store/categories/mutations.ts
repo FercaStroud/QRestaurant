@@ -16,18 +16,18 @@ const ADD_CATEGORY = (state, payload) => {
 };
 
 const UPDATE_CATEGORY = (state, payload) => {
-  const idx = state.users.findIndex(u => u.id === payload.id);
+  const idx = state.categories.findIndex(u => u.id === payload.id);
 
   if (idx >= 0) {
-    Vue.set(state.users, idx, payload);
+    Vue.set(state.categories, idx, payload);
   }
 };
 
-const DELETE_USER = (state, payload) => {
-  const idx = state.users.findIndex(u => u.id === payload.id);
+const DELETE_CATEGORY = (state, payload) => {
+  const idx = state.categories.findIndex(u => u.id === payload.id);
 
   if (idx >= 0) {
-    Vue.delete(state.users, idx);
+    Vue.delete(state.categories, idx);
   }
 };
 
@@ -47,7 +47,7 @@ export default {
   SET_CATEGORIES,
   ADD_CATEGORY,
   UPDATE_CATEGORY,
-  DELETE_USER,
+  DELETE_CATEGORY,
   SET_LOADING,
   SET_MODAL_LOADING,
   SET_MODAL_VISIBLE,
