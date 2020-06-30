@@ -27,6 +27,7 @@
     "test": "cross-env NODE_ENV=test jest"
   },
   "dependencies": {
+    "@chenfengyuan/vue-qrcode": "^1.0.2",
     "@websanova/vue-auth": "^2.21.16-beta",
     "apollo-boost": "^0.4.7",
     "axios": "^0.19.2",

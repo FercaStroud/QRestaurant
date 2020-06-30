@@ -22,18 +22,59 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        return response()->json([], 201);
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $product = new Product($request->all());
+        $product->image_src = null;
+
+        if ($request->has('image_src') and $request->file('image_src') !== null) {
+            $image = $request->file('image_src');
+            $name = Str::slug($request->input('name')) . '_' . time();
+            $folder = '/uploads/images/categories/';
+            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+
+            $this->uploadOne($image, $folder, 'public', $name);
+            $product->image_src = $filePath;
+        }
+
+        $product->save();
+        return response()->json($product, 201);
     }
 
     public function update(Request $request, Product $product)
     {
-        return response()->json([], 201);
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        $product->category_id = $request->get("category_id", $product->category_id);
+        $product->name = $request->get("name", $product->name);
+        $product->description = $request->get("description", $product->description);
+        $product->price = $request->get("price", $product->price);
+
+        if ($request->has('image_src') and $request->file('image_src') !== null) {
+            $image = $request->file('image_src');
+            $name = Str::slug($request->input('name')) . '_' . time();
+            $folder = '/uploads/images/categories/';
+            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+
+            $this->uploadOne($image, $folder, 'public', $name);
+            $product->image_src = $filePath;
+        }
+
+        $product->save();
+        return response()->json($product, 201);
     }
 
     public function destroy(Product $product)
     {
         $product->delete();
-
         return response()->json(null, 204);
     }
 }

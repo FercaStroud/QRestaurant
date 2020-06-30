@@ -21,6 +21,8 @@ return [
     'drop_img'=>'Arrastra tu imagen aquí...',
     'browse'=>'Buscar',
     'no_parent_category'=>'Sin categoría padre',
+    'price'=>'Precio',
+    'category'=>'Categoría',
 
 
     // Pages

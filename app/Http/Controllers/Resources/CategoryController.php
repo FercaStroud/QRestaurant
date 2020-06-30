@@ -41,7 +41,7 @@ class CategoryController extends Controller
         $category->parent_id = $request->get("parent_id", 0);
         $category->name = $request->get("name");
         $category->description = $request->get("description", "");
-        $category->image_src = '/images/logo.svg';
+        $category->image_src = null;
 
         if ($request->has('image_src') and $request->file('image_src') !== null) {
             $image = $request->file('image_src');

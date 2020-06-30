@@ -7,7 +7,7 @@
   import CategoriesCard from '@/components/categories/CategoriesCard.vue';
   import CategoriesModal from '@/components/categories/CategoriesModal.vue';
 
-  const uStore = namespace('categories');
+  const cStore = namespace('categories');
 
   @Component({
     components: {
@@ -19,13 +19,13 @@
   export default class Categories extends Vue {
     @Action setBackUrl;
     @Action setMenu;
-    @uStore.State categories;
-    @uStore.State pagination;
-    @uStore.State isLoading;
-    @uStore.State isModalVisible;
-    @uStore.Action deleteCategory;
-    @uStore.Action loadCategories;
-    @uStore.Action setModalVisible;
+    @cStore.State categories;
+    @cStore.State pagination;
+    @cStore.State isLoading;
+    @cStore.State isModalVisible;
+    @cStore.Action deleteCategory;
+    @cStore.Action loadCategories;
+    @cStore.Action setModalVisible;
 
     currentPage = 1;
     form: Partial<Category> = {};

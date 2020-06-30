@@ -22,6 +22,9 @@ return [
     'drop_img'=>'Drop image here...',
     'browse'=>'Browse',
     'no_parent_category'=>'No parent category',
+    'price'=>'Price',
+    'category'=>'Category',
+
     // Pages
     'dashboard'=>'Admin Panel',
     'example' => 'Example',

@@ -7,6 +7,7 @@ return [
     'passwords_not_match' => 'La confirmación de contraseña no coincide.',
     'settings' => 'Configuraciones',
 
+    'delete_product_confirmation' => '¿Seguro que quieres eliminar a este producto?',
     'delete_user_confirmation' => '¿Seguro que quieres eliminar a este usuario?',
     'delete_category_confirmation' => '¿Seguro que quieres eliminar a esta categoría?',
     'language' => 'Español',

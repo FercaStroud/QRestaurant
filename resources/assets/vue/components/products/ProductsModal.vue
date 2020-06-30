@@ -2,19 +2,26 @@
   import {Component, Emit, Prop, Vue} from 'vue-property-decorator';
   import {Action, State, namespace} from 'vuex-class';
 
-  const uStore = namespace('products');
+  const pStore = namespace('products');
+  const cStore = namespace('categories');
+
 
   @Component
   export default class ProductsModal extends Vue {
     @Prop() form;
     @Prop() isAdd;
     @Prop() isVisible;
-    @uStore.Action addProduct;
-    @uStore.Action editProduct;
-    @uStore.Action setModalVisible;
-    @uStore.State isModalLoading;
+    @cStore.State categories;
+    @pStore.State isModalLoading;
+    @pStore.Action addProduct;
+    @pStore.Action editProduct;
+    @pStore.Action setModalVisible;
+    @cStore.Action loadCategories;
 
     async created() {
+      if (this.categories.length == 0) {
+        await this.getCategories(1);
+      }
     }
 
     handleOk() {
@@ -24,6 +31,10 @@
       } else {
         this.editProduct(this.form);
       }
+    }
+
+    async getCategories(page: number): Promise<void> {
+      this.loadCategories({ page });
     }
 
     handleClose() {
@@ -53,6 +64,30 @@
           v-model='form.name',
           maxlength='191',
           required,
+        )
+
+      b-form-group(
+        :label='$t("categories.text")'
+        label-for='category_id',
+      )
+        b-form-select#category_id(
+          v-model='form.category_id',
+          :select-size="4"
+        )
+          b-form-select-option(
+            v-for='(category, i) in categories',
+            :key='category.id',
+            :value="category.id"
+          ) {{ category.name }}
+
+      b-form-group(
+        :label='$t("strings.price")'
+        label-for='description',
+      )
+        b-form-input#price(
+          type='number',
+          min="0"
+          v-model='form.price',
         )
 
       b-form-group(
