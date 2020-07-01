@@ -17,7 +17,7 @@ export default class Home extends Vue {
   @Action setMenu;
   @Action setDialogMessage;
 
-  urlHost;
+  darkColor = '#000000';
 
   mounted() {
     this.setBackUrl('/');
@@ -34,7 +34,6 @@ export default class Home extends Vue {
         this.$router.push({path: '/categories'})
       },
     }]);
-    this.urlHost = window.location.host;
 
   }
 
@@ -49,7 +48,23 @@ b-container(tag='main')
   p {{ $t('dashboard.dashboard_description') }}
   b-row
     b-col
-      h2 {{ $t('dashboard.your_code') }}
-      p URL: {{ urlHost + '/menu/' + actualUser.id }}
-      qrcode(:value="urlHost + '/menu/' + actualUser.id", tag="img", :options="{ width: 500 }")
+      div
+        h2 {{ $t('dashboard.your_code') }}
+        a(:href="'http://qrestaurant.appsgorilasonline.com/menu/' + actualUser.id", target="_blank") URL: {{ 'http://qrestaurant.appsgorilasonline.com/menu/' + actualUser.id }}
+
+      b-form-group(
+        label='Color'
+        label-for='color',
+      )
+        b-form-input#color(
+          type='text',
+          v-model='darkColor',
+          maxlength='7',
+          required,
+        )
+      qrcode(
+        :value=" 'http://qrestaurant.appsgorilasonline.com/menu/' + actualUser.id",
+        tag="img",
+        :options="{ width: 500,  color: { dark: darkColor, light: '#0000' }, }"
+      )
 </template>

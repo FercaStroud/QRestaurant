@@ -55,6 +55,8 @@ export default class App extends Vue {
 </script>
 
 <template lang="pug">
+//div.app(v-if='$route.name === "menu_view"')
+  router-view(v-if='$auth.ready()')
 div.app(v-show='$auth.ready()')
   dialogs-wrapper
   div(v-if='$auth.check()')
@@ -63,7 +65,7 @@ div.app(v-show='$auth.ready()')
   base-auth(v-else)
   .languages
     b-button(
-      v-for='locale, i in locales',
+      v-for='(locale, i) in locales',
       :class='{ active: activeLocale === locale.name }',
       :key='i',
       :title='locale.title',

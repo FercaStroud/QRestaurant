@@ -19,7 +19,7 @@ b-col(sm="6" md="4" lg="3" )
       h4 {{ category.id }} - {{ category.name }}
 
     b-card-body
-      img.img-fluid(v-if="category.image_src !== undefined" :src='category.image_src')
+      img.img-fluid(v-if="category.image_src" :src='"/uploads/images/categories/" + category.image_src')
 
       p.card-text
         span.font-weight-bold {{ $t('strings.description') }}:

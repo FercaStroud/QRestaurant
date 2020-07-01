@@ -47,7 +47,7 @@ class CategoryController extends Controller
             $image = $request->file('image_src');
             $name = Str::slug($request->input('name')) . '_' . time();
             $folder = '/uploads/images/categories/';
-            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+            $filePath = $name . '.' . $image->getClientOriginalExtension();
 
             $this->uploadOne($image, $folder, 'public', $name);
             $category->image_src = $filePath;
@@ -77,7 +77,7 @@ class CategoryController extends Controller
             $image = $request->file('image_src');
             $name = Str::slug($request->input('name')) . '_' . time();
             $folder = '/uploads/images/categories/';
-            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+            $filePath = $name . '.' . $image->getClientOriginalExtension();
 
             $this->uploadOne($image, $folder, 'public', $name);
             $category->image_src = $filePath;

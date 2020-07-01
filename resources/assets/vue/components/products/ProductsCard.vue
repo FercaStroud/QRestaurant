@@ -32,7 +32,7 @@ b-col(sm="6" md="4" lg="3" )
       h4 {{ product.id }} - {{ product.name }}
 
     b-card-body
-      img.img-fluid(v-if="product.image_src !== undefined" :src='product.image_src')
+      img.img-fluid(v-if="product.image_src" :src='"/uploads/images/products/" + product.image_src')
 
       p.card-text
         span.font-weight-bold {{ $t('strings.description') }}:

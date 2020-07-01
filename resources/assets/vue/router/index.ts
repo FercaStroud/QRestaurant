@@ -8,6 +8,7 @@ const AuthResetForm = () => import('../views/AuthResetForm.vue');
 
 const Dashboard = () => import('../views/Dashboard.vue');
 const Home = () => import('../views/Home.vue');
+const Menu = () => import('../views/Menu.vue');
 //const Messages = () => import('../views/Messages.vue');
 const Users = () => import('../views/Users.vue');
 const Categories = () => import('../views/Categories.vue');
@@ -135,6 +136,15 @@ const router = new Router({
         auth: false,
       },
     },
+    /*{
+      path: '/menu/:id',
+      name: 'menu_view',
+      component: Menu,
+      meta: {
+        title: 'Menu',
+        auth: false,
+      },
+    },*/
     {
       path: '*',
       redirect: '/',

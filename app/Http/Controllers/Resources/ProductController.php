@@ -34,8 +34,8 @@ class ProductController extends Controller
         if ($request->has('image_src') and $request->file('image_src') !== null) {
             $image = $request->file('image_src');
             $name = Str::slug($request->input('name')) . '_' . time();
-            $folder = '/uploads/images/categories/';
-            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+            $folder = '/uploads/images/products/';
+            $filePath = $name . '.' . $image->getClientOriginalExtension();
 
             $this->uploadOne($image, $folder, 'public', $name);
             $product->image_src = $filePath;
@@ -61,8 +61,8 @@ class ProductController extends Controller
         if ($request->has('image_src') and $request->file('image_src') !== null) {
             $image = $request->file('image_src');
             $name = Str::slug($request->input('name')) . '_' . time();
-            $folder = '/uploads/images/categories/';
-            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
+            $folder = '/uploads/images/products/';
+            $filePath = $name . '.' . $image->getClientOriginalExtension();
 
             $this->uploadOne($image, $folder, 'public', $name);
             $product->image_src = $filePath;
