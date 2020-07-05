@@ -44,10 +44,10 @@
         :class='{ disabled: isSending }',
       ) {{ $t('login.login') }}
 
-    //  b-button(style={width:'180px'})(
-    //    variant='primary',
-    //    to='/register',
-    //  ) {{ $t('login.register') }}
+      b-button(style={width:'180px'})(
+        variant='primary',
+        to='/register',
+      ) {{ $t('login.register') }}
 </template>
 
 <script lang="ts">

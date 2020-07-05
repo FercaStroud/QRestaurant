@@ -22,11 +22,11 @@ const loadProducts = async ({ commit }, payload) => {
 
 const addProduct = async ({ commit }, payload) => {
 
-  if(payload.description === undefined){
-    payload.description = "";
+  if (payload.description === undefined) {
+    payload.description = '';
   }
 
-  let formData = new FormData();
+  const formData = new FormData();
   formData.append('category_id', payload.category_id);
   formData.append('name', payload.name);
   formData.append('description', payload.description);
@@ -53,11 +53,11 @@ const addProduct = async ({ commit }, payload) => {
 };
 
 const editProduct = async ({ commit }, payload) => {
-  if(payload.description === undefined){
-    payload.description = "";
+  if (payload.description === undefined) {
+    payload.description = '';
   }
 
-  let formData = new FormData();
+  const formData = new FormData();
   formData.append('category_id', payload.category_id);
   formData.append('name', payload.name);
   formData.append('description', payload.description);

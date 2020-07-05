@@ -1,5 +1,6 @@
 export default {
   categories: [],
+  categoriesWithProducts:[],
   pagination: {
     currentPage: 1,
     perPage: 5,

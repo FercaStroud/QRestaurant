@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Resources;
 
+use App\Product;
+use App\User;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -98,5 +100,26 @@ class CategoryController extends Controller
         $category->delete();
 
         return response()->json(null, 204);
+    }
+
+
+    public function withProducts(Request $request)
+    {
+        $user = User::find($request->get("id"));
+        $categories = Category::where("user_id", "=", $user->id)->get();
+
+        $i = 0;
+        foreach ($categories as $category) {
+            $categories[$i]['products'] = Product::where('category_id', '=', $category->id)->get();
+            $categories[$i]['parent'] = Category::where('id', '=', $category->parent_id)->first();
+
+            $i++;
+        };
+
+        return response()->json(
+            [
+                'user' => ['name' => $user->name],
+                'categories' => $categories
+            ], 201);
     }
 }

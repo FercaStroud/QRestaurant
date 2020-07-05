@@ -29,13 +29,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validator($request);
+        $user = new User($request->all());
+        $user->password = bcrypt($request->password);
+        $user->save();
 
-        return response()->json(tap(new User($request->all()), function ($user) {
-            $user->save();
-        }), 201);
+        return response()->json($user, 201);
     }
-
     /**
      * Update the specified resource in storage.
      *

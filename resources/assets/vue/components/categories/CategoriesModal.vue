@@ -56,23 +56,23 @@
           required,
         )
 
-      b-form-group(
-        :label='$t("categories.parent_name")'
-        label-for='parent_id',
-      )
-        b-form-select#parent_id(
-          v-model='form.parent_id',
-          :select-size="4"
-        )
-          b-form-select-option(
-            :value="0"
-          ) {{ $t("strings.no_parent_category") }}
-          b-form-select-option(
-            v-for='(category, i) in categories',
-            :key='category.id',
-            :value="category.id"
-            v-if="category.parent_id === 0"
-          ) {{ category.name }}
+      //b-form-group(
+      //  :label='$t("categories.parent_name")'
+      //  label-for='parent_id',
+      //)
+      //  b-form-select#parent_id(
+      //    v-model='form.parent_id',
+      //    :select-size="4"
+      //  )
+      //    b-form-select-option(
+      //      :value="0"
+      //    ) {{ $t("strings.no_parent_category") }}
+          //b-form-select-option(
+          //  v-for='(category, i) in categories',
+          //  :key='category.id',
+          //  :value="category.id"
+          //  v-if="category.parent_id === 0"
+          //) {{ category.name }}
 
       b-form-group(
         :label='$t("strings.description")'

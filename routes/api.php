@@ -24,6 +24,7 @@ Route::group([
     Route::get('user', 'AuthController@user');
 
     Route::post('register', 'RegisterController@register');
+
 });
 
 Route::group(['middleware' => ['jwt.auth'],], function () {
@@ -62,3 +63,5 @@ Route::any('messages/{type}/{id}', function ($type, $id) {
 
     return response()->json($data);
 });
+
+Route::post('categories/withProducts', 'Resources\CategoryController@withProducts');

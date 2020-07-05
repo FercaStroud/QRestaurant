@@ -11,6 +11,10 @@ const SET_CATEGORIES = (state, payload) => {
   };
 };
 
+const SET_CATEGORIES_WITH_PRODUCTS = (state, payload) => {
+  state.categoriesWithProducts = payload;
+};
+
 const ADD_CATEGORY = (state, payload) => {
   state.categories.unshift(payload);
 };
@@ -45,6 +49,7 @@ const SET_MODAL_VISIBLE = (state, payload) => {
 
 export default {
   SET_CATEGORIES,
+  SET_CATEGORIES_WITH_PRODUCTS,
   ADD_CATEGORY,
   UPDATE_CATEGORY,
   DELETE_CATEGORY,

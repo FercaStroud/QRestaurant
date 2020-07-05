@@ -1,26 +1,126 @@
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { Action, State } from 'vuex-class';
+  import {Component, Vue} from 'vue-property-decorator';
+  import {Action, State, namespace} from 'vuex-class';
 
-@Component({
-  components: {
+  const cStore = namespace('categories');
 
-  },
-})
-export default class Menu extends Vue {
-  mounted() {
-    //this.setMenu([]);
+  @Component({
+    components: {},
+  })
+
+  export default class Menu extends Vue {
+    @cStore.State categoriesWithProducts;
+    @cStore.Action loadCategoriesWithProducts;
+
+    async created() {
+        await this.getCategoriesWithProducts(this.$route.params.id);
+    }
+
+    async getCategoriesWithProducts(id: string): Promise<void> {
+      this.loadCategoriesWithProducts({ id });
+    }
   }
-}
 </script>
 
 <template lang="pug">
-b-container#home(tag='main')
-  h1.font-caveat {{ $t('strings.welcome') }}
+div.bg-color
+  div.glass.fixed.custom-border-color
+    b-container(fluid="")
+      //span.font-caveat(
+        style={
+          fontSize: '2em',
+          color: '#f16338',
+          float: 'left',
+          padding: '10px'
+        }
+      //) {{ $t('strings.project_title') }}!
+      .font-caveat(
+        style={
+          fontSize: '2em',
+          color: '#333',
+          textAlign:'center',
+          padding: '10px'
+        }
+      ) {{ categoriesWithProducts.user.name }}!
+
+    //div.scrollmenu
+      a Homeme
+      a {{ $route.params.id }}
+      a Homeme
+
+  b-container#home(tag='main', fluid="")
+    b-row
+      b-col(md="12" v-for="data in categoriesWithProducts.categories" :key="n" )
+        b-card(
+          :title="data.name"
+          img-top
+          tag="article"
+          style="width:100%"
+          class="mb-2"
+        )
+          template(v-slot:header)
+            img.img-fluid(v-if="data.image_src" :src='"/uploads/images/categories/" + data.image_src')
+
+          b-card-text {{ data.description }}
+
+          b-row
+            b-col(md="3" v-for="product in data.products" :key="product.id" )
+              b-card(
+                img-top
+                tag="article"
+                style="width:100%"
+              )
+                template(v-slot:header)
+                  img.img-fluid(v-if="product.image_src" :src='"/uploads/images/products/" + product.image_src')
+
+                p.card-text
+                  span.font-weight-bold {{ product.name }}
+                  br/
+                  | &nbsp;{{ product.price }}
+                  br/
+                  br/
+                  | &nbsp;{{ product.description }}
+
+
+
+
+//img.img-fluid(src="https://picsum.photos/500/500")
+
+
 </template>
 
 <style scoped>
-#home {
-  padding-top: 70px;
-}
+  .card-header{
+    padding: 0 !important;
+  }
+  .bg-color {
+    background: #f7f7f8;
+  }
+  .fixed{
+    position: fixed;
+    width: 100%;
+    z-index:99;
+  }
+  #home {
+    padding-top: 150px;
+  }
+  div.scrollmenu {
+    overflow: auto;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  div.scrollmenu a {
+    display: inline-block;
+    color: #333;
+    text-align: center;
+    padding: 14px;
+    text-decoration: none;
+  }
+
+  div.scrollmenu a:hover {
+    //background-color: #777;
+    cursor:pointer;
+    color:#f7f7f8 !important;
+  }
 </style>

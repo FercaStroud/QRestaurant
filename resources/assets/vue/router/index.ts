@@ -136,7 +136,7 @@ const router = new Router({
         auth: false,
       },
     },
-    /*{
+    {
       path: '/menu/:id',
       name: 'menu_view',
       component: Menu,
@@ -144,7 +144,7 @@ const router = new Router({
         title: 'Menu',
         auth: false,
       },
-    },*/
+    },
     {
       path: '*',
       redirect: '/',

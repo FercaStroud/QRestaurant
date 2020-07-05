@@ -79,5 +79,13 @@ body {
       color: $primary_color !important;
     }
   }
-
+  .glass{
+    //background-color: rgba(255,255,255,.4);
+    backdrop-filter: blur(10px);
+  }
+  .custom-border-color{
+    border-bottom: 1px solid transparent;
+    padding: 10px;
+    box-shadow: 0px 0px 5px #000;
+  }
 }

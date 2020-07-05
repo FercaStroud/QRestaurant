@@ -1,6 +1,25 @@
 import axios from 'axios';
 import checkResponse from '@/utils/checkResponse';
 
+const loadCategoriesWithProducts = async ({ commit }, payload) => {
+  commit('SET_LOADING', true);
+
+  try {
+    const response = await axios.post('categories/withProducts', payload);
+    const checkErrors = checkResponse(response);
+
+    if (checkErrors) {
+      commit('SET_DIALOG_MESSAGE', checkErrors.message, { root: true });
+    } else {
+      commit('SET_CATEGORIES_WITH_PRODUCTS', response.data);
+    }
+  } catch (e) {
+    commit('SET_DIALOG_MESSAGE', 'errors.generic_error', { root: true });
+  } finally {
+    commit('SET_LOADING', false);
+  }
+};
+
 const loadCategories = async ({ commit }, payload) => {
   commit('SET_LOADING', true);
 
@@ -22,12 +41,12 @@ const loadCategories = async ({ commit }, payload) => {
 
 const addCategory = async ({ commit }, payload) => {
 
-  if(payload.description === undefined){
-    payload.description = "";
+  if (payload.description === undefined ){
+    payload.description = '';
   }
 
-  let formData = new FormData();
-  formData.append('parent_id', payload.parent_id);
+  const formData = new FormData();
+  formData.append('parent_id', '0');
   formData.append('name', payload.name);
   formData.append('description', payload.description);
   formData.append('image_src', payload.image_src);
@@ -52,11 +71,11 @@ const addCategory = async ({ commit }, payload) => {
 };
 
 const editCategory = async ({ commit }, payload) => {
-  if(payload.description === undefined){
-    payload.description = "";
+  if (payload.description === undefined) {
+    payload.description = '';
   }
 
-  let formData = new FormData();
+  const formData = new FormData();
   formData.append('id', payload.id);
   formData.append('parent_id', payload.parent_id);
   formData.append('name', payload.name);
@@ -104,6 +123,7 @@ const setModalVisible = ({ commit }, payload) => {
 
 export default {
   loadCategories,
+  loadCategoriesWithProducts,
   addCategory,
   editCategory,
   deleteCategory,

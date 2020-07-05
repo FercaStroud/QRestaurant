@@ -4,7 +4,7 @@ return [
 
     'deleted_successfully' => 'Ha sido eliminado con éxito.',
     'password_changed_successfully' => 'Tu contraseña ha sido cambiada exitosamente.',
-    'passwords_not_match' => 'La confirmación de contraseña no coincide.',
+    'passwords_not_match' => 'Las contraseñas no coinciden.',
     'settings' => 'Configuraciones',
 
     'delete_product_confirmation' => '¿Seguro que quieres eliminar a este producto?',

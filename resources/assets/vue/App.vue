@@ -55,9 +55,9 @@ export default class App extends Vue {
 </script>
 
 <template lang="pug">
-//div.app(v-if='$route.name === "menu_view"')
+div.app(v-if='$route.name === "menu_view"')
   router-view(v-if='$auth.ready()')
-div.app(v-show='$auth.ready()')
+div.app(v-else, v-show='$auth.ready()')
   dialogs-wrapper
   div(v-if='$auth.check()')
     the-header
