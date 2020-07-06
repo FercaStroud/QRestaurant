@@ -24,29 +24,32 @@
 
 <template lang="pug">
 div.bg-color
-  div.glass.fixed.custom-border-color
+  div.fixed.custom-border-color
     b-container(fluid="")
-      //span.font-caveat(
+      span.font-caveat(
         style={
           fontSize: '2em',
           color: '#f16338',
           float: 'left',
           padding: '10px'
         }
-      //) {{ $t('strings.project_title') }}!
-      .font-caveat(
+      ) {{ $t('strings.project_title') }}!
+      //.font-caveat(
         style={
           fontSize: '2em',
           color: '#333',
           textAlign:'center',
           padding: '10px'
         }
-      ) {{ categoriesWithProducts.user.name }}!
+      //) {{ categoriesWithProducts.user.name }}!
 
     //div.scrollmenu
       a Homeme
       a {{ $route.params.id }}
       a Homeme
+  div.menu-header(
+      :style="{backgroundImage: 'url(https://picsum.photos/1920/700)'}"
+  )
 
   b-container#home(tag='main', fluid="")
     b-row
@@ -90,11 +93,17 @@ div.bg-color
 </template>
 
 <style scoped>
+  .menu-header{
+    height: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
   .card-header{
     padding: 0 !important;
   }
   .bg-color {
-    background: #f7f7f8;
+    background: #fff;
   }
   .fixed{
     position: fixed;
