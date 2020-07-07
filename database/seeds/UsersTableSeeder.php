@@ -22,6 +22,9 @@ class UsersTableSeeder extends Seeder
         User::create([
             'name' => 'Normal',
             'email' => 'normal@example.com',
+            'image_src' => 'https://picsum.photos/1920/400',
+            'logo_src' => 'https://picsum.photos/400/200',
+            'address' => 'Im baby wolf chillwave snackwave, neutra thundercats raclette direct trade small batch kinfolk truffaut kombucha health goth typewriter 8-bit.',
             'password' => bcrypt('normal'),
             'type_id' => 2,
         ]);

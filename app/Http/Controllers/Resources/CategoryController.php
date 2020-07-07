@@ -118,7 +118,12 @@ class CategoryController extends Controller
 
         return response()->json(
             [
-                'user' => ['name' => $user->name],
+                'user' => [
+                    'name' => $user->name,
+                    'address' => $user->address,
+                    'image_src' => $user->image_src,
+                    'logo_src' => $user->logo_src
+                ],
                 'categories' => $categories
             ], 201);
     }
