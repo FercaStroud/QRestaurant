@@ -50,7 +50,9 @@ b-container(tag='main')
     b-col
       div
         h2 {{ $t('dashboard.your_code') }}
-        a(:href="'http://qrestaurant.appsgorilasonline.com/menu/' + actualUser.id", target="_blank") URL: {{ 'http://qrestaurant.appsgorilasonline.com/menu/' + actualUser.id }}
+        a(
+          :href="'http://qrestaurant.appsgorilasonline.com/menu/' + actualUser.id", target="_blank"
+        ) URL: {{ 'http://qrestaurant.appsgorilasonline.com/menu/' + actualUser.id }}
 
       b-form-group(
         label='Color'

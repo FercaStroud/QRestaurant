@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use App\Util\Utils;
 use App\Traits\UploadTrait;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Response;
 
@@ -17,7 +18,17 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        return Product::paginate(5);
+        return Product::select(
+            'products.id',
+            'products.category_id',
+            'products.deleted_at',
+            'products.description',
+            'products.image_src',
+            'products.name',
+            'products.price'
+        )->leftJoin('categories', 'categories.id', '=', 'products.category_id')
+            ->where("categories.user_id", "=", $request->user()->id)
+            ->paginate(5);
     }
 
     public function store(Request $request)
