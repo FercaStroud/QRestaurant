@@ -18,6 +18,7 @@ return [
     'user' => 'User',
     'welcome' => 'Welcome',
     'description'=>'Description',
+    'address'=>'Address',
     'choose_img'=>'Choose a image or drop it here...',
     'drop_img'=>'Drop image here...',
     'browse'=>'Browse',

@@ -90,7 +90,7 @@ b-container(tag='main')
 
   .users(v-if='users.length > 0')
     users-card(
-      v-for='user, i in users',
+      v-for='(user, i) in users',
       :key='user.id',
       :user='user',
       @edit-user='editUser(user, i)',

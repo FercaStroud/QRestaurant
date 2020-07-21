@@ -50,9 +50,9 @@ return [
 
         'public' => [
             'driver' => 'local',
-            'root' => env('APP_URL'),
+            'root' => public_path(),
             //            'root' => '/home/appsgorilas/public_html/qrestaurant.appsgorilasonline.com',
-            'url' => env('APP_URL').'/public',
+            'url' => env('APP_URL') . '/public',
             'visibility' => 'public',
         ],
 

@@ -6,33 +6,53 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Util\Errors;
 use App\Util\Utils;
+use Illuminate\Support\Str;
+use App\Traits\UploadTrait;
+
 
 class SettingController extends Controller
 {
+    use UploadTrait;
+
     public function saveSettings(Request $request)
     {
         $request->validate([
             'password' => 'nullable|string|min:6|confirmed',
+            'name' => 'required',
+            'address' => 'required',
         ]);
 
-        if ($request->user()->isAdmin()) {
-            $settingsFile = Utils::getSettingsFile();
 
-            $settings = json_encode([ // TODO change
-                'example' => $request->input('example', ''),
-            ]);
+        $imageSrc = $request->user()->image_src;
+        $logoSrc = $request->user()->logo_src;
 
-            file_put_contents($settingsFile, $settings);
+        if ($request->has('image_src') and $request->file('image_src') !== null) {
+            $image = $request->file('image_src');
+            $name = Str::slug($request->input('name')) . '_' . time();
+            $folder = '/uploads/images/headers/';
+            $filePath = $name . '.' . $image->getClientOriginalExtension();
+
+            $this->uploadOne($image, $folder, 'public', $name);
+            $imageSrc = $filePath;
+        }
+        if ($request->has('logo_src') and $request->file('logo_src') !== null) {
+            $image = $request->file('logo_src');
+            $name = Str::slug($request->input('name')) . '_' . time();
+            $folder = '/uploads/images/logos/';
+            $filePath = $name . '.' . $image->getClientOriginalExtension();
+
+            $this->uploadOne($image, $folder, 'public', $name);
+            $logoSrc = $filePath;
         }
 
-        $password = $request['password'];
+        $request->user()->update([
+            'name' => $request['name'],
+            'address' => $request['address'],
+            'image_src' => $imageSrc,
+            'logo_src' => $logoSrc,
+            'password' => bcrypt($request['password']),
+        ]);
 
-        if (!empty($password)) {
-            $request->user()->update([
-                'password' => bcrypt($password),
-            ]);
-        }
-
-        return [];
+        return response()->json($request->user(), 201);
     }
 }

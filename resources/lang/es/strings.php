@@ -15,6 +15,7 @@ return [
     'text' => 'Texto',
     'title' => 'Título',
     'description' => 'Descripción',
+    'address' => 'Dirección',
     'user' => 'Usuario',
     'welcome' => 'Bienvenido',
     'choose_img'=>'Elije una imagen o arrástrala hasta aquí...',

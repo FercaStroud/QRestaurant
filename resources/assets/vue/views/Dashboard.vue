@@ -34,7 +34,6 @@ export default class Home extends Vue {
         this.$router.push({path: '/categories'})
       },
     }]);
-
   }
 
   get actualUser() {
@@ -45,7 +44,6 @@ export default class Home extends Vue {
 
 <template lang="pug">
 b-container(tag='main')
-  p {{ $t('dashboard.dashboard_description') }}
   b-row
     b-col
       div
