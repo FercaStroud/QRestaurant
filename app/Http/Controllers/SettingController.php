@@ -45,14 +45,25 @@ class SettingController extends Controller
             $logoSrc = $filePath;
         }
 
-        $request->user()->update([
-            'name' => $request['name'],
-            'address' => $request['address'],
-            'image_src' => $imageSrc,
-            'logo_src' => $logoSrc,
-            'password' => bcrypt($request['password']),
-        ]);
 
-        return response()->json($request->user(), 201);
+        if($request['password'] !== "undefined"){
+            $request->user()->update([
+                'name' => $request['name'],
+                'address' => $request['address'],
+                'image_src' => $imageSrc,
+                'logo_src' => $logoSrc,
+                'password' => bcrypt($request['password']),
+            ]);
+        } else {
+            $request->user()->update([
+                'name' => $request['name'],
+                'address' => $request['address'],
+                'image_src' => $imageSrc,
+                'logo_src' => $logoSrc,
+            ]);
+        }
+
+
+        return response()->json( $request->user(), 201);
     }
 }

@@ -19,6 +19,7 @@ return [
     'welcome' => 'Welcome',
     'description'=>'Description',
     'address'=>'Address',
+    'download'=>'Download',
     'choose_img'=>'Choose a image or drop it here...',
     'drop_img'=>'Drop image here...',
     'browse'=>'Browse',

@@ -15,7 +15,6 @@
 
     isSending = false;
     okText = 'buttons.save';
-
     get userType() {
       return this.$auth.user().type_id;
     }
@@ -27,28 +26,40 @@
     }
 
     mounted(){
-      let vm = this;
-      this.$nextTick(function () {
-        this.settings.address = vm.userAddress
-        this.settings.name = vm.userName
-        this.settings.password = '';
-        this.settings.password_confirmation = '';
-      })
+
     }
 
     async handleOk() {
+      let boolSize = true;
+      console.log(this.settings)
       if (!checkPassword(this.settings)) {
         return;
       }
+      if (this.settings.image_src !== undefined) {
+        if (this.settings.image_src.size <= '2000000') {
 
-      const response = await this.postData();
-      const checkErrors = checkResponse(response);
-
-      if (checkErrors) {
-        this.setDialogMessage(checkErrors.message);
-        return;
+        } else {
+          boolSize = false;
+          this.setDialogMessage("La imagen no debe ser mayor a 2MB.");
+        }
       }
+      if (this.settings.logo_photo !== undefined) {
+        if (this.settings.logo_photo.size <= '2000000') {
 
+        } else {
+          boolSize = false;
+          this.setDialogMessage("La imagen no debe ser mayor a 2MB.");
+        }
+      }
+      if(boolSize) {
+        const response = await this.postData();
+        const checkErrors = checkResponse(response);
+
+        if (checkErrors) {
+          this.setDialogMessage(checkErrors.message);
+          return;
+        }
+      }
       (<any>this.$refs.modal).hide();
     }
 
@@ -57,14 +68,15 @@
       this.settings.password_confirmation = '';
     }
 
+
     async postData(): Promise<any> {
       this.isSending = true;
       this.okText = 'buttons.sending';
 
       let response: AxiosResponse<any>;
       const formData = new FormData();
-      formData.append('address', this.settings.address);
-      formData.append('name', this.settings.name);
+      formData.append('address', this.$auth.user().address);
+      formData.append('name', this.$auth.user().name);
       formData.append('image_src', this.settings.image_src);
       formData.append('logo_src', this.settings.logo_photo);
       formData.append('password', this.settings.password);
@@ -122,7 +134,7 @@
       )
         b-form-input#name(
           type='text',
-          v-model='settings.name',
+          v-model='$auth.user().name',
           maxlength=191,
           required,
         )
@@ -132,12 +144,14 @@
       )
         b-form-textarea#address(
           type='text',
-          v-model='settings.address',
+          v-model='$auth.user().address',
         )
 
       b-form-group(
         :label='$t("settings.cover_photo")'
         label-for='image_src',
+        description="Se recomiendan las siguientes medidas W1080px / H500px"
+
       )
         b-form-file#image_src(
           type='text',
@@ -152,6 +166,8 @@
       b-form-group(
         :label='$t("settings.logo_photo")'
         label-for='logo_src',
+        description="Se recomiendan las siguientes medidas W500px / H500px"
+
       )
         b-form-file#logo_src(
           type='text',

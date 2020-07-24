@@ -14,16 +14,46 @@
     @uStore.Action editCategory;
     @uStore.Action setModalVisible;
     @uStore.State isModalLoading;
+    @Action setDialogMessage;
 
     async created() {
+      this.form.name = '';
+      this.form.description = '';
+    }
+
+    checkForm() {
+      let vm = this;
+      let isValid = true;
+      Object.keys(this.form).forEach(function (index, item) {
+        console.log(vm.form[index]);
+        if (vm.form[index] === "") {
+          isValid = false;
+        }
+      });
+      return isValid;
     }
 
     handleOk() {
-
-      if (this.isAdd) {
-        this.addCategory(this.form);
+      if (this.checkForm()) {
+        if (this.form.image_src !== undefined) {
+          if (this.form.image_src.size <= '2000000') {
+            if (this.isAdd) {
+              this.addCategory(this.form);
+            } else {
+              this.editCategory(this.form);
+            }
+          } else {
+            this.setDialogMessage("La imagen no debe ser mayor a 2MB.");
+          }
+        } else {
+          if (this.isAdd) {
+            this.addCategory(this.form);
+          } else {
+            this.editCategory(this.form);
+          }
+        }
       } else {
-        this.editCategory(this.form);
+        this.setDialogMessage("Todos los campos son requeridos.");
       }
     }
 
@@ -86,6 +116,7 @@
       b-form-group(
         :label='$t("strings.image")'
         label-for='image_src',
+        description="Se recomiendan las siguientes medidas W1080px / H500px"
       )
         b-form-file#image_src(
           type='text',

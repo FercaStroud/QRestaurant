@@ -36,7 +36,11 @@
 .bg-white {
   background-color: white;
 }
-
+.bg-primary{
+  background-color: $primary_color !important;
+  color:white !important;
+  border-color: $primary_color !important;;
+}
 .font-caveat {
   font-family: 'Caveat', cursive;
 }

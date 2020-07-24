@@ -18,6 +18,7 @@ return [
     'address' => 'Dirección',
     'user' => 'Usuario',
     'welcome' => 'Bienvenido',
+    'download' => 'Descargar',
     'choose_img'=>'Elije una imagen o arrástrala hasta aquí...',
     'drop_img'=>'Arrastra tu imagen aquí...',
     'browse'=>'Buscar',
