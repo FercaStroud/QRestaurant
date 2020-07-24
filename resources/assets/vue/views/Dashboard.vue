@@ -49,8 +49,8 @@ b-container(tag='main')
       div
         h2 {{ $t('dashboard.your_code') }}
         a(
-          :href="'http://qrestaurant.appsgorilasonline.com/menu/' + actualUser.id", target="_blank"
-        ) URL: {{ 'http://qrestaurant.appsgorilasonline.com/menu/' + actualUser.id }}
+          :href="'https://q-restaurant.com/menu/' + actualUser.id", target="_blank"
+        ) URL: {{ 'q-restaurant.com/menu/' + actualUser.id }}
 
       b-form-group(
         label='Color'
@@ -63,7 +63,7 @@ b-container(tag='main')
           required,
         )
       qrcode(
-        :value=" 'http://qrestaurant.appsgorilasonline.com/menu/' + actualUser.id",
+        :value=" 'https://q-restaurant.com/menu/' + actualUser.id",
         tag="img",
         :options="{ width: 500,  color: { dark: darkColor, light: '#0000' }, }"
       )

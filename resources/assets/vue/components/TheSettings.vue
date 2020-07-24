@@ -66,7 +66,7 @@
       formData.append('address', this.settings.address);
       formData.append('name', this.settings.name);
       formData.append('image_src', this.settings.image_src);
-      formData.append('logo_src', this.settings.logo_src);
+      formData.append('logo_src', this.settings.logo_photo);
       formData.append('password', this.settings.password);
       formData.append('password_confirmation', this.settings.password_confirmation);
 
