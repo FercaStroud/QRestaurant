@@ -34,13 +34,15 @@
       Object.keys(this.form).forEach(function (index, item) {
         console.log(vm.form[index])
         if (vm.form[index] === "") {
-          isValid = false
+          if(index !== 'categories')
+            isValid = false
         }
       });
       return isValid;
     }
 
     handleOk() {
+
       if (this.checkForm()) {
         if (this.form.image_src !== undefined) {
           if (this.form.image_src.size <= '2000000') {
@@ -60,6 +62,7 @@
           }
         }
       }else {
+        console.log(this.form)
         this.setDialogMessage("Todos los campos son requeridos.");
       }
     }
