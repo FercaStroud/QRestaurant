@@ -43,7 +43,6 @@
 
     handleOk() {
 
-      if (this.checkForm()) {
         if (this.form.image_src !== undefined) {
           if (this.form.image_src.size <= '2000000') {
             if (this.isAdd) {
@@ -61,10 +60,7 @@
             this.addProduct(this.form);
           }
         }
-      }else {
-        console.log(this.form)
-        this.setDialogMessage("Todos los campos son requeridos.");
-      }
+
     }
 
     async getCategories(page: number): Promise<void> {

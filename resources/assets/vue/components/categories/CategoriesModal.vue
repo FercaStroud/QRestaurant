@@ -20,6 +20,10 @@
       this.form.name = '';
       this.form.description = '';
     }
+    async mounted() {
+      this.form.name = '';
+      this.form.description = '';
+    }
 
     checkForm() {
       let vm = this;
@@ -34,7 +38,7 @@
     }
 
     handleOk() {
-      if (this.checkForm()) {
+
         if (this.form.image_src !== undefined) {
           if (this.form.image_src.size <= '2000000') {
             if (this.isAdd) {
@@ -52,9 +56,6 @@
             this.editCategory(this.form);
           }
         }
-      } else {
-        this.setDialogMessage("Todos los campos son requeridos.");
-      }
     }
 
     handleClose() {
