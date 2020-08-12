@@ -74,7 +74,6 @@ const editCategory = async ({ commit }, payload) => {
   if (payload.description === undefined) {
     payload.description = '';
   }
-
   const formData = new FormData();
   formData.append('id', payload.id);
   formData.append('parent_id', payload.parent_id);

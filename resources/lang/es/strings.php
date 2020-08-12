@@ -1,13 +1,14 @@
 <?php
 
 return [
-    'project_title'=>'QRestaurant',
+    'project_title'=>'QRestaurant!',
     'admin' => 'Administrador',
     'email' => 'E-mail',
     'image' => 'Imagen',
     'loading' => 'Cargando',
     'logo' => 'Logo',
     'name' => 'Nombre',
+    'restaurant_name' => 'Nombre del Restaurante',
     'normal' => 'Normal',
     'optional' => 'Opcional',
     'password' => 'Contraseña',

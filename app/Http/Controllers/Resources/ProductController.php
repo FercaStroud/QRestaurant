@@ -36,7 +36,6 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
-            'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $product = new Product($request->all());
@@ -61,13 +60,17 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'price' => 'required',
-            'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-
         $product->category_id = $request->get("category_id", $product->category_id);
         $product->name = $request->get("name", $product->name);
-        $product->description = $request->get("description", $product->description);
         $product->price = $request->get("price", $product->price);
+
+        $description = $request->get("description");
+
+        if($description == "null"){
+            $description = '';
+        }
+        $product->description = $description;
 
         if ($request->has('image_src') and $request->file('image_src') !== null) {
             $image = $request->file('image_src');

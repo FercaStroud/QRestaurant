@@ -23,10 +23,6 @@
       if (this.categories.length == 0) {
         await this.getCategories(1);
       }
-      this.form.name = '';
-      this.form.description = '';
-      this.form.price = '';
-      this.form.categories = '';
     }
     checkForm() {
       let vm = this;
@@ -42,13 +38,12 @@
     }
 
     handleOk() {
-
         if (this.form.image_src !== undefined) {
           if (this.form.image_src.size <= '2000000') {
             if (this.isAdd) {
               this.addProduct(this.form);
             } else {
-              this.addProduct(this.form);
+              this.editProduct(this.form);
             }
           } else {
             this.setDialogMessage("La imagen no debe ser mayor a 2MB.");
@@ -57,7 +52,7 @@
           if (this.isAdd) {
             this.addProduct(this.form);
           } else {
-            this.addProduct(this.form);
+            this.editProduct(this.form);
           }
         }
 

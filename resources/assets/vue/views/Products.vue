@@ -51,6 +51,10 @@
     addProduct(): void {
       this.isModalAdd = true;
       this.setModalVisible(true);
+      this.form.name = '';
+      this.form.price = '';
+      this.form.description = '';
+      this.form.image_src = undefined;
     }
 
     editProduct(product: Product, index: number): void {
@@ -58,6 +62,7 @@
       this.setModalVisible(true);
 
       this.form = { ...product };
+      this.form.image_src = undefined;
     }
 
     async deleteProductConfirm(product: Product): Promise<void> {

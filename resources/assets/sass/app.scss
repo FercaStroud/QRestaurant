@@ -73,7 +73,16 @@ body {
   #vue-loading {
     margin: 16px;
   }
-
+  .card-preview{
+    float:left;
+    position: relative;
+    width: 100%;
+    padding-bottom : 100%;
+    margin:1.66%;
+    background-position:center center;
+    background-repeat:no-repeat;
+    background-size:cover;
+  }
   .btn-link {
     cursor: pointer;
   }

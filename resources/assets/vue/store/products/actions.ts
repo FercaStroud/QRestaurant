@@ -58,6 +58,7 @@ const editProduct = async ({ commit }, payload) => {
   }
 
   const formData = new FormData();
+  formData.append('id', payload.id);
   formData.append('category_id', payload.category_id);
   formData.append('name', payload.name);
   formData.append('description', payload.description);

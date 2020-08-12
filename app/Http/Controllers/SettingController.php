@@ -19,7 +19,6 @@ class SettingController extends Controller
         $request->validate([
             'password' => 'nullable|string|min:6|confirmed',
             'name' => 'required',
-            'address' => 'required',
         ]);
 
 
@@ -45,19 +44,23 @@ class SettingController extends Controller
             $logoSrc = $filePath;
         }
 
+        $address = $request['address'];
+        if($address == "null"){
+            $address = '';
+        }
 
         if($request['password'] !== "undefined"){
             $request->user()->update([
-                'name' => $request['name'],
-                'address' => $request['address'],
+                'name' => $request->input('name'),
+                'address' => $address,
                 'image_src' => $imageSrc,
                 'logo_src' => $logoSrc,
                 'password' => bcrypt($request['password']),
             ]);
         } else {
             $request->user()->update([
-                'name' => $request['name'],
-                'address' => $request['address'],
+                'name' => $request->input('name'),
+                'address' => $address,
                 'image_src' => $imageSrc,
                 'logo_src' => $logoSrc,
             ]);

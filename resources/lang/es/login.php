@@ -3,8 +3,8 @@
 return [
 
     'confirm_password' => 'Confirmar contraseña',
-    'description' => 'Activated charcoal squid brunch retro messenger bag hashtag 90\'s wayfarers jianbing mustache banh mi fanny pack PBR&B adaptogen. Master cleanse normcore XOXO, neutra meh asymmetrical lumbersexual humblebrag umami af. ',
     'forgot_password' => '¿Olvidaste tu contraseña?',
+    'description' => 'Personaliza fácilmente el menú de tu restaurante de una manera más atractiva y única al alcance de tus clientes desde su móvil en todo momento. Se la diferencia ante la competencia y olvídate de los menús físicos, brinda lo más importante seguridad e higiene de la mano con la novedad y haz la diferencia.',
     'login' => 'Iniciar sesión',
     'keep_connected' => 'Mantenme conectado',
     'register' => 'Registro',

@@ -99,9 +99,6 @@ form {
       margin-top: 150px;
     }
   }
-  .logo {
-    margin-top: 50px;
-  }
   .welcome {
     margin-bottom: 0px;
     margin-top: 285px;

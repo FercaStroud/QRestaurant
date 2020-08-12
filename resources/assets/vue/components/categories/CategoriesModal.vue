@@ -16,14 +16,6 @@
     @uStore.State isModalLoading;
     @Action setDialogMessage;
 
-    async created() {
-      this.form.name = '';
-      this.form.description = '';
-    }
-    async mounted() {
-      this.form.name = '';
-      this.form.description = '';
-    }
 
     checkForm() {
       let vm = this;

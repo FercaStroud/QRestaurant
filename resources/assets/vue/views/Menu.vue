@@ -70,6 +70,8 @@
             tag="article"
             style="width:100%"
             class="mb-2"
+            border-variant="none"
+            :style="{ backgroundColor: 'rgba(255,255,255,.6)', border:'none'}"
           )
             template(v-slot:header)
               img.img-fluid(v-if="data.image_src" :src='"/uploads/images/categories/" + data.image_src')
@@ -77,19 +79,16 @@
             b-card-text {{ data.description }}
 
             b-row
-              b-col(md="3" v-for="product in data.products" :key="product.id" )
+              b-col(md="4" v-for="product in data.products" :key="product.id" )
                 b-card(
-                  img-top
-                  tag="article"
                   style="width:100%"
                 )
-                  template(v-slot:header)
-                    img.img-fluid(
+                  b-card-body
+                    div.card-preview(
                       v-if="product.image_src"
-                      :src='"/uploads/images/products/" + product.image_src'
-                      style={}
+                      :style="{marginBottom: '18px',backgroundImage: 'url(/uploads/images/products/' + product.image_src + ')'}"
                     )
-                  b-card-text
+
                     p.card-text
                       span.font-weight-bold {{ product.name }}
                       br/

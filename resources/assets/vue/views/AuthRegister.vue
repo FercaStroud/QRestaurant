@@ -53,7 +53,7 @@ b-form(@submit='register')
   .title.font-caveat(style={fontSize:'2em'}) {{ $t('login.register') }}
 
   b-form-group(
-    :label='$t("strings.name")'
+    :label='$t("strings.restaurant_name")'
     label-for='name',
   )
     b-form-input(

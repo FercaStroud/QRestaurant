@@ -51,6 +51,8 @@
     addCategory(): void {
       this.isModalAdd = true;
       this.setModalVisible(true);
+      this.form.name = '';
+      this.form.description = '';
     }
 
     editCategory(category: Category, index: number): void {
@@ -58,6 +60,7 @@
       this.setModalVisible(true);
 
       this.form = { ...category };
+      this.form.image_src = undefined;
     }
 
     async deleteCategoryConfirm(category: Category): Promise<void> {

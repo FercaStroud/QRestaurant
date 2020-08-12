@@ -34,7 +34,6 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         //$category = new Category($request->all());
@@ -68,12 +67,16 @@ class CategoryController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'profile_image' => 'image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
         $category->parent_id = $request->get("parent_id", $category->parent_id);
         $category->name = $request->get("name", $category->name);
-        $category->description = $request->get("description", $category->description);
+        $description = $request->get("description");
+
+        if($description == "null"){
+            $description = '';
+        }
+        $category->description = $description;
 
         if ($request->has('image_src') and $request->file('image_src') !== null) {
             $image = $request->file('image_src');

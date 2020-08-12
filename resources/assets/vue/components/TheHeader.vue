@@ -47,7 +47,7 @@
             height=36,
           //)
 
-          .font-caveat(style={fontSize: '1.2em', color: '#f16338'}) {{ $t('strings.project_title') }}!
+          .font-caveat(style={fontSize: '1.2em', color: '#f16338'}) {{ $t('strings.project_title') }}
 
 
         b-navbar-toggle(target='nav_collapse')

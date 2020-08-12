@@ -2,13 +2,14 @@
 
 return [
 
-    'project_title'=>'QRestaurant',
+    'project_title'=>'QRestaurant!',
     'admin' => 'Administrator',
     'email' => 'E-mail',
     'image' => 'Image',
     'loading' => 'Loading',
     'logo' => 'Logo',
     'name' => 'Name',
+    'restaurant_name' => 'Restaurant Name',
     'normal' => 'Normal',
     'optional' => 'Optional',
     'password' => 'Password',
