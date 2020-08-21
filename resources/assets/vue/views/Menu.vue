@@ -24,16 +24,16 @@
 
 <template lang="pug">
   div.bg-pattern
-    div.fixed.bg-white
+    div.fixed.bg-white(style={padding: '9px'})
       b-container
-        span.font-caveat(
-          style={
-            fontSize: '2em',
-            color: '#f16338',
-            float: 'left',
-            padding: '10px'
-          }
-        ) {{ $t('strings.project_title') }}!
+        img(style={float:'left', height: '52px'}).align-top(
+          src='images/logo-square.png',
+          alt='Logo QRestaurant',
+        )
+        img(style={float:'left', height: '52px'}).align-top(
+          src='images/logo-horizontal.png',
+          alt='Logo QRestaurant',
+        )
 
     div.menu-header(
       :style="{backgroundImage: 'url(/uploads/images/headers/'+categoriesWithProducts.user.image_src+')'}"

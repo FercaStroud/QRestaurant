@@ -41,13 +41,16 @@
           v-icon(name='arrow-left')
 
         b-navbar-brand(:to='homePath', :class='{"has-back": path !== homePath}')
-          //img(style={float:'left'}).align-top(
-            src='images/logo.svg',
+          img(style={float:'left', height: '52px'}).align-top(
+            src='images/logo-square.png',
             alt='Logo QRestaurant',
-            height=36,
-          //)
+          )
+          img(style={float:'left', height: '52px'}).align-top(
+            src='images/logo-horizontal.png',
+            alt='Logo QRestaurant',
+          )
 
-          .font-caveat(style={fontSize: '1.2em', color: '#f16338'}) {{ $t('strings.project_title') }}
+          //.font-caveat(style={fontSize: '1.2em', color: '#f16338'}) {{ $t('strings.project_title') }}
 
 
         b-navbar-toggle(target='nav_collapse')

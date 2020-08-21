@@ -27,7 +27,7 @@ export default class BaseAuth extends Vue {
       :style="{ background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/background-login.jpg) no-repeat center / cover' }"
     )
       .welcome
-        h1.font-caveat(style={fontSize:'5em'}) {{ $t('strings.project_title') }}!
+        h1(style={fontSize:'5em'}) {{ $t('strings.project_title') }}
         .sub-text {{ $t('login.description') }}
 
 </template>
