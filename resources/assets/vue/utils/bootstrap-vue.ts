@@ -1,6 +1,7 @@
 import Vue from 'vue';
 
 import {
+  BootstrapVueIcons,
   CardPlugin,
   ButtonPlugin,
   ModalPlugin,
@@ -24,10 +25,13 @@ import {
   BFormRadio,
   BDropdown,
   BDropdownItem,
+  BTable,
+  PopoverPlugin,
 } from 'bootstrap-vue';
 
 Vue.component('b-dropdown', BDropdown);
 Vue.component('b-dropdown-item', BDropdownItem);
+Vue.component('b-table', BTable);
 
 Vue.use(CardPlugin);
 Vue.use(ButtonPlugin);
@@ -35,6 +39,9 @@ Vue.use(ModalPlugin);
 Vue.use(FormPlugin);
 Vue.use(ListGroupPlugin);
 Vue.use(NavbarPlugin);
+Vue.use(BootstrapVueIcons);
+Vue.use(PopoverPlugin);
+
 Vue.component('b-container', BContainer);
 Vue.component('b-row', BRow);
 Vue.component('b-col', BCol);

@@ -38,6 +38,9 @@ Route::group(['middleware' => ['jwt.auth'],], function () {
     Route::resource('products', 'Resources\ProductController', [
         'except' => ['create', 'edit', 'show'],
     ]);
+    Route::resource('menus', 'Resources\MenuController', [
+        'except' => ['create', 'edit', 'show'],
+    ]);
 });
 
 Route::group([

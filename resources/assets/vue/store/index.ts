@@ -12,6 +12,7 @@ import state from './state';
 import users from './users';
 import products from './products';
 import categories from './categories';
+import menus from './menus';
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ const modules = {
   users,
   products,
   categories,
+  menus,
 };
 
 const store = new Vuex.Store({

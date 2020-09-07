@@ -27,8 +27,12 @@ return [
     'no_parent_category'=>'No parent category',
     'price'=>'Price',
     'category'=>'Category',
-
+    'created_at'=>'Created at',
+    'updated_at'=>'Last update',
     // Pages
+    'actions'=>'Actions',
+    'delete'=>'Delete',
+    'edit'=>'Edit',
     'dashboard'=>'Admin Panel',
     'example' => 'Example',
     'home' => 'Home',

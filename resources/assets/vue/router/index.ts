@@ -9,6 +9,7 @@ const AuthResetForm = () => import('../views/AuthResetForm.vue');
 const Dashboard = () => import('../views/Dashboard.vue');
 const Home = () => import('../views/Home.vue');
 const Menu = () => import('../views/Menu.vue');
+const Menus = () => import('../views/MyMenus.vue');
 //const Messages = () => import('../views/Messages.vue');
 const Users = () => import('../views/Users.vue');
 const Categories = () => import('../views/Categories.vue');
@@ -61,6 +62,18 @@ const router = new Router({
       component: Products,
       meta: {
         title: Vue.i18n.translate('products.text', null),
+        auth: {
+          roles: userTypes.NORMAL,
+          forbiddenRedirect: '/',
+        },
+      },
+    },
+    {
+      path: '/menus',
+      name: 'menus',
+      component: Menus,
+      meta: {
+        title: Vue.i18n.translate('strings.my_menus', null),
         auth: {
           roles: userTypes.NORMAL,
           forbiddenRedirect: '/',

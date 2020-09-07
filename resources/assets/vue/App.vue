@@ -61,7 +61,7 @@ div.app(v-else, v-show='$auth.ready()')
   dialogs-wrapper
   div(v-if='$auth.check()')
     the-header
-    router-view(v-if='$auth.ready()')
+    router-view(:style="{marginTop:'30px',}" v-if='$auth.ready()')
   base-auth(v-else)
   .languages
     b-button(

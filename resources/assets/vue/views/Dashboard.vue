@@ -20,7 +20,15 @@ export default class Home extends Vue {
 
   mounted() {
     this.setBackUrl('/');
-    this.setMenu([{
+    this.setMenu([
+      {
+        text: 'menus.title',
+        key: 1,
+        handler: () => {
+          this.$router.push({path: '/menus'})
+        },
+      },
+      /*{{
       text: 'products.text',
       key: 1,
       handler: () => {
@@ -31,8 +39,8 @@ export default class Home extends Vue {
       key: 2,
       handler: () => {
         this.$router.push({path: '/categories'})
-      },
-    }]);
+      },*/
+    ]);
   }
 
   downloadImage() {
@@ -61,35 +69,38 @@ export default class Home extends Vue {
 <template lang="pug">
 b-container(tag='main')
   b-row
-    b-col(md="12" )
-      h2 {{ $t('dashboard.your_code') }}
-      .color-primary() {{ 'q-restaurant.com/menu/' + actualUser.id }}
+    b-col
+      span Selecciona una opción para continuar
+<!--  b-row-->
+<!--    b-col(md="12" )-->
+<!--      //h2 {{ $t('dashboard.your_code') }}-->
+<!--      //.color-primary() {{ 'q-restaurant.com/menu/' + actualUser.id }}-->
 
-  b-row(style="margin-top:40px")
-    b-col(md="4")
-      b-card
-        b-form-group(
-          label='Color'
-          label-for='color',
-        )
-          b-form-input#color(
-            type='text',
-            v-model='darkColor',
-            maxlength='7',
-            required,
-          )
-        b-card-footer
-          b-btn.bg-primary(
-            style="width:100%", @click="downloadImage"
-          ) {{ $t('strings.download') }}
-    b-col(md="8"  sm="12")
-      b-card
-        qrcode(
-          id="QR-CODE"
-          :value=" 'https://q-restaurant.com/menu/' + actualUser.id",
-          tag="img",
-          :options="{ width: 1080,  color: { dark: darkColor, light: '#0000' }, }"
-        )
+<!--  b-row(style="margin-top:40px")-->
+<!--    b-col(md="4")-->
+<!--      b-card-->
+<!--        b-form-group(-->
+<!--          label='Color'-->
+<!--          label-for='color',-->
+<!--        )-->
+<!--          b-form-input#color(-->
+<!--            type='text',-->
+<!--            v-model='darkColor',-->
+<!--            maxlength='7',-->
+<!--            required,-->
+<!--          )-->
+<!--        b-card-footer-->
+<!--          b-btn.bg-primary(-->
+<!--            style="width:100%", @click="downloadImage"-->
+<!--          ) {{ $t('strings.download') }}-->
+<!--    b-col(md="8"  sm="12")-->
+<!--      b-card-->
+<!--        qrcode(-->
+<!--          id="QR-CODE"-->
+<!--          :value=" 'https://q-restaurant.com/menu/' + actualUser.id",-->
+<!--          tag="img",-->
+<!--          :options="{ width: 1080,  color: { dark: darkColor, light: '#0000' }, }"-->
+<!--        )-->
 
 
 

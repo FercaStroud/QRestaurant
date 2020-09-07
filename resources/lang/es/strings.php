@@ -26,6 +26,11 @@ return [
     'no_parent_category'=>'Sin categoría padre',
     'price'=>'Precio',
     'category'=>'Categoría',
+    'created_at'=>'Fecha de creación',
+    'updated_at'=>'Última actualización',
+    'actions'=>'Acciones',
+    'delete'=>'Eliminar',
+    'edit'=>'Editar',
 
 
     // Pages
