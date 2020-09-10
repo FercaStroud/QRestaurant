@@ -1,12 +1,15 @@
 declare interface User {
   id: number;
-  email: string;
-  name: string;
-  address: string;
-  image_src: string;
-  logo_src: string;
-  type: string;
   type_id: number;
+  user_name: string;
+  restaurant_name: string;
+  logo_src: string;
+  email: string;
+  phone: string;
+  city: string;
+  type: string;
+  state: string;
+  address: string;
   password: string;
   password_confirmation: string;
 }

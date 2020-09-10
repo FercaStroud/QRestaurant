@@ -9,6 +9,8 @@ return [
     'logo' => 'Logo',
     'name' => 'Nombre',
     'restaurant_name' => 'Nombre del Restaurante',
+    'user_name' => 'Nombre completo',
+    'cancel' => 'Cancelar',
     'normal' => 'Normal',
     'optional' => 'Opcional',
     'password' => 'Contraseña',

@@ -26,6 +26,7 @@ import {
   BDropdown,
   BDropdownItem,
   BTable,
+  BSpinner,
   PopoverPlugin,
 } from 'bootstrap-vue';
 
@@ -56,4 +57,4 @@ Vue.component('b-form-file', BFormFile);
 Vue.component('b-form-checkbox', BFormCheckbox);
 Vue.component('b-form-radio-group', BFormRadioGroup);
 Vue.component('b-form-radio', BFormRadio);
-Vue.component('b-pagination', BPagination);
+Vue.component('b-spinner', BSpinner);

@@ -53,15 +53,25 @@ b-form(@submit='register')
   .title.font-caveat(style={fontSize:'2em'}) {{ $t('login.register') }}
 
   b-form-group(
-    :label='$t("strings.restaurant_name")'
-    label-for='name',
+    :label='$t("strings.user_name")'
+    label-for='user_name',
   )
-    b-form-input(
+    b-form-input#user_name(
       type='text',
-      v-model='form.name',
-      maxlength='191',
+      v-model='form.user_name',
+      maxlength=191,
       required,
-      autofocus,
+    )
+
+  b-form-group(
+    :label='$t("strings.restaurant_name")'
+    label-for='restaurant_name',
+  )
+    b-form-input#restaurant_name(
+      type='text',
+      v-model='form.restaurant_name',
+      maxlength=191,
+      required,
     )
 
   b-form-group(
@@ -73,6 +83,41 @@ b-form(@submit='register')
       v-model='form.email',
       name='email',
       maxlength='191',
+      required,
+    )
+
+  b-form-group(
+    :label='$t("strings.phone")'
+    label-for='phone',
+  )
+    b-form-input(
+      type='number',
+      v-model='form.phone',
+      name='phone',
+      min='0',
+      maxlength='20',
+      required,
+    )
+
+  b-form-group(
+    :label='$t("strings.city")'
+    label-for='city',
+  )
+    b-form-input#city(
+      type='text',
+      v-model='form.city',
+      maxlength=40,
+      required,
+    )
+
+  b-form-group(
+    :label='$t("strings.state")'
+    label-for='city',
+  )
+    b-form-input#state(
+      type='text',
+      v-model='form.state',
+      maxlength=40,
       required,
     )
 
@@ -97,6 +142,12 @@ b-form(@submit='register')
       name='password_confirmation',
       required,
     )
+
+  b-form-group
+    b-button(
+      @click=""
+      variant='warning',
+    ) {{ $t('strings.cancel') }}
 
   b-form-group
     b-button(

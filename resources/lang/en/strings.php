@@ -10,6 +10,8 @@ return [
     'logo' => 'Logo',
     'name' => 'Name',
     'restaurant_name' => 'Restaurant Name',
+    'user_name' => 'Full Name',
+    'cancel' => 'Cancel',
     'normal' => 'Normal',
     'optional' => 'Optional',
     'password' => 'Password',
