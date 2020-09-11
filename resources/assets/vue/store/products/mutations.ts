@@ -3,12 +3,12 @@ import Vue from 'vue';
 const SET_PRODUCTS = (state, payload) => {
   state.products = payload.data;
 
-  state.pagination = {
+  /*state.pagination = {
     currentPage: payload.current_page,
     perPage: payload.per_page,
     totalProducts: payload.total,
     totalPages: payload.last_page,
-  };
+  };*/
 };
 
 const ADD_PRODUCT = (state, payload) => {
@@ -42,8 +42,17 @@ const SET_MODAL_LOADING = (state, payload) => {
 const SET_MODAL_VISIBLE = (state, payload) => {
   state.isModalVisible = payload;
 };
+const SET_MODAL_ADD = (state, payload) => {
+  state.isModalAdd = payload;
+};
+
+const SET_FORM = (state, payload) => {
+  state.form = payload;
+};
 
 export default {
+  SET_FORM,
+  SET_MODAL_ADD,
   SET_PRODUCTS,
   ADD_PRODUCT,
   UPDATE_PRODUCT,

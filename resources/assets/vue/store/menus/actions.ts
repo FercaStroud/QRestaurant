@@ -1,17 +1,17 @@
 import axios from 'axios';
 import checkResponse from '@/utils/checkResponse';
 
-const loadMenus = async ({ commit }, payload) => {
+const loadMenus = async ({ commit }) => {
   commit('SET_LOADING', true);
 
   try {
-    const response = await axios.get(`menus?page=${payload.page}`);
+    const response = await axios.get('menus');
     const checkErrors = checkResponse(response);
 
     if (checkErrors) {
       commit('SET_DIALOG_MESSAGE', checkErrors.message, { root: true });
     } else {
-      commit('SET_MENUS', response.data);
+      commit('SET_MENUS', response);
     }
   } catch (e) {
     commit('SET_DIALOG_MESSAGE', 'errors.generic_error', { root: true });

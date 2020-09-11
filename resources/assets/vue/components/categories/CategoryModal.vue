@@ -5,7 +5,7 @@
   const uStore = namespace('categories');
 
   @Component
-  export default class CategoriesModal extends Vue {
+  export default class CategoryModal extends Vue {
     @Prop() form;
     @Prop() isAdd;
     @Prop() categories;
@@ -15,19 +15,6 @@
     @uStore.Action setModalVisible;
     @uStore.State isModalLoading;
     @Action setDialogMessage;
-
-
-    checkForm() {
-      let vm = this;
-      let isValid = true;
-      Object.keys(this.form).forEach(function (index, item) {
-        console.log(vm.form[index]);
-        if (vm.form[index] === "") {
-          isValid = false;
-        }
-      });
-      return isValid;
-    }
 
     handleOk() {
 

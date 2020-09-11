@@ -23,7 +23,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        return Category::where("user_id", "=", $request->user()->id)->paginate(25);
+        return Category::where("menu_id", "=", $request->get("menu_id"))->get();
     }
 
     /**
@@ -39,6 +39,7 @@ class CategoryController extends Controller
         //$category = new Category($request->all());
         $category = new Category();
         $category->user_id = $request->user()->id;
+        $category->menu_id = $request->get("menu_id");
         $category->parent_id = $request->get("parent_id", 0);
         $category->name = $request->get("name");
         $category->description = $request->get("description", "");

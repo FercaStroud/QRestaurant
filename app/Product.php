@@ -24,6 +24,5 @@ class Product extends Model
     ];
 
     protected $hidden = [
-        'created_at', 'updated_at'
     ];
 }

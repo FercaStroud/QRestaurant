@@ -5,11 +5,11 @@
   const pStore = namespace('products');
   const cStore = namespace('categories');
 
-
   @Component
-  export default class ProductsModal extends Vue {
+  export default class ProductModal extends Vue {
     @Prop() form;
     @Prop() isAdd;
+    @Prop() product;
     @Prop() isVisible;
     @cStore.State categories;
     @pStore.State isModalLoading;
@@ -20,21 +20,7 @@
     @Action setDialogMessage;
 
     async created() {
-      if (this.categories.length == 0) {
-        await this.getCategories(1);
-      }
-    }
-    checkForm() {
-      let vm = this;
-      let isValid = true;
-      Object.keys(this.form).forEach(function (index, item) {
-        console.log(vm.form[index])
-        if (vm.form[index] === "") {
-          if(index !== 'categories')
-            isValid = false
-        }
-      });
-      return isValid;
+      await this.getCategories(this.form.menu_id);
     }
 
     handleOk() {
@@ -58,8 +44,8 @@
 
     }
 
-    async getCategories(page: number): Promise<void> {
-      this.loadCategories({ page });
+    async getCategories(menu_id: number): Promise<void> {
+      this.loadCategories({ menu_id });
     }
 
     handleClose() {
@@ -70,6 +56,7 @@
 
 <template lang="pug">
   b-modal(
+    size="xl"
     hide-header-close=true,
     :visible='isVisible',
     :cancel-title='$t("buttons.cancel")',

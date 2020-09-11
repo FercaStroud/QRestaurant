@@ -1,7 +1,10 @@
 <?php
 
 return [
-
+    'title'=>'Categories',
+    'name'=>'Categories',
+    'description'=>'Description',
+    'image_src'=>'Image',
     'text'=>'Categories',
     'add_category' => 'Add category',
     'edit_category' => 'Edit category',

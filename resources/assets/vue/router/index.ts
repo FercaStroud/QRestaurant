@@ -45,7 +45,7 @@ const router = new Router({
       },
     },
     {
-      path: '/categories',
+      path: '/categories/:id',
       name: 'categories',
       component: Categories,
       meta: {
@@ -57,7 +57,7 @@ const router = new Router({
       },
     },
     {
-      path: '/products',
+      path: '/products/:id',
       name: 'products',
       component: Products,
       meta: {

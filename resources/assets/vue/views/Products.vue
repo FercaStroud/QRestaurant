@@ -1,123 +1,65 @@
 <script lang="ts">
-  import { Component, Vue, Watch } from 'vue-property-decorator';
-  import { Action, State, namespace } from 'vuex-class';
+import {Component, Vue} from 'vue-property-decorator';
+import {Action, namespace} from 'vuex-class';
+import ProductList from '@/components/products/ProductList.vue';
+import ProductModal from '@/components/products/ProductModal.vue';
 
-  import dialog from '@/utils/dialog';
+const pStore = namespace('products');
 
-  import ProductsCard from '@/components/products/ProductsCard.vue';
-  import ProductsModal from '@/components/products/ProductsModal.vue';
-
-  const uStore = namespace('products');
-
-  @Component({
-    components: {
-      ProductsCard,
-      ProductsModal,
-    },
-  })
-
-  export default class Products extends Vue {
-    @Action setBackUrl;
-    @Action setMenu;
-    @uStore.State products;
-    @uStore.State pagination;
-    @uStore.State isLoading;
-    @uStore.State isModalVisible;
-    @uStore.Action deleteProduct;
-    @uStore.Action loadProducts;
-    @uStore.Action setModalVisible;
-
-    currentPage = 1;
-    form: Partial<Product> = {};
-    isModalAdd = true;
-
-    async created() {
-      this.setBackUrl('/');
-      this.setMenu([
-        {
-          key: 'add_product',
-          text: 'products.add_product',
-          handler: this.addProduct,
-        },
-      ]);
-
-      this.currentPage = this.pagination.currentPage;
-
-      if (this.products.length == 0) {
-        await this.getProducts(1);
-      }
-    }
-
-    addProduct(): void {
-      this.isModalAdd = true;
-      this.setModalVisible(true);
-      this.form.name = '';
-      this.form.price = '';
-      this.form.description = '';
-      this.form.image_src = undefined;
-    }
-
-    editProduct(product: Product, index: number): void {
-      this.isModalAdd = false;
-      this.setModalVisible(true);
-
-      this.form = { ...product };
-      this.form.image_src = undefined;
-    }
-
-    async deleteProductConfirm(product: Product): Promise<void> {
-      if (!(await dialog('front.delete_product_confirmation', true))) {
-        return;
-      }
-
-      this.deleteProduct(product);
-    }
-
-    async getProducts(page: number): Promise<void> {
-      this.loadProducts({ page });
-    }
+@Component(
+  {
+    components: {ProductModal, ProductList}
   }
+)
+export default class Products extends Vue {
+  @Action setBackUrl;
+  @Action setMenu;
+  @pStore.Action setModalVisible;
+  @pStore.Action setForm;
+  @pStore.Action setModalAdd;
+  @pStore.State isModalVisible;
+  @pStore.State isModalAdd;
+  @pStore.State form;
+
+  product: Partial<Product> = {};
+
+  mounted() {
+    this.product.menu_id = parseInt(this.$route.params.id);
+    this.setForm(this.product);
+    this.setBackUrl('/menus');
+    this.setMenu(
+      [
+        {
+          text: 'products.add_product',
+          key: 1,
+          handler: this.addProduct
+        },
+      ]
+    );
+  }
+
+  addProduct(): void {
+    this.setForm(this.product);
+    this.setModalAdd(true);
+    this.setForm(this.product);
+    this.form.menu_id = parseInt(this.$route.params.id);
+    this.setModalVisible(true);
+  }
+}
 </script>
 
 <template lang="pug">
-  b-container(tag='main')
-    b-pagination(
-      align='center',
-      v-if='pagination.totalProducts > pagination.perPage',
-      v-model='currentPage',
-      :per-page='pagination.perPage',
-      :total-rows='pagination.totalProducts',
-      @change='getProducts',
-    )
+  b-container(fluid="")
+    b-row
+      b-col
+        h2 {{ $t('products.title') }}
+        ProductList
 
-    .categories(v-if='products.length > 0')
-      b-row
-        products-card(
-          v-for='(product, i) in products',
-          :key='product.id',
-          :product='product',
-          @edit-product='editProduct(product, i)',
-          @delete-product='deleteProductConfirm(product)',
-        )
-
-    div(v-else-if='isLoading') {{ $t('strings.loading') }}...
-
-    div(v-else) {{ $t('products.no_products') }}
-
-    b-pagination(
-      align='center',
-      v-if='pagination.totalProducts > pagination.perPage',
-      v-model='currentPage',
-      :per-page='pagination.perPage',
-      :total-rows='pagination.totalProducts',
-      @change='getProducts',
-    )
-
-    products-modal(
+    product-modal(
       ref='products_modal',
-      :form='form',
-      :products='products'
+      :form="form"
       :is-add='isModalAdd',
       :is-visible='isModalVisible',
     )
+
 </template>

@@ -21,14 +21,16 @@ class ProductController extends Controller
         return Product::select(
             'products.id',
             'products.category_id',
-            'products.deleted_at',
+            'products.created_at',
+            'products.updated_at',
             'products.description',
             'products.image_src',
             'products.name',
-            'products.price'
+            'products.price',
+            'categories.name as category_name'
         )->leftJoin('categories', 'categories.id', '=', 'products.category_id')
-            ->where("categories.user_id", "=", $request->user()->id)
-            ->paginate(5);
+            ->where("categories.menu_id", "=", $request->get("menu_id"))->get();
+
     }
 
     public function store(Request $request)

@@ -24,13 +24,13 @@ const loadCategories = async ({ commit }, payload) => {
   commit('SET_LOADING', true);
 
   try {
-    const response = await axios.get(`categories?page=${payload.page}`);
+    const response = await axios.get(`categories?menu_id=${payload.menu_id}`);
     const checkErrors = checkResponse(response);
 
     if (checkErrors) {
       commit('SET_DIALOG_MESSAGE', checkErrors.message, { root: true });
     } else {
-      commit('SET_CATEGORIES', response.data);
+      commit('SET_CATEGORIES', response);
     }
   } catch (e) {
     commit('SET_DIALOG_MESSAGE', 'errors.generic_error', { root: true });
@@ -47,6 +47,7 @@ const addCategory = async ({ commit }, payload) => {
 
   const formData = new FormData();
   formData.append('parent_id', '0');
+  formData.append('menu_id', payload.menu_id);
   formData.append('name', payload.name);
   formData.append('description', payload.description);
   formData.append('image_src', payload.image_src);
@@ -120,7 +121,17 @@ const setModalVisible = ({ commit }, payload) => {
   commit('SET_MODAL_VISIBLE', payload);
 };
 
+const setModalAdd = ({ commit }, payload) => {
+  commit('SET_MODAL_ADD', payload);
+};
+
+const setForm = ({ commit }, payload) => {
+  commit('SET_FORM', payload);
+};
+
 export default {
+  setForm,
+  setModalAdd,
   loadCategories,
   loadCategoriesWithProducts,
   addCategory,

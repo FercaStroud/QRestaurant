@@ -18,7 +18,7 @@ class MenuController extends Controller
 
     public function index(Request $request)
     {
-        return Menu::where("user_id", "=", $request->user()->id)->orderBy('id', 'ASC')->paginate(25);
+        return Menu::where("user_id", "=", $request->user()->id)->orderBy('id', 'ASC')->get();
     }
 
     public function store(Request $request)

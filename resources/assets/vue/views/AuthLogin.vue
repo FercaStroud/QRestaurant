@@ -7,7 +7,7 @@
           b-col(md="4")
             img(
               style="width:100%;margin-top:100px"
-              src='/images/qr1.svg',
+              src='/images/qr1.svg'
               alt='Logo QRestaurant'
             )
             div(style="text-align:center")

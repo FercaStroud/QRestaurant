@@ -3,12 +3,12 @@ import Vue from 'vue';
 const SET_MENUS = (state, payload) => {
   state.menus = payload.data;
 
-  state.pagination = {
+  /*state.pagination = {
     currentPage: payload.current_page,
     perPage: payload.per_page,
     totalMenus: payload.total,
     totalPages: payload.last_page,
-  };
+  };*/
 };
 
 const ADD_MENU = (state, payload) => {

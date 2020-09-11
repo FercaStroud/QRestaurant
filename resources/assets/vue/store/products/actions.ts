@@ -5,13 +5,13 @@ const loadProducts = async ({ commit }, payload) => {
   commit('SET_LOADING', true);
 
   try {
-    const response = await axios.get(`products?page=${payload.page}`);
+    const response = await axios.get(`products?menu_id=${payload.menu_id}`);
     const checkErrors = checkResponse(response);
 
     if (checkErrors) {
       commit('SET_DIALOG_MESSAGE', checkErrors.message, { root: true });
     } else {
-      commit('SET_PRODUCTS', response.data);
+      commit('SET_PRODUCTS', response);
     }
   } catch (e) {
     commit('SET_DIALOG_MESSAGE', 'errors.generic_error', { root: true });
@@ -104,7 +104,17 @@ const setModalVisible = ({ commit }, payload) => {
   commit('SET_MODAL_VISIBLE', payload);
 };
 
+const setModalAdd = ({ commit }, payload) => {
+  commit('SET_MODAL_ADD', payload);
+};
+
+const setForm = ({ commit }, payload) => {
+  commit('SET_FORM', payload);
+};
+
 export default {
+  setForm,
+  setModalAdd,
   loadProducts,
   addProduct,
   editProduct,

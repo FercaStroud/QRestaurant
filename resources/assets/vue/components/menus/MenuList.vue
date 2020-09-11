@@ -20,15 +20,20 @@ export default class MenuList extends Vue {
   currentPage = 1;
 
   async created() {
-    this.currentPage = this.pagination.currentPage;
-
-    if (this.menus.length == 0) {
-      await this.getMenus(1);
-    }
+      await this.getMenus();
   }
 
-  async getMenus(page: number): Promise<void> {
-    this.loadMenus({ page });
+  async getMenus(): Promise<void> {
+    this.loadMenus();
+  }
+
+  handleEditProduct(menu_id):void{
+    this.$router.push({path: '/products/' + menu_id});
+    //console.log(payload)
+  }
+  handleEditCategory(menu_id):void{
+    this.$router.push({path: '/categories/' + menu_id});
+    //console.log(payload)
   }
 }
 </script>
@@ -70,6 +75,7 @@ export default class MenuList extends Vue {
 
       template(v-slot:cell(products)="data")
         b-button.btn.table-btn.mb-2(
+          @click="handleEditProduct(data.item.id)"
           size="sm"
           :title="$t('products.text')"
         )
@@ -82,6 +88,7 @@ export default class MenuList extends Vue {
       template(v-slot:cell(categories)="data")
         b-button.btn.table-btn.mb-2(
           size="sm"
+          @click="handleEditCategory(data.item.id)"
           :title="$t('categories.text')"
         )
           b-icon(
