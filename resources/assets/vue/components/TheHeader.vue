@@ -41,14 +41,15 @@
           v-icon(name='arrow-left')
 
         b-navbar-brand(:to='homePath', :class='{"has-back": path !== homePath}')
-          img(style={float:'left', height: '52px'}).align-top(
-            src='images/logo-square.png',
-            alt='Logo QRestaurant',
+          img(
+            style="width:48px"
+            src='/images/qr1.svg',
+            alt='Logo QRestaurant'
           )
-          img(style={float:'left', height: '52px'}).align-top(
-            src='images/logo-horizontal.png',
-            alt='Logo QRestaurant',
-          )
+          div(style="float: right;margin-top: 2px;")
+            span.Gotham-Black.color-primary(style="font-size:1.3em;color:") Q-R
+            span.Gotham-Medium.color-secondary(style="font-size:1.3em") estaurant
+
 
           //.font-caveat(style={fontSize: '1.2em', color: '#f16338'}) {{ $t('strings.project_title') }}
 

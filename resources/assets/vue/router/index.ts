@@ -123,7 +123,7 @@ const router = new Router({
       },
     },
     {
-      path: '/register',
+      path: '/registrations/new',
       name: 'auth.register',
       component: AuthRegister,
       meta: {

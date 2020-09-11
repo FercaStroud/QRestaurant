@@ -7,34 +7,43 @@ export default class BaseAuth extends Vue {
 </script>
 
 <template lang="pug">
-.container-fluid
-  .login-row.row
-    b-col.login-col(cols=12, md=6, sm=12, lg=4)
-      router-link(to='/login')
-        .logo
-          img.d-inline-block.img-fluid(
-            src='/images/logo.svg',
-            alt='Logo QRestaurant'
-          )
-
-      router-view
-
-    b-col.login-background(
-      cols=12,
-      md=6,
-      sm=12,
-      lg=8,
-      :style="{ background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(/images/background-login.jpg) no-repeat center / cover' }"
-    )
-      .welcome
-        h1(style={fontSize:'5em'}) {{ $t('strings.project_title') }}
-        .sub-text {{ $t('login.description') }}
+div
+  b-navbar#navbar(
+    :toggleable="'md'"
+  )
+    b-navbar-brand
+      img(
+        style="width:48px"
+        src='/images/qr1.svg',
+        alt='Logo QRestaurant'
+      )
+      div(style="float: right;margin-top: 2px;")
+        span.Gotham-Black.color-primary(style="font-size:1.3em;color:") Q-R
+        span.Gotham-Medium.color-secondary(style="font-size:1.3em") estaurant
+    b-navbar-toggle(target="nav-collapse")
+    b-collapse#nav-collapse(is-nav)
+      b-navbar-nav(class="ml-auto")
+        b-nav-item
+          router-link(to='/login') {{ $t('login.login') }}
+        b-nav-item
+          router-link(to='/registrations/new') {{ $t('login.register') }}
+  .container-fluid
+    router-view.router-view
 
 </template>
 
 <style lang="scss" scoped>
+#navbar{
+  width: 100%;
+  position:fixed;
+  z-index: 2;
+  background:rgba(255,255,255,.98)
+}
 .container-fluid {
+  top:0px;
+  position: absolute;
   height: 100%;
+  background: linear-gradient(rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.0)), url("/images/delivery.svg") no-repeat center / cover;
 }
 
 form {
@@ -44,64 +53,7 @@ form {
   max-width: 380px;
 }
 
-.fork-me {
-  position: absolute;
-  top: 0;
-  right: 0;
-  border: 0;
-}
-
-.login-background {
-  padding-left: 75px;
-}
-
-.login-col {
-  padding: 50px;
-}
-
-.login-screen,
-.login-row {
-  height: 100%;
-  background-color: white;
-}
-
-.logo {
-  margin-top: 0px;
-}
-
-.reset-password {
-  padding-top: 0px;
-}
-
-.title {
-  color: #000000;
-  font-size: 27px;
-  font-weight: 500;
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-
-.welcome {
-  color: #f7f7f8;
-  max-width: 555px;
-  margin-bottom: 65px;
-  margin-top: 65px;
-  padding-right: 55px;
-
-  h1 {
-    font-size: 60px;
-  }
-}
-
 @media (min-width: 768px) {
-  .login-screen {
-    form {
-      margin-top: 150px;
-    }
-  }
-  .welcome {
-    margin-bottom: 0px;
-    margin-top: 285px;
-  }
+
 }
 </style>

@@ -1,7 +1,7 @@
 // Just an example of how to change Bootstrap theme colors, it's the default values
 $danger_color: #dc3545;
 $primary_color: #f7931e;
-$secondary_color: #5b5d5d;
+$secondary_color: #3f3f3f;
 $theme-colors: ("danger": $danger_color, "primary": $primary_color);
 
 ::-moz-selection { /* Code for Firefox */
@@ -12,4 +12,28 @@ $theme-colors: ("danger": $danger_color, "primary": $primary_color);
 ::selection {
   color: #f7931e;
   background: #f7f7f8;
+}
+
+@font-face {
+  font-family: 'Gotham-Black';
+  src: url('/fonts/Gotham-Black.woff2') format('woff2'),
+  url('/fonts/Gotham-Black.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+.Gotham-Black{
+  font-family: 'Gotham-Black';
+}
+@font-face {
+  font-family: 'Gotham-Medium';
+  src: url('/fonts/Gotham-Medium.woff2') format('woff2'),
+  url('/fonts/Gotham-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+.Gotham-Medium{
+  font-family: 'Gotham-Medium';
 }

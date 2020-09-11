@@ -1,53 +1,67 @@
 <template lang="pug">
-  b-form#login(@submit='login')
-    b-form-group(
-      :label='$t("strings.email")'
-      label-for='email',
-    )
-      b-form-input(
-        type='email',
-        v-model='form.email',
-        name='email',
-        maxlength='191',
-        required,
-        autofocus,
-      )
-      span.help-block(v-if='authError')
-        strong {{ $t('auth.failed') }}
+.welcome
+  b-row
+    b-col(md="12")
+      b-card(style="border:none;background:rgba(255,255,255,.98)")
+        b-row
+          b-col(md="4")
+            img(
+              style="width:100%;margin-top:100px"
+              src='/images/qr1.svg',
+              alt='Logo QRestaurant'
+            )
+            div(style="text-align:center")
+              span.Gotham-Black.color-primary(style="font-size:1.6em;color:") Q-R
+              span.Gotham-Medium.color-secondary(style="font-size:1.6em") estaurant
+          b-col(md="8")
+            .Gotham-Medium.color-secondary(style="font-size:2em;text-align:center") {{ $t('login.login') }}
+            b-form#login(@submit='login')
+              b-form-group(
+                :label='$t("strings.email")'
+                label-for='email',
+              )
+                b-form-input(
+                  type='email',
+                  v-model='form.email',
+                  name='email',
+                  maxlength='191',
+                  required,
+                  autofocus,
+                )
+                span.help-block(v-if='authError')
+                  strong {{ $t('auth.failed') }}
 
-    b-form-group(
-      :label='$t("strings.password")'
-      label-for='password',
-    )
-      b-form-input(
-        type='password',
-        v-model='form.password',
-        required,
-      )
+              b-form-group(
+                :label='$t("strings.password")'
+                label-for='password',
+              )
+                b-form-input(
+                  type='password',
+                  v-model='form.password',
+                  required,
+                )
 
-    b-form-group#boxes
-      .d-flex.justify-content-between.align-items-center
-        b-form-checkbox(
-          v-model='form.rememberMe',
-          checked-value=true,
-          unchecked-value=false,
-        ) {{ $t('login.keep_connected') }}
+              b-form-group#boxes
+                .d-flex.justify-content-between.align-items-center
+                  b-form-checkbox(
+                    v-model='form.rememberMe',
+                    checked-value=true,
+                    unchecked-value=false,
+                  ) {{ $t('login.keep_connected') }}
 
-        b-button.content-vertical.text-secondary(variant='link', to='/password/reset')
-          v-icon(name='question-circle')
-          | &nbsp;{{ $t('login.forgot_password') }}
+                  b-button.content-vertical.text-secondary(variant='link', to='/password/reset')
+                    v-icon(name='question-circle')
+                    | &nbsp;{{ $t('login.forgot_password') }}
 
-    .d-flex.justify-content-between
-      b-button(style={width:'180px'})(
-        type='submit',
-        variant='primary',
-        :class='{ disabled: isSending }',
-      ) {{ $t('login.login') }}
+              .d-flex.justify-content-between
+                b-button.btn-primary(style={width:'180px'})(
+                  type='submit',
+                  :class='{ disabled: isSending }',
+                ) {{ $t('login.login') }}
 
-      b-button(style={width:'180px'})(
-        variant='primary',
-        to='/register',
-      ) {{ $t('login.register') }}
+                b-button.btn-primary(style={width:'180px'})(
+                  to='/registrations/new',
+                ) {{ $t('login.register') }}
 </template>
 
 <script lang="ts">
@@ -101,6 +115,11 @@ export default class AuthLogin extends Vue {
 </script>
 
 <style scoped>
-#login {
+.welcome{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 </style>

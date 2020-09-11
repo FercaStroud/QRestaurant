@@ -36,11 +36,13 @@
 .bg-white {
   background-color: white;
 }
-.bg-primary{
+
+.bg-primary {
   background-color: $primary_color !important;
-  color:white !important;
+  color: white !important;
   border-color: $primary_color !important;;
 }
+
 .font-caveat {
   font-family: 'Caveat', cursive;
 }
@@ -54,12 +56,23 @@ html {
 }
 
 body {
+  font-family: "Gotham-Medium" !important;
+
+  .glass-effect {
+    background-color: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(5px);
+  }
+
   background: #fff;
   height: 100%;
   overflow-x: hidden;
 
   .color-primary {
     color: $primary_color;
+  }
+
+  .color-secondary {
+    color: $secondary_color;
   }
 
   h1 {
@@ -73,40 +86,46 @@ body {
   #vue-loading {
     margin: 16px;
   }
-  .card-preview{
-    float:left;
+
+  .card-preview {
+    float: left;
     position: relative;
     width: 100%;
-    padding-bottom : 100%;
-    margin:1.66%;
-    background-position:center center;
-    background-repeat:no-repeat;
-    background-size:cover;
+    padding-bottom: 100%;
+    margin: 1.66%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
+
   .btn-link {
     cursor: pointer;
   }
-  .table-btn{
+
+  .table-btn {
     margin-right: 4px;
   }
-  .btn-cover-photo{
-    border:none;
+
+  .btn-cover-photo {
+    border: none;
     height: 400px;
     width: 100%;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
   }
-  .form-control:focus,.btn-secondary:focus, .btn-secondary.focus {
+
+  .form-control:focus, .btn-secondary:focus, .btn-secondary.focus {
     border-color: #ff6a00;
     box-shadow: inset 0 1px 1px rgba(255, 106, 0, .075), 0 0 8px rgba(255, 106, 0, .6);
   }
+
   a {
     color: $secondary_color;
 
     &:hover {
       text-decoration: none;
-      color: $primary_color !important;
+      color: $primary_color;
     }
   }
 
@@ -119,5 +138,16 @@ body {
     border-bottom: 1px solid transparent;
     padding: 10px;
     box-shadow: 0px 0px 5px #000;
+  }
+
+  .btn-primary{
+    border:1px solid $primary_color;
+    color: $primary_color;
+    background:white;
+    &:hover {
+      border:1px solid $primary_color !important;
+      color: white !important;
+      background: $primary_color;
+    }
   }
 }
