@@ -18,22 +18,12 @@ class SettingController extends Controller
     {
         $request->validate([
             'password' => 'nullable|string|min:6|confirmed',
-            'name' => 'required',
+            'user_name' => 'required',
+            'restaurant_name' => 'required',
         ]);
 
-
-        $imageSrc = $request->user()->image_src;
         $logoSrc = $request->user()->logo_src;
 
-        if ($request->has('image_src') and $request->file('image_src') !== null) {
-            $image = $request->file('image_src');
-            $name = Str::slug($request->input('name')) . '_' . time();
-            $folder = '/uploads/images/headers/';
-            $filePath = $name . '.' . $image->getClientOriginalExtension();
-
-            $this->uploadOne($image, $folder, 'public', $name);
-            $imageSrc = $filePath;
-        }
         if ($request->has('logo_src') and $request->file('logo_src') !== null) {
             $image = $request->file('logo_src');
             $name = Str::slug($request->input('name')) . '_' . time();
@@ -44,24 +34,23 @@ class SettingController extends Controller
             $logoSrc = $filePath;
         }
 
-        $address = $request['address'];
-        if($address == "null"){
-            $address = '';
-        }
-
         if($request['password'] !== "undefined"){
             $request->user()->update([
-                'name' => $request->input('name'),
-                'address' => $address,
-                'image_src' => $imageSrc,
+                'user_name' => $request->input('user_name'),
+                'restaurant_name' => $request->input('restaurant_name'),
+                'phone' => $request->input('phone'),
+                'city' => $request->input('city'),
+                'state' => $request->input('state'),
                 'logo_src' => $logoSrc,
                 'password' => bcrypt($request['password']),
             ]);
         } else {
             $request->user()->update([
-                'name' => $request->input('name'),
-                'address' => $address,
-                'image_src' => $imageSrc,
+                'user_name' => $request->input('user_name'),
+                'restaurant_name' => $request->input('restaurant_name'),
+                'phone' => $request->input('phone'),
+                'city' => $request->input('city'),
+                'state' => $request->input('state'),
                 'logo_src' => $logoSrc,
             ]);
         }
