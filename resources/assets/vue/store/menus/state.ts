@@ -33,6 +33,8 @@ export default {
     totalMenus: 0,
     totalPages: 0,
   },
+  form:{},
+  isModalAdd: false,
   isLoading: false,
   isModalLoading: false,
   isModalVisible: false,

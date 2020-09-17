@@ -10,12 +10,14 @@ const mStore = namespace('menus');
 export default class MenuList extends Vue {
   @mStore.State fields;
   @mStore.State menus;
-  @mStore.State pagination;
   @mStore.State isLoading;
-  @mStore.State isModalVisible;
+  @mStore.State isModalAdd;
+  @mStore.State form;
   @mStore.Action deleteMenu;
   @mStore.Action loadMenus;
   @mStore.Action setModalVisible;
+  @mStore.Action setModalAdd;
+  @mStore.Action setForm;
 
   currentPage = 1;
 
@@ -27,10 +29,17 @@ export default class MenuList extends Vue {
     this.loadMenus();
   }
 
+  handleEditMenu(menu: Menu):void{
+    this.setForm(menu);
+    this.setModalAdd(false);
+    this.setModalVisible(true);
+  }
+
   handleEditProduct(menu_id):void{
     this.$router.push({path: '/products/' + menu_id});
     //console.log(payload)
   }
+
   handleEditCategory(menu_id):void{
     this.$router.push({path: '/categories/' + menu_id});
     //console.log(payload)
@@ -111,6 +120,7 @@ export default class MenuList extends Vue {
       template(v-slot:cell(actions)="data")
         b-button.btn.table-btn.mb-2(
           size="sm"
+          @click="handleEditMenu(data.item)"
           :title="$t('strings.edit')"
         )
           b-icon(

@@ -11,14 +11,19 @@ const mStore = namespace('menus');
   components: {MenuList,MenuModal}
 })
 export default class MyMenus extends Vue {
+  @Action setBackUrl;
   @Action setMenu;
   @mStore.Action setModalVisible;
+  @mStore.Action setForm;
+  @mStore.Action setModalAdd;
   @mStore.State isModalVisible;
+  @mStore.State isModalAdd;
+  @mStore.State form;
 
-  form: Partial<Menu> = {};
-  isModalAdd = true;
+  menu: Partial<Menu> = {};
 
   mounted() {
+    this.setBackUrl('/dashboard');
     this.setMenu([
       {
         text: 'menus.add_menu',
@@ -29,7 +34,8 @@ export default class MyMenus extends Vue {
   }
 
   addMenu(): void {
-    this.isModalAdd = true;
+    this.setForm(this.menu);
+    this.setModalAdd(true);
     this.form.name = '';
     this.form.description = '';
     this.setModalVisible(true);

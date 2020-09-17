@@ -9,6 +9,7 @@
     @Prop() form;
     @Prop() isAdd;
     @Prop() isVisible;
+    @Prop() menus;
     @mStore.Action addMenu;
     @mStore.Action editMenu;
     @mStore.Action setModalVisible;

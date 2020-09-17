@@ -37,15 +37,9 @@ export default class CategoryList extends Vue {
   }
 
   handleEditCategory(category: Category):void{
-    //category.image_src = null;
     this.setForm(category);
     this.setModalAdd(false);
     this.setModalVisible(true);
-    /*
-    this.form.menu_id = parseInt(this.$route.params.id);
-    this.form.name = '';
-    this.form.description = '';
-    this.setModalVisible(true);*/
   }
 
   async deleteCategoryConfirm(category: Category): Promise<void> {

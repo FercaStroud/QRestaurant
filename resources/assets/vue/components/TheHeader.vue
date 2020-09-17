@@ -65,7 +65,7 @@
               href='#',
             ) {{ $t(item.text) }}
 
-            b-nav-item-dropdown(:text='$auth.user().name')
+            b-nav-item-dropdown(:text='$auth.user().user_name')
               b-dropdown-item(
                 @click='showSettings',
               ) {{ $t('strings.settings') }}

@@ -43,7 +43,17 @@ const SET_MODAL_VISIBLE = (state, payload) => {
   state.isModalVisible = payload;
 };
 
+const SET_MODAL_ADD = (state, payload) => {
+  state.isModalAdd = payload;
+};
+
+const SET_FORM = (state, payload) => {
+  state.form = payload;
+};
+
 export default {
+  SET_FORM,
+  SET_MODAL_ADD,
   SET_MENUS,
   ADD_MENU,
   UPDATE_MENU,

@@ -89,7 +89,17 @@ const setModalVisible = ({ commit }, payload) => {
   commit('SET_MODAL_VISIBLE', payload);
 };
 
+const setModalAdd = ({ commit }, payload) => {
+  commit('SET_MODAL_ADD', payload);
+};
+
+const setForm = ({ commit }, payload) => {
+  commit('SET_FORM', payload);
+};
+
 export default {
+  setForm,
+  setModalAdd,
   loadMenus,
   addMenu,
   editMenu,

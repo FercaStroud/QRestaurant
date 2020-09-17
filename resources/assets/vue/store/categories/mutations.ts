@@ -46,9 +46,11 @@ const SET_MODAL_LOADING = (state, payload) => {
 const SET_MODAL_VISIBLE = (state, payload) => {
   state.isModalVisible = payload;
 };
+
 const SET_MODAL_ADD = (state, payload) => {
   state.isModalAdd = payload;
 };
+
 const SET_FORM = (state, payload) => {
   state.form = payload;
 };
