@@ -109,8 +109,9 @@ class CategoryController extends Controller
 
     public function withProducts(Request $request)
     {
-        $user = User::find($request->get("id"));
-        $categories = Category::where("user_id", "=", $user->id)->get();
+        $categories = Category::where("menu_id", "=", $request->get("id"))->get();
+
+        $user = User::find($categories[0]->user_id);
 
         $i = 0;
         foreach ($categories as $category) {
@@ -123,9 +124,9 @@ class CategoryController extends Controller
         return response()->json(
             [
                 'user' => [
-                    'name' => $user->name,
-                    'address' => $user->address,
-                    'image_src' => $user->image_src,
+                    'name' => $user->restaurant_name,
+                    //'address' => $user->address,
+                    //'image_src' => $user->image_src,
                     'logo_src' => $user->logo_src
                 ],
                 'categories' => $categories

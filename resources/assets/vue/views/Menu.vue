@@ -26,17 +26,17 @@
   div.bg-pattern
     div.fixed.bg-white(style={padding: '9px'})
       b-container
-        img(style={float:'left', height: '52px'}).align-top(
-          src='images/logo-square.png',
-          alt='Logo QRestaurant',
+        img(
+          style="width:48px;float:left"
+          src='/images/qr1.svg',
+          alt='Logo QRestaurant'
         )
-        img(style={float:'left', height: '52px'}).align-top(
-          src='images/logo-horizontal.png',
-          alt='Logo QRestaurant',
-        )
+        div(style="margin-top: 4px;")
+          span.Gotham-Black.color-primary(style="font-size:1.5em;color:") Q-R
+          span.Gotham-Medium.color-secondary(style="font-size:1.5em") estaurant
 
     div.menu-header(
-      :style="{backgroundImage: 'url(/uploads/images/headers/'+categoriesWithProducts.user.image_src+')'}"
+      :style="{backgroundImage: 'url(https://picsum.photos/1080/500/?blur)'}"
     )
       b-container
         b-card.square-logo-container(
@@ -52,18 +52,6 @@
 
 
     b-container#home(tag='main')
-      b-col(md="12", :style="{marginBottom: '30px'}")
-        b-card
-          strong(:style="{fontSize: '1.2em'}") {{ categoriesWithProducts.user.name }}!
-          br/
-          strong Dirección
-          br/
-          p {{ categoriesWithProducts.user.address }}
-          b-btn(
-            target="_blank"
-            :href="'https://www.google.com/maps/search/' + categoriesWithProducts.user.address"
-          ) ¿Cómo llegar?
-
       b-col(md="12" v-for="(data, i) in categoriesWithProducts.categories" :key="i" )
           b-card(
             :title="data.name"

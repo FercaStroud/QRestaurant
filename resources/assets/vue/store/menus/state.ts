@@ -20,9 +20,6 @@ export default {
       key: 'updated_at',
     },
     {
-      key: 'settings',
-    },
-    {
       key: 'actions',
     },
   ],

@@ -27,6 +27,7 @@ export default class MenuList extends Vue {
     data: {},
   };
 
+
   async created() {
     this.menuQRData.modal = false;
     await this.getMenus();
@@ -44,7 +45,6 @@ export default class MenuList extends Vue {
 
   handleEditProduct(menu_id):void{
     this.$router.push({path: '/products/' + menu_id});
-    //console.log(payload)
   }
 
   downloadImage():void {
@@ -79,7 +79,6 @@ export default class MenuList extends Vue {
 
   handleEditCategory(menu_id):void{
     this.$router.push({path: '/categories/' + menu_id});
-    //console.log(payload)
   }
 }
 </script>
@@ -97,7 +96,6 @@ export default class MenuList extends Vue {
       :items="menus"
       :fields="fields"
     )
-
       template(v-slot:table-busy)
         div.text-center.text-danger
           b-spinner.align-middle
@@ -143,17 +141,6 @@ export default class MenuList extends Vue {
           )
           span {{$t('strings.edit')}}
 
-      template(v-slot:cell(settings)="data")
-        b-button.btn.table-btn.mb-2(
-          size="sm"
-          :title="$t('strings.settings')"
-        )
-          b-icon(
-            icon="gear-fill"
-            style="color: #fff;margin-right:5px"
-          )
-          span {{$t('strings.settings')}}
-
       template(v-slot:cell(actions)="data")
         b-button.btn.table-btn.mb-2(
           size="sm"
@@ -182,12 +169,6 @@ export default class MenuList extends Vue {
             icon="trash-fill"
             style="color: #fff"
           )
-        //b-button(
-          variant=""
-          @click="data.toggleDetails"
-        //)  {{ data.detailsShowing ? 'Cerrar' : 'Mostrar' }}
-
-
       template( v-slot:cell(index)="data")
         span {{ data.index + 1 }}
 
@@ -197,7 +178,7 @@ export default class MenuList extends Vue {
       hide-footer
       v-model="menuQRData.modal"
     ) {{ $t('dashboard.your_code') }}:
-      img
+      p {{'https://q-restaurant.com/menu/' + menuQRData.data.id}}
       qrcode.img-responsive(
         style="width:100%"
         id="QR-CODE"
@@ -215,7 +196,6 @@ export default class MenuList extends Vue {
           style="color: #fff;"
         )
         span &ensp; {{$t('strings.download')}}
-
 </template>
 
 
