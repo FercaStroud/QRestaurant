@@ -10,6 +10,7 @@ return [
     'delete_product_confirmation' => '¿Seguro que quieres eliminar a este producto?',
     'delete_user_confirmation' => '¿Seguro que quieres eliminar a este usuario?',
     'delete_category_confirmation' => '¿Seguro que quieres eliminar a esta categoría?',
+    'delete_menu_confirmation' => '¿Seguro que quieres eliminar a este menú?',
     'language' => 'Español',
 
 ];

@@ -3,6 +3,7 @@ import {Component, Vue, Watch} from 'vue-property-decorator';
 import {Action, State, namespace} from 'vuex-class';
 
 import dialog from '@/utils/dialog';
+import Menu from '@/views/Menu.vue';
 
 const mStore = namespace('menus');
 
@@ -20,9 +21,15 @@ export default class MenuList extends Vue {
   @mStore.Action setForm;
 
   currentPage = 1;
+  menuQRData = {
+    image: null,
+    modal: false,
+    data: {},
+  };
 
   async created() {
-      await this.getMenus();
+    this.menuQRData.modal = false;
+    await this.getMenus();
   }
 
   async getMenus(): Promise<void> {
@@ -38,6 +45,36 @@ export default class MenuList extends Vue {
   handleEditProduct(menu_id):void{
     this.$router.push({path: '/products/' + menu_id});
     //console.log(payload)
+  }
+
+  downloadImage():void {
+    let imagesrc;
+    imagesrc = <HTMLElement>document.querySelector("#QR-CODE");
+
+    const downloadImage = (name, content, type) => {
+      let link = document.createElement('a');
+      link.href = content;
+      link.download = /\.\w+/.test(name) ? name : `${name}.${type}`;
+
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    };
+    downloadImage('QRCode', imagesrc.getAttribute("src"), 'png');
+
+  }
+
+  createQRImage(menu: Menu):void{
+    this.menuQRData.modal = !this.menuQRData.modal;
+    this.menuQRData.data = menu;
+  }
+
+  async deleteMenuConfirm(menu: Menu): Promise<void> {
+    if (!(await dialog('front.delete_menu_confirmation', true))) {
+      return;
+    }
+
+    this.deleteMenu(menu);
   }
 
   handleEditCategory(menu_id):void{
@@ -129,6 +166,7 @@ export default class MenuList extends Vue {
           )
         b-button.btn.table-btn.mb-2(
           size="sm"
+          @click="createQRImage(data.item)"
           :title="$t('strings.download')"
         )
           b-icon(
@@ -137,6 +175,7 @@ export default class MenuList extends Vue {
           )
         b-button.btn-danger.table-btn.mb-2(
           :title="$t('strings.delete')"
+          @click="deleteMenuConfirm(data.item)"
           size="sm"
         )
           b-icon(
@@ -151,6 +190,31 @@ export default class MenuList extends Vue {
 
       template( v-slot:cell(index)="data")
         span {{ data.index + 1 }}
+
+    b-modal(
+      :title="menuQRData.data.name"
+      centered
+      hide-footer
+      v-model="menuQRData.modal"
+    ) {{ $t('dashboard.your_code') }}:
+      img
+      qrcode.img-responsive(
+        style="width:100%"
+        id="QR-CODE"
+        :value=" 'https://q-restaurant.com/menu/' + menuQRData.data.id",
+        tag="img",
+        :options="{ width: 1080,  color: { dark: '#000000', light: '#ffffff' }, }"
+      )
+      b-button.btn.table-btn.mb-2.bg-primary(
+        style="width:100%"
+        @click="downloadImage"
+        :title="$t('strings.download')"
+      )
+        b-icon(
+          icon="cloud-download"
+          style="color: #fff;"
+        )
+        span &ensp; {{$t('strings.download')}}
 
 </template>
 
