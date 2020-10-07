@@ -1,7 +1,59 @@
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { Action } from 'vuex-class';
+
+import dialog from '@/utils/dialog';
+import formValidation from '@/utils/formValidation';
+
+@Component
+export default class AuthLogin extends Vue {
+  @Action loadData;
+  @Action setDialogMessage;
+
+  form = {
+    rememberMe: false,
+  };
+  authError = false;
+  isSending = false;
+
+  async doLogin() {
+    await this.$auth.login({
+      data: this.form,
+      rememberMe: this.form.rememberMe,
+      success(response) {
+        const { status } = response;
+
+        if (status === 401) {
+          this.authError = true;
+        }
+
+        this.loadData();
+      },
+    });
+  }
+
+  async login(evt: Event) {
+    if (!formValidation(evt)) return;
+
+    this.isSending = true;
+
+    try {
+      await this.doLogin();
+    } catch {
+      this.setDialogMessage('errors.generic_error');
+    }
+
+    this.isSending = false;
+  }
+}
+</script>
+
 <template lang="pug">
 .welcome
-  b-row
-    b-col(md="12")
+  b-row#fix-top(
+    style=""
+  )
+    b-col(md="7")
       b-card(style="border:none;background:rgba(255,255,255,.98)")
         b-row
           b-col(md="4")
@@ -53,7 +105,7 @@
                     v-icon(name='question-circle')
                     | &nbsp;{{ $t('login.forgot_password') }}
 
-              .d-flex.justify-content-between
+              .d-flex.justify-content-between(style="margin-bottom:70px")
                 b-button.btn-primary(style={width:'180px'})(
                   type='submit',
                   :class='{ disabled: isSending }',
@@ -64,62 +116,17 @@
                 ) {{ $t('login.register') }}
 </template>
 
-<script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-import { Action } from 'vuex-class';
-
-import dialog from '@/utils/dialog';
-import formValidation from '@/utils/formValidation';
-
-@Component
-export default class AuthLogin extends Vue {
-  @Action loadData;
-  @Action setDialogMessage;
-
-  form = {
-    rememberMe: false,
-  };
-  authError = false;
-  isSending = false;
-
-  async doLogin() {
-    await this.$auth.login({
-      data: this.form,
-      rememberMe: this.form.rememberMe,
-      success(response) {
-        const { status } = response;
-
-        if (status === 401) {
-          this.authError = true;
-        }
-
-        this.loadData();
-      },
-    });
-  }
-
-  async login(evt: Event) {
-    if (!formValidation(evt)) return;
-
-    this.isSending = true;
-
-    try {
-      await this.doLogin();
-    } catch {
-      this.setDialogMessage('errors.generic_error');
-    }
-
-    this.isSending = false;
-  }
-}
-</script>
 
 <style scoped>
-.welcome{
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+#fix-top{
+  margin-top:150px;
+  margin-left:9px;
+
+}
+@media (max-width:767px) {
+  #fix-top{
+    margin-top:0px;
+    margin-left:0px;
+  }
 }
 </style>

@@ -50,7 +50,9 @@ export default class AuthRegister extends Vue {
 
 <template lang="pug">
 .welcome
-  b-row
+  b-row#fix-top(
+    style=""
+  )
     b-col(lg="9" md="12" sm="12")
       b-card(style="border:none;background:rgba(255,255,255,.98)")
         b-row
@@ -185,7 +187,15 @@ export default class AuthRegister extends Vue {
 </template>
 
 <style scoped>
-.welcome{
-  margin-top:80px
+
+ #fix-top{
+   margin-top:150px;
+   margin-left:9px;
+ }
+@media (max-width:767px) {
+  #fix-top{
+    margin-top:0px;
+    margin-left:0px;
+  }
 }
 </style>

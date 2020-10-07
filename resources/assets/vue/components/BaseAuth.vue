@@ -7,7 +7,7 @@ export default class BaseAuth extends Vue {
 </script>
 
 <template lang="pug">
-div
+.div
   b-navbar#navbar(
     :toggleable="'md'"
   )
@@ -27,8 +27,8 @@ div
           router-link(to='/login') {{ $t('login.login') }}
         b-nav-item
           router-link(to='/registrations/new') {{ $t('login.register') }}
-  .container-fluid
-    router-view.router-view
+    
+  router-view.router-view
 
 </template>
 
@@ -37,13 +37,16 @@ div
   width: 100%;
   position:fixed;
   z-index: 2;
-  background:rgba(255,255,255,.98)
+  background:rgba(255,255,255,.98);
+  top:0px
 }
-.container-fluid {
+
+.router-view {
   top:0px;
-  position: absolute;
   height: 100%;
-  background: linear-gradient(rgba(255, 255, 255, 0.0), rgba(255, 255, 255, 0.0)), url("/images/delivery.svg") no-repeat center / cover;
+  width:100%;
+  position:absolute;
+  background:  url("/images/delivery.svg") no-repeat center / cover;
 }
 
 form {

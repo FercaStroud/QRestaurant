@@ -52,8 +52,10 @@ export default class AuthResetForm extends Vue {
 </script>
 
 <template lang="pug">
-b-form(@submit='submitForm')
-  .title.font-caveat(style={fontSize:'2em'})  {{ $t('login.reset_password') }}
+b-form#fix-top(
+  @submit='submitForm'
+)
+  .title(style={fontSize:'2em'})  {{ $t('login.reset_password') }}
 
   b-form-group(
     :label='$t("strings.email")'
@@ -96,3 +98,13 @@ b-form(@submit='submitForm')
       :class='{ disabled: isSending }',
     ) {{ $t('login.reset_password') }}
 </template>
+<style scoped>
+#fix-top{
+  margin-top:150px;
+}
+@media (max-width:767px) {
+  #fix-top{
+    margin-top:0px;
+  } 
+}
+</style>

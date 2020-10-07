@@ -6,6 +6,7 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -63,7 +64,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'user_name' => $data['user_name'],
             'restaurant_name' => $data['restaurant_name'],
             'email' => $data['email'],
@@ -73,5 +74,29 @@ class RegisterController extends Controller
             'type_id' => 2,
             'password' => bcrypt($data['password']),
         ]);
+
+        self::sendEmailOnCreatedUser($user);
+
+        return $user;
     }
+
+    public function sendEmailOnCreatedUser(&$user)
+    {
+        $to_name = $user->user_name;
+        $to_email = $user->email;
+
+        $data = [
+            'name' => $user->user_name,
+            'email' => $user->email
+        ];
+
+        Mail::send("emails.createUser", $data,
+            function ($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)->subject("¡Gracias por registrarte en Q-Restaurant!");
+                $message->from(getenv("MAIL_FROM_ADDRESS"), "Q-Restaurant");
+                $message->cc(getenv("MAIL_FROM_ADDRESS"), "Q-Restaurant");
+            }
+        );
+    }
+
 }

@@ -42,26 +42,44 @@ export default class AuthResetLink extends Vue {
 </script>
 
 <template lang="pug">
-b-form(@submit='submitForm')
-  .title.font-caveat(style={fontSize:'2em'})  {{ $t('login.reset_password') }}
-
-  b-form-group(
-    :label='$t("strings.email")'
-    label-for='email',
+.welcome
+  b-row#fix-top(
+    style=""
   )
-    b-form-input(
-      type='email',
-      v-model='form.email',
-      name='email',
-      maxlength='191',
-      required,
-      autofocus,
-    )
+    b-col(md="6")
+      b-card(style="border:none;background:rgba(255,255,255,.98);height:calc(100vh - 68px")
+        b-form(
+          @submit='submitForm'
+        )
+          .title(style={fontSize:'2em'})  {{ $t('login.reset_password') }}
 
-  b-form-group
-    b-button(
-      type='submit',
-      variant='primary',
-      :class='{ disabled: isSending }',
-    ) {{ $t('login.send_reset_link') }}
+          b-form-group(
+            :label='$t("strings.email")'
+            label-for='email',
+          )
+            b-form-input(
+              type='email',
+              v-model='form.email',
+              name='email',
+              maxlength='191',
+              required,
+              autofocus,
+            )
+
+          b-form-group
+            b-button(
+              type='submit',
+              variant='primary',
+              :class='{ disabled: isSending }',
+            ) {{ $t('login.send_reset_link') }}
 </template>
+<style scoped>
+#fix-top{
+  margin-top:150px;
+}
+@media (max-width:767px) {
+  #fix-top{
+    margin-top:68px;
+  } 
+}
+</style>
