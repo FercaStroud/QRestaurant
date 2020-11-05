@@ -8,13 +8,13 @@ const AuthResetForm = () => import('../views/AuthResetForm.vue');
 
 const Dashboard = () => import('../views/Dashboard.vue');
 const Home = () => import('../views/Home.vue');
+const Landing = () => import('../views/Landing.vue');
 const Menu = () => import('../views/Menu.vue');
 const Menus = () => import('../views/MyMenus.vue');
 //const Messages = () => import('../views/Messages.vue');
 const Users = () => import('../views/Users.vue');
 const Categories = () => import('../views/Categories.vue');
 const Products = () => import('../views/Products.vue');
-const UsersGraphQL = () => import('../views/UsersGraphQL.vue');
 
 import userTypes from '@/utils/userTypes';
 
@@ -25,6 +25,15 @@ const router = new Router({
   routes: [
     {
       path: '/',
+      name: 'landing',
+      component: Landing,
+      meta: {
+        title: Vue.i18n.translate('strings.home', null),
+        auth: false,
+      },
+    },
+  /*{
+      path: '/',
       name: 'home',
       component: Home,
       meta: {
@@ -34,7 +43,7 @@ const router = new Router({
           forbiddenRedirect: '/dashboard',
         },
       },
-    },
+    },*/
     {
       path: '/dashboard',
       name: 'dashboard',
@@ -93,18 +102,6 @@ const router = new Router({
       path: '/users',
       name: 'users',
       component: Users,
-      meta: {
-        title: Vue.i18n.translate('strings.users', null),
-        auth: {
-          roles: userTypes.ADMIN,
-          forbiddenRedirect: '/dashboard',
-        },
-      },
-    },
-    {
-      path: '/users/graphql',
-      name: 'users_graphql',
-      component: UsersGraphQL,
       meta: {
         title: Vue.i18n.translate('strings.users', null),
         auth: {
