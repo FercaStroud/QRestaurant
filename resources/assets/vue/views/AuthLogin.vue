@@ -22,8 +22,12 @@ export default class AuthLogin extends Vue {
       rememberMe: this.form.rememberMe,
       success(response) {
         const { status } = response;
+        if (status === 200) {
+          //TODO
+          //modificar la siguiente instrucción, por el momento no hay administrador
+          window.location.href = '/dashboard'
 
-        if (status === 401) {
+        } else if (status === 401) {
           this.authError = true;
         }
 
@@ -39,7 +43,6 @@ export default class AuthLogin extends Vue {
 
     try {
       await this.doLogin();
-      //this.$router.push({ path: '/dashboard' });
     } catch {
       this.setDialogMessage('errors.generic_error');
     }

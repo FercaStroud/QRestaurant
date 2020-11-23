@@ -19,48 +19,96 @@ export default class Landing extends Vue {
 <template lang="pug">
   div
     .parallax(
-      style="minHeight: 600px;backgroundImage:url('/images/delivery.svg');backgroundPosition: center;backgroundSize: cover;"
+      style="minHeight: 600px;backgroundImage:url('/images/Isometric.svg');backgroundPosition: center;backgroundSize: cover;"
     )
       #message.color-secondary
-        .glass(
+        div(
           style="padding:2%;border-radius:25px;"
         )
-          br
           p(
-            style="text-shadow:0px 1px 10px white; line-height: 34px;"
+            style="text-shadow:0px 1px 30px black; line-height: 34px;"
           )
-            span TU MENÚ &ensp;
-            span.color-primary DIGITAL.
+            span.Gotham-Black(style="color:white") TU MENÚ &ensp;
+            span.Gotham-Black.color-primary DIGITAL.
+          p Deja de gastar en menús impresos.
           p Descubre una nueva forma de presentar los platillos de tu restaurant con un menú digital.
-          p Una alternativa
-            strong rápida, segura y moderna.
 
-          b-button.btn-primary(style={width: '180px', marginBottom:'30px'})(
+          b-button.btn-primary(style={width: '180px', marginBottom: '30px'})(
             to='/registrations/new',
           ) {{ $t('buttons.register') }}
 
-    section.container#aboutUs
-      b-row
-        b-col(sm="12" md="6")
-          h1.color-secondary ¿Qué es Q-Restaurant?
-          p.color-secondary Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur eos eum, expedita fugiat fugit, id itaque minima nemo neque placeat quae quam quas reiciendis rem sed voluptatum! Ab, doloribus.
+    section#aboutUs
+      b-container
+        b-row
+          b-col(md="12")
+            br
+            p(
+              style=" text-align:center;"
+            )
+              span.Gotham-Black.color-secondary TAN FÁCIL COMO
+          b-col(md="12")
+            img(
+              style="width:100%"
+              src='/images/qr-concept.jpg',
+              alt='Logo QRestaurant'
+            )
+          b-col(md="12")
+            p.color-secondary(style="text-align:center") Diseñamos y digitalizamos el menú de tu restaurant, cafetería, o bar, ofrecemos a tus clientes una alternativa cómoda y segura para ordenar sus platillos favoritos a través de un Código QR.
 
-          img(
-            style="width:100%"
-            src='/images/qr1.svg',
-            alt='QRestaurant'
+      .parallax(
+        style="minHeight: 300px;backgroundImage:url('/images/Kitchen.jpg');backgroundPosition: center;backgroundSize: cover;"
+      )
+        b-row
+          b-col(sm="12" md="12" style="text-align:center")
+            br
+            p.Gotham-Black#whatIs() ¡Actualiza tu restaurant!
+            img.branding-logo(
+              style="width:200px"
+              src='/images/qr2.svg',
+              alt='Logo QRestaurant'
+            )
+
+      b-container
+        b-row
+          b-col(md="12")
+            br
+            p(
+              style=" text-align:center;"
+            )
+              span.Gotham-Black.color-secondary PAQUETE ANUAL
+
+          b-col(md="12")
+            p(style="text-align:center")
+              span ¡PRIMER MES GRATIS!
+              br
+              span Nombre del restaurante y logotipo
+              br
+              span De 2 a 5 menús
+              br
+              span Categorías ilimitadas
+              br
+              span Bebidas y platillos ilimitados
+              br
+              span Fotos de tus platillos y bebidas
+              br
+              span Actualizaciones y soporte
+              br
+
+              b-button.btn-primary(style={width: '400px', marginBottom: '30px'})(
+                to='/registrations/new',
+              ) {{ $t('buttons.register') }}
+
+      .parallax(
+            style="minHeight: 130px;backgroundImage:url('/images/delivery.svg');backgroundPosition: center;backgroundSize: cover;"
           )
+            b-row
+              b-col(sm="12" md="12" style="text-align:center")
+                br
+                p.Gotham-Black#whatIs() Dile adiós a los menús tradicionales...
 
-          h1.color-secondary Fácil y Simple
-          p.color-secondary Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur eos eum, expedita fugiat fugit, id itaque minima nemo neque placeat quae quam quas reiciendis rem sed voluptatum! Ab, doloribus.
 
-        b-col(sm="12" md="6")
-          img(
-            style="width:100%"
-            src='/images/menu_example.jpg',
-            alt='QRestaurant'
-          )
-    section.container#steps
+
+    //section.container#steps
       b-row
         b-col(sm="12" md="12" style="text-align:center;")
           h1.color-secondary ¿Qué es Q-Restaurant?
@@ -93,7 +141,7 @@ export default class Landing extends Vue {
             )
 
 
-    section.container#accordion(role='tablist')
+    //section.container#accordion(role='tablist')
       b-row
         b-col(sm="12" md="12" style="text-align:center;")
           h1.color-secondary Preguntas Frecuentes
@@ -135,18 +183,27 @@ $primary_color: #ff6a00;
     width: 100%;
   }
 }
-section{
-  margin-top: 100px;
+
+section {
+  //margin-top: 100px;
 }
+
 /* First Section Styles */
 #message {
   position: absolute;
   width: 400px;
+
   span {
-    font-size: 3em;
+    font-size: 5em;
   }
 
   margin: 15% 10% 10% 10%;
+}
+
+#whatIs {
+  font-size: 3em;
+  text-shadow: 1px 1px 30px black;
+  color: white;
 }
 
 @media (max-width: 1280px) {
