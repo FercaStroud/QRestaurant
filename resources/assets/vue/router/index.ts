@@ -32,8 +32,8 @@ const router = new Router({
         auth: false,
       },
     },
-  /*{
-      path: '/',
+    {
+      path: '/admin',
       name: 'home',
       component: Home,
       meta: {
@@ -43,7 +43,7 @@ const router = new Router({
           forbiddenRedirect: '/dashboard',
         },
       },
-    },*/
+    },
     {
       path: '/dashboard',
       name: 'dashboard',

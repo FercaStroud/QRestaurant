@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'add' => 'Añadir',
     'approve' => 'Aprobar',
     'cancel' => 'Cancelar',
@@ -16,5 +15,6 @@ return [
     'save' => 'Guardar',
     'sending' => 'Enviando',
     'update' => 'Actualizar',
-
+    'register' => '¡Regístrate!',
+    'search' => 'Buscar'
 ];

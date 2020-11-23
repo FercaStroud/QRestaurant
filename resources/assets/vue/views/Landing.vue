@@ -1,157 +1,186 @@
 <script lang="ts">
 import {Component, Vue} from 'vue-property-decorator';
 import {Action, State} from 'vuex-class';
+import Parallax from 'vue-parallaxy';
 
-@Component({
-  components: {},
-})
+@Component(
+  {
+    components: {Parallax},
+  }
+)
 
 export default class Landing extends Vue {
   @Action setBackUrl;
   @Action setMenu;
 
-  paddingNavbar: string = '5px 10px';
-  widthBrandingLogo: string = '60px';
-  widthBrandingText: string = '1.4em';
-
-  mounted() {
-    window.addEventListener('scroll', this.handleScroll);
-  }
-
-  beforeDestroy() {
-    window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll(event) {
-
-    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-      this.paddingNavbar = '0px 10px';
-      this.widthBrandingLogo = '48px';
-      this.widthBrandingText = '1em';
-    } else {
-      this.paddingNavbar = '5px 10px';
-      this.widthBrandingLogo = '60px';
-      this.widthBrandingText = '1.4em';
-    }
-  }
-
 }
 </script>
 
 <template lang="pug">
-  div.random-pattern()
-    b-navbar.public-navbar(
-      toggleable='lg'
-      :style="{padding: paddingNavbar}"
+  div
+    .parallax(
+      style="minHeight: 600px;backgroundImage:url('/images/delivery.svg');backgroundPosition: center;backgroundSize: cover;"
     )
-      b-navbar-brand(href='#')
-        img.branding-logo(
-          :style="{width: widthBrandingLogo}"
-          src='/images/qr1.svg',
-          alt='Logo QRestaurant'
+      #message.color-secondary
+        .glass(
+          style="padding:2%;border-radius:25px;"
         )
-        div(style="margin-top: 4px;")
-          span.Gotham-Black.color-primary.branding-text(
-            :style="{fontSize: widthBrandingText}"
-          ) Q-R
-          span.Gotham-Medium.color-secondary.branding-text(
-            :style="{fontSize: widthBrandingText}"
-          ) estaurant
-      b-navbar-toggle(target='nav-collapse')
-      b-collapse#nav-collapse(is-nav='')
+          br
+          p(
+            style="text-shadow:0px 1px 10px white; line-height: 34px;"
+          )
+            span TU MENÚ &ensp;
+            span.color-primary DIGITAL.
+          p Descubre una nueva forma de presentar los platillos de tu restaurant con un menú digital.
+          p Una alternativa
+            strong rápida, segura y moderna.
 
-        // Right aligned nav items
-        b-navbar-nav.ml-auto
-          b-navbar-nav
-            b-nav-item(href='#') ¡Regístrate!
-            b-nav-item(href='#') Iniciar Sesión
+          b-button.btn-primary(style={width: '180px', marginBottom:'30px'})(
+            to='/registrations/new',
+          ) {{ $t('buttons.register') }}
 
-          b-nav-form
-            b-form-input.mr-sm-2#input-search(size='sm' placeholder='Encuentra tu restaurante favorito')
-            b-button.my-2.my-sm-0(size='sm' type='submit') Buscar
+    section.container#aboutUs
+      b-row
+        b-col(sm="12" md="6")
+          h1.color-secondary ¿Qué es Q-Restaurant?
+          p.color-secondary Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur eos eum, expedita fugiat fugit, id itaque minima nemo neque placeat quae quam quas reiciendis rem sed voluptatum! Ab, doloribus.
 
-    div.header
-      img(
-        style=""
-        src='/images/banner-home.jpg',
-        alt='Header Image'
-      )
-    div.header
-      img(
-        style=""
-        src='/images/banner-home.jpg',
-        alt='Header Image'
-      )
-    div.header
-      img(
-        style=""
-        src='/images/banner-home.jpg',
-        alt='Header Image'
-      )
-    b-container#footer(style={backgroundColor: '#393939', padding: '20px', marginTop: '50px'}, fluid="" )
-      a(
-        target="_blank"
-        href="https://www.appsgorilasonline.com/"
-        style={color: 'white'}
-      ) By Gorilas Online
+          img(
+            style="width:100%"
+            src='/images/qr1.svg',
+            alt='QRestaurant'
+          )
+
+          h1.color-secondary Fácil y Simple
+          p.color-secondary Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci consequuntur eos eum, expedita fugiat fugit, id itaque minima nemo neque placeat quae quam quas reiciendis rem sed voluptatum! Ab, doloribus.
+
+        b-col(sm="12" md="6")
+          img(
+            style="width:100%"
+            src='/images/menu_example.jpg',
+            alt='QRestaurant'
+          )
+    section.container#steps
+      b-row
+        b-col(sm="12" md="12" style="text-align:center;")
+          h1.color-secondary ¿Qué es Q-Restaurant?
+          p.color-secondary Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, aliquid cum deleniti iste necessitatibus quaerat? Beatae debitis et ipsa, natus necessitatibus, non porro, qui quibusdam quo rem sapiente similique ullam!
+        b-col(sm="12" md="12" style="text-align:center;")
+          .color-secondary(style="font-size:35px") Paso 1
+          b-icon(
+            style="font-size:35px"
+            icon="arrow-down"
+          )
+        b-col(sm="12" md="12" style="text-align:center;")
+          p.color-secondary Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, aliquid cum deleniti iste necessitatibus quaerat? Beatae debitis et ipsa, natus necessitatibus, non porro, qui quibusdam quo rem sapiente similique ullam!
+          img(
+              style="width:100%"
+              src='https://picsum.photos/700/200',
+              alt='QRestaurant'
+            )
+        b-col(sm="12" md="12" style="text-align:center;")
+          .color-secondary(style="font-size:35px") Paso 2
+          b-icon(
+            style="font-size:35px"
+            icon="arrow-down"
+          )
+        b-col(sm="12" md="12" style="text-align:center;")
+          p.color-secondary Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, aliquid cum deleniti iste necessitatibus quaerat? Beatae debitis et ipsa, natus necessitatibus, non porro, qui quibusdam quo rem sapiente similique ullam!
+          img(
+              style="width:100%"
+              src='https://picsum.photos/700/200',
+              alt='QRestaurant'
+            )
+
+
+    section.container#accordion(role='tablist')
+      b-row
+        b-col(sm="12" md="12" style="text-align:center;")
+          h1.color-secondary Preguntas Frecuentes
+          p.color-secondary Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus, aliquid cum deleniti iste necessitatibus quaerat? Beatae debitis et ipsa, natus necessitatibus, non porro, qui quibusdam quo rem sapiente similique ullam!
+
+      b-card.mb-1(no-body='')
+        b-card-header.p-1(header-tag='header' role='tab')
+          b-button(block='' v-b-toggle.accordion-1='') Pregunta 1
+        b-collapse#accordion-1(visible='' accordion='my-accordion' role='tabpanel')
+          b-card-body
+            b-card-text
+              | I start opened because
+              code visible
+              |  is
+              code true
+            b-card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi est, totam! Aperiam debitis dolor dolorem, dolorum enim, error excepturi harum iste labore maxime nesciunt, porro praesentium repellendus sit tempore velit.
+      b-card.mb-1(no-body='')
+        b-card-header.p-1(header-tag='header' role='tab')
+          b-button(block='' v-b-toggle.accordion-2='') Pregunta 2
+        b-collapse#accordion-2(accordion='my-accordion' role='tabpanel')
+          b-card-body
+            b-card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi est, totam! Aperiam debitis dolor dolorem, dolorum enim, error excepturi harum iste labore maxime nesciunt, porro praesentium repellendus sit tempore velit.
+
+      b-card.mb-1(no-body='')
+        b-card-header.p-1(header-tag='header' role='tab')
+          b-button(block='' v-b-toggle.accordion-3='') Pregunta 3
+        b-collapse#accordion-3(accordion='my-accordion' role='tabpanel')
+          b-card-body
+            b-card-text Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi est, totam! Aperiam debitis dolor dolorem, dolorum enim, error excepturi harum iste labore maxime nesciunt, porro praesentium repellendus sit tempore velit.
 
 
 </template>
 
 <style lang="scss">
 $primary_color: #ff6a00;
-.app {
-  background-image: url("/images/food_pattern_00.jpg");
-  background-size: 400px;
-}
-
-#input-search {
-  width: 300px;
-
-  &::placeholder {
-    font-size: .9em;
-  }
-}
-
-.nav-link {
-  font-size: .9em;
-
-  &:hover {
-    color: $primary_color !important;
-  }
-}
-
-.btn {
-  &:hover {
-    border: 1px solid $primary_color;
-    background-color: $primary_color;
-    color: #fff !important;
-  }
-}
 
 .header {
   img {
     width: 100%;
   }
 }
+section{
+  margin-top: 100px;
+}
+/* First Section Styles */
+#message {
+  position: absolute;
+  width: 400px;
+  span {
+    font-size: 3em;
+  }
 
-/*NAVBAR STYLES*/
-.public-navbar {
-  overflow: hidden;
-  background-color: #fff;
-  transition: 0.4s;
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 99;
+  margin: 15% 10% 10% 10%;
 }
 
-.branding-logo {
-  transition: 0.4s;
-  float: left;
+@media (max-width: 1280px) {
+  #message {
+    //margin: 20% 10% 10% 10%;
+  }
 }
 
-.branding-text {
-  transition: 0.4s;
+@media (max-width: 991px) {
+  #message {
+    span {
+      font-size: 3em;
+    }
+
+    margin: 20% 10% 10% 10%;
+    width: 80%;
+  }
+}
+
+@media (max-width: 500px) {
+  #message {
+    span {
+      font-size: 15vw;
+    }
+
+    margin: 50% 10% 10% 10%;
+    width: 80%;
+  }
+}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1024px) {
+  .parallax {
+    background-attachment: scroll;
+  }
 }
 </style>

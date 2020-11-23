@@ -24,17 +24,6 @@
 
 <template lang="pug">
   div.bg-pattern
-    div.fixed.bg-white(style={padding: '9px'})
-      b-container
-        img(
-          style="width:48px;float:left"
-          src='/images/qr1.svg',
-          alt='Logo QRestaurant'
-        )
-        div(style="margin-top: 4px;")
-          span.Gotham-Black.color-primary(style="font-size:1.5em;color:") Q-R
-          span.Gotham-Medium.color-secondary(style="font-size:1.5em") estaurant
-
     div.menu-header(
       :style="{backgroundImage: 'url(https://picsum.photos/1080/500/?blur)'}"
     )

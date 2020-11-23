@@ -11,7 +11,7 @@ export default class AuthLogin extends Vue {
   @Action setDialogMessage;
 
   form = {
-    rememberMe: false,
+    rememberMe: true,
   };
   authError = false;
   isSending = false;
@@ -39,6 +39,7 @@ export default class AuthLogin extends Vue {
 
     try {
       await this.doLogin();
+      //this.$router.push({ path: '/dashboard' });
     } catch {
       this.setDialogMessage('errors.generic_error');
     }

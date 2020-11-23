@@ -68,9 +68,7 @@ export default class Home extends Vue {
 
 <template lang="pug">
 b-container(tag='main')
-  b-row
-    b-col
-      span Selecciona una opción para continuar
+  router-view(:style="{marginTop:'30px',}" v-if='$auth.ready()')
 <!--  b-row-->
 <!--    b-col(md="12" )-->
 <!--      //h2 {{ $t('dashboard.your_code') }}-->
