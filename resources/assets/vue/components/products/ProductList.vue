@@ -24,8 +24,10 @@ export default class ProductList extends Vue {
   @pStore.Action setModalAdd;
   @pStore.Action setForm;
 
-  async created() {
-    await this.getProducts(this.form.menu_id);
+  mounted() {
+    this.$nextTick(() => {
+      this.getProducts(this.form.menu_id);
+    })
   }
 
   handleEditProduct(product: Product):void{
@@ -52,11 +54,12 @@ export default class ProductList extends Vue {
 <template lang="pug">
 div
   b-table.btable(
+    style="max-height:600px"
+    sort-icon-left
     striped
     responsive
     hover
     sticky-header
-    no-border-collapse
     head-variant="dark"
     :busy="isLoading"
     :items="products"
@@ -68,21 +71,21 @@ div
         b-spinner.align-middle
 
     template(v-slot:head(name)="data")
-      span {{$t("products.name")}}
+      .text-nowrap {{$t("products.name")}}
     template(v-slot:head(category_name)="data")
-      span {{$t("products.category_name")}}
+      .text-nowrap {{$t("products.category_name")}}
     template(v-slot:head(description)="data")
-      span {{$t("products.description")}}
+      .text-nowrap {{$t("products.description")}}
     template(v-slot:head(price)="data")
-      span {{$t("products.price")}}
+      .text-nowrap {{$t("products.price")}}
     template(v-slot:head(image_src)="data")
-      span {{$t("products.image_src")}}
+      .text-nowrap {{$t("products.image_src")}}
     template(v-slot:head(created_at)="data")
-      span {{$t("strings.created_at")}}
+      .text-nowrap {{$t("strings.created_at")}}
     template(v-slot:head(updated_at)="data")
-      span {{$t("strings.updated_at")}}
+      .text-nowrap {{$t("strings.updated_at")}}
     template(v-slot:head(actions)="data")
-      span {{$t("strings.actions")}}
+      .text-nowrap {{$t("strings.actions")}}
 
     template(v-slot:cell(image_src)="data")
       img(
@@ -92,7 +95,7 @@ div
       )
 
     template(v-slot:cell(price)="data")
-      span ${{data.item.price}}
+      .text-nowrap ${{data.item.price}}
 
     template(v-slot:cell(actions)="data")
       b-button.btn.table-btn.mb-2(
@@ -116,7 +119,7 @@ div
 
 
     template( v-slot:cell(index)="data")
-      span {{ data.index + 1 }}
+      .text-nowrap {{ data.index + 1 }}
 
 
 </template>

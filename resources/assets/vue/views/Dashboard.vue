@@ -67,7 +67,7 @@ export default class Home extends Vue {
 </script>
 
 <template lang="pug">
-b-container(tag='main')
+b-container(tag='main' fluid)
   router-view(:style="{marginTop:'30px',}" v-if='$auth.ready()')
 <!--  b-row-->
 <!--    b-col(md="12" )-->

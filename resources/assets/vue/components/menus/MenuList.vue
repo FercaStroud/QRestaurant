@@ -28,9 +28,9 @@ export default class MenuList extends Vue {
   };
 
 
-  async created() {
+  mounted() {
     this.menuQRData.modal = false;
-    await this.getMenus();
+    this.getMenus();
   }
 
   async getMenus(): Promise<void> {
@@ -86,6 +86,8 @@ export default class MenuList extends Vue {
 <template lang="pug">
   div
     b-table.btable(
+      style="max-height:600px"
+      sort-icon-left
       striped
       responsive
       hover

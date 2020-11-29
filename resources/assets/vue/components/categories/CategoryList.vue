@@ -32,8 +32,10 @@ export default class CategoryList extends Vue {
   //currentPage = 1;
   //category: Partial<Category> = {};
 
-  async created() {
-    await this.getCategories(parseInt(this.$route.params.id));
+  mounted() {
+    this.$nextTick(() => {
+      this.getCategories(parseInt(this.$route.params.id));
+    })
   }
 
   handleEditCategory(category: Category):void{
@@ -59,6 +61,8 @@ export default class CategoryList extends Vue {
 <template lang="pug">
 div
   b-table.btable(
+    style="max-height:600px"
+    sort-icon-left
     striped
     responsive
     hover
