@@ -11,7 +11,7 @@ export default class AuthLogin extends Vue {
   @Action setDialogMessage;
 
   form = {
-    rememberMe: false,
+    rememberMe: true,
   };
   authError = false;
   isSending = false;
@@ -22,8 +22,12 @@ export default class AuthLogin extends Vue {
       rememberMe: this.form.rememberMe,
       success(response) {
         const { status } = response;
+        if (status === 200) {
+          //TODO
+          //modificar la siguiente instrucción, por el momento no hay administrador
+          window.location.href = '/dashboard'
 
-        if (status === 401) {
+        } else if (status === 401) {
           this.authError = true;
         }
 

@@ -3,16 +3,20 @@ import axios from 'axios';
 import { Component, Vue, Watch } from 'vue-property-decorator';
 import { Action, State } from 'vuex-class';
 
-import BaseAuth from './components/BaseAuth.vue';
+import Landing from './views/Landing.vue';
+import Dashboard from './views/Dashboard.vue';
 import TheHeader from './components/TheHeader.vue';
+import PublicHeader from './components/headers/PublicHeader.vue';
 
 import dialog from '@/utils/dialog';
 import userTypes from '@/utils/userTypes';
 
 @Component({
   components: {
-    BaseAuth,
+    Dashboard,
     TheHeader,
+    PublicHeader,
+    Landing,
   },
 })
 export default class App extends Vue {
@@ -55,22 +59,22 @@ export default class App extends Vue {
 </script>
 
 <template lang="pug">
-div.app(v-if='$route.name === "menu_view" || $route.name === "landing"')
-  router-view(v-if='$auth.ready()')
-div.app(v-else, v-show='$auth.ready()')
+div.app(v-show='$auth.ready()')
   dialogs-wrapper
   div(v-if='$auth.check()')
     the-header
-    router-view(:style="{marginTop:'30px',}" v-if='$auth.ready()')
-  base-auth(v-else)
-  .languages
-    b-button(
-      v-for='(locale, i) in locales',
-      :class='{ active: activeLocale === locale.name }',
-      :key='i',
-      :title='locale.title',
-      @click='changeLocale(locale.name)',
-    ) {{ locale.flag }}
+    dashboard
+  div(v-else)
+    public-header
+    router-view
+    .languages
+      b-button(
+        v-for='(locale, i) in locales',
+        :class='{ active: activeLocale === locale.name }',
+        :key='i',
+        :title='locale.title',
+        @click='changeLocale(locale.name)',
+      ) {{ locale.flag }}
 </template>
 
 <style lang="scss">

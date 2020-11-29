@@ -16,5 +16,7 @@ return [
     'save' => 'Save',
     'sending' => 'Sending',
     'update' => 'Update',
+    'register' => '¡Register Now!',
+    'search' => 'Search'
 
 ];

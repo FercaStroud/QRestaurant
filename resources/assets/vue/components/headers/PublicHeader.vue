@@ -2,7 +2,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 @Component
-export default class BaseAuth extends Vue {
+export default class PublicHeader extends Vue {
 
   paddingNavbar: string = '5px 10px';
   widthBrandingLogo: string = '60px';
@@ -34,7 +34,38 @@ export default class BaseAuth extends Vue {
 
 <template lang="pug">
 .div
-  router-view.router-view
+  b-navbar.public-navbar(
+    toggleable='lg'
+    :style="{padding: paddingNavbar}"
+  )
+    b-navbar-brand(href='#')
+      router-link(to='/')
+        img.branding-logo(
+          :style="{width: widthBrandingLogo}"
+          src='/images/qr1.svg',
+          alt='Logo QRestaurant'
+        )
+        div(style="margin-top: 4px;")
+          span.Gotham-Black.color-primary.branding-text(
+            :style="{fontSize: widthBrandingText}"
+          ) Q-R
+          span.Gotham-Medium.color-secondary.branding-text(
+            :style="{fontSize: widthBrandingText}"
+          ) estaurant
+    b-navbar-toggle(target='nav-collapse')
+    b-collapse#nav-collapse(is-nav='')
+
+      // Right aligned nav items
+      b-navbar-nav.ml-auto
+        b-navbar-nav
+          b-nav-item
+            router-link(to='/login') {{ $t('login.login') }}
+          b-nav-item
+            router-link(to='/registrations/new') {{ $t('buttons.register') }}
+
+        b-nav-form
+          b-form-input.mr-sm-2#input-search(size='sm' placeholder='Encuentra tu restaurante favorito')
+          b-button.my-2.my-sm-0.btn-primary(size='sm' type='submit') {{ $t('buttons.search') }}
 
 </template>
 
