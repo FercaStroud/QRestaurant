@@ -13,6 +13,7 @@ import users from './users';
 import products from './products';
 import categories from './categories';
 import menus from './menus';
+import payments from './payments';
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ const modules = {
   products,
   categories,
   menus,
+  payments,
 };
 
 const store = new Vuex.Store({

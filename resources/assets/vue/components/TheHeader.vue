@@ -23,6 +23,10 @@
       (<any>this.$refs.the_settings).$refs.modal.show();
     }
 
+    goToPayments(){
+      this.$router.push({path: '/payments'})
+    }
+
     get homePath() {
       return this.$auth.user().home_path;
     }
@@ -69,6 +73,10 @@
               b-dropdown-item(
                 @click='showSettings',
               ) {{ $t('strings.settings') }}
+
+              b-dropdown-item(
+                @click='goToPayments',
+              ) {{ $t('payments.title') }}
 
               b-dropdown-item(
                 @click='logout',

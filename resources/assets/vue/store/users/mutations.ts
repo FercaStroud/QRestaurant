@@ -43,6 +43,10 @@ const SET_MODAL_VISIBLE = (state, payload) => {
   state.isModalVisible = payload;
 };
 
+const SET_DIALOG_MESSAGE = (state, payload) => {
+  state.dialogMessage = payload;
+};
+
 export default {
   SET_USERS,
   ADD_USER,
@@ -51,4 +55,5 @@ export default {
   SET_LOADING,
   SET_MODAL_LOADING,
   SET_MODAL_VISIBLE,
+  SET_DIALOG_MESSAGE,
 };

@@ -37,7 +37,6 @@ return [
     'delete'=>'Eliminar',
     'edit'=>'Editar',
 
-
     // Pages
     'dashboard'=>'Panel de Administración',
     'example' => 'Ejemplo',
@@ -46,6 +45,7 @@ return [
     'users' => 'Usuarios',
     'users_graphql' => 'Usuarios (GraphQL)',
     'settings' => 'Configuraciones',
+    'subscriptions' => 'Suscripciones',
 
     'error_occurred' => 'Ocurrió un error.',
     'items_to_show' => 'Elementos a mostrar por página:',

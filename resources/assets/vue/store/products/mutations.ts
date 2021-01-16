@@ -46,12 +46,17 @@ const SET_MODAL_ADD = (state, payload) => {
   state.isModalAdd = payload;
 };
 
+const SET_DIALOG_MESSAGE = (state, payload) => {
+  state.dialogMessage = payload;
+};
+
 const SET_FORM = (state, payload) => {
   state.form = payload;
 };
 
 export default {
   SET_FORM,
+  SET_DIALOG_MESSAGE,
   SET_MODAL_ADD,
   SET_PRODUCTS,
   ADD_PRODUCT,

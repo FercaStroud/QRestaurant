@@ -45,6 +45,7 @@ return [
     'users' => 'Users',
     'users_graphql' => 'Users (GraphQL)',
     'settings' => 'Settings',
+    'subscriptions' => 'Subscriptions',
 
     'error_occurred' => 'An error occurred.',
     'items_to_show' => 'Items to show:',

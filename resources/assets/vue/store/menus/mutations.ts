@@ -51,6 +51,10 @@ const SET_FORM = (state, payload) => {
   state.form = payload;
 };
 
+const SET_DIALOG_MESSAGE = (state, payload) => {
+  state.dialogMessage = payload;
+};
+
 export default {
   SET_FORM,
   SET_MODAL_ADD,
@@ -61,4 +65,5 @@ export default {
   SET_LOADING,
   SET_MODAL_LOADING,
   SET_MODAL_VISIBLE,
+  SET_DIALOG_MESSAGE,
 };

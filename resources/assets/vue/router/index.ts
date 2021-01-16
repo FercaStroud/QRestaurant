@@ -15,6 +15,7 @@ const Menus = () => import('../views/MyMenus.vue');
 const Users = () => import('../views/Users.vue');
 const Categories = () => import('../views/Categories.vue');
 const Products = () => import('../views/Products.vue');
+const Payments = () => import('../views/Payments.vue');
 
 import userTypes from '@/utils/userTypes';
 
@@ -83,6 +84,18 @@ const router = new Router({
       component: Menus,
       meta: {
         title: Vue.i18n.translate('strings.my_menus', null),
+        auth: {
+          roles: userTypes.NORMAL,
+          forbiddenRedirect: '/',
+        },
+      },
+    },
+    {
+      path: '/payments',
+      name: 'payments',
+      component: Payments,
+      meta: {
+        title: Vue.i18n.translate('payments.title', null),
         auth: {
           roles: userTypes.NORMAL,
           forbiddenRedirect: '/',

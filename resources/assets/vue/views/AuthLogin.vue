@@ -57,7 +57,7 @@ export default class AuthLogin extends Vue {
   b-row#fix-top(
     style=""
   )
-    b-col(md="7")
+    b-col(md="11" sm="12" lg="8")
       b-card(style="border:none;background:rgba(255,255,255,.98)")
         b-row
           b-col(md="4")
