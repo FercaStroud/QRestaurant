@@ -1,6 +1,25 @@
 import axios from 'axios';
 import checkResponse from '@/utils/checkResponse';
 
+const loadPaymentStatus = async ({ commit }, payload) => {
+  commit('SET_LOADING', true);
+
+  try {
+    const response = await axios.post(`payments/status?user_id=${payload.user_id}`);
+    const checkErrors = checkResponse(response);
+
+    if (checkErrors) {
+      commit('SET_DIALOG_MESSAGE', checkErrors.message, { root: true });
+    } else {
+      commit('SET_PAYMENT_STATUS', response);
+    }
+  } catch (e) {
+    commit('SET_DIALOG_MESSAGE', 'errors.generic_error', { root: true });
+  } finally {
+    commit('SET_LOADING', false);
+  }
+};
+
 const loadPayments = async ({ commit }, payload) => {
   commit('SET_LOADING', true);
 
@@ -22,4 +41,5 @@ const loadPayments = async ({ commit }, payload) => {
 
 export default {
   loadPayments,
+  loadPaymentStatus,
 };

@@ -23,6 +23,7 @@ export default {
       key: 'actions',
     },
   ],
+  status: [],
   payments: [],
   isLoading: false,
 };

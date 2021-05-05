@@ -31,7 +31,10 @@ Route::group(['middleware' => ['jwt.auth'],], function () {
 
     Route::get('vue', 'HomeController@vue');
     Route::post('settings', 'SettingController@saveSettings');
-    //Route::post('Payments', 'PaymentController@');
+
+    Route::group(['prefix' => 'payments'], function () {
+        Route::post('status', 'PaymentController@getServiceStatus');
+    });
 
     Route::resource('categories', 'Resources\CategoryController', [
         'except' => ['create', 'edit', 'show'],

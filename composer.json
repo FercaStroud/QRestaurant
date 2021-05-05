@@ -31,7 +31,8 @@
     "laravel/tinker": "^2.0",
     "pusher/pusher-php-server": "~4.1.4",
     "rebing/graphql-laravel": "^4.0.0",
-    "tymon/jwt-auth": "1.0.0-rc.5.1"
+    "tymon/jwt-auth": "1.0.0-rc.5.1",
+    "ext-http": "*"
   },
   "require-dev": {
     "facade/ignition": "^1.4",

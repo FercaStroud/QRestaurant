@@ -2,7 +2,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Action, State, namespace } from 'vuex-class';
 
-//const pStore = namespace('payments');
+const pStore = namespace('payments');
 
 @Component(
   {
@@ -12,13 +12,17 @@ import { Action, State, namespace } from 'vuex-class';
 )
 
 export default class PaymentList extends Vue {
-  //@pStore.State isLoading;
-  //@pStore.Action loadPaymentStatus;
+  @pStore.State isLoading;
+  @pStore.Action loadPaymentStatus;
 
   mounted() {
     this.$nextTick(() => {
-      //this.getPayments(this.actualUser.id);
+      this.getPaymentStatus(this.actualUser.id);
     })
+  }
+
+  async getPaymentStatus(user_id: number): Promise<void> {
+    this.loadPaymentStatus({ user_id });
   }
 
   get actualUser() {
