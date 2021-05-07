@@ -36,6 +36,8 @@ return [
     'category'=>'Category',
     'created_at'=>'Created at',
     'updated_at'=>'Last update',
+    'update_table' => 'Update table',
+
     // Pages
     'actions'=>'Actions',
     'delete'=>'Delete',

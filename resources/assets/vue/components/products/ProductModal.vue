@@ -1,57 +1,59 @@
 <script lang="ts">
-  import {Component, Emit, Prop, Vue} from 'vue-property-decorator';
-  import {Action, State, namespace} from 'vuex-class';
+import {Component, Emit, Prop, Vue} from 'vue-property-decorator';
+import {Action, State, namespace} from 'vuex-class';
 
-  const pStore = namespace('products');
-  const cStore = namespace('categories');
+const pStore = namespace('products');
+const cStore = namespace('categories');
 
-  @Component
-  export default class ProductModal extends Vue {
-    @Prop() form;
-    @Prop() isAdd;
-    @Prop() product;
-    @Prop() isVisible;
-    @cStore.State categories;
-    @pStore.State isModalLoading;
-    @pStore.Action addProduct;
-    @pStore.Action editProduct;
-    @pStore.Action setModalVisible;
-    @cStore.Action loadCategories;
-    @Action setDialogMessage;
+@Component
+export default class ProductModal extends Vue {
+  @Prop() form;
+  @Prop() isAdd;
+  @Prop() product;
+  @Prop() isVisible;
+  @cStore.State categories;
+  @pStore.State isModalLoading;
+  @pStore.Action addProduct;
+  @pStore.Action editProduct;
+  @pStore.Action setModalVisible;
+  @cStore.Action loadCategories;
+  @Action setDialogMessage;
 
-    async created() {
-      await this.getCategories(this.form.menu_id);
-    }
-
-    handleOk() {
-        if (this.form.image_src !== undefined) {
-          if (this.form.image_src.size <= '2000000') {
-            if (this.isAdd) {
-              this.addProduct(this.form);
-            } else {
-              this.editProduct(this.form);
-            }
-          } else {
-            this.setDialogMessage("La imagen no debe ser mayor a 2MB.");
-          }
-        } else{
-          if (this.isAdd) {
-            this.addProduct(this.form);
-          } else {
-            this.editProduct(this.form);
-          }
-        }
-
-    }
-
-    async getCategories(menu_id: number): Promise<void> {
-      this.loadCategories({ menu_id });
-    }
-
-    handleClose() {
-      this.setModalVisible(false);
-    }
+  mounted() {
+    this.$nextTick(() => {
+      this.getCategories(this.form.menu_id);
+    });
   }
+
+  handleOk() {
+    if (this.form.image_src !== undefined && this.form.image_src !== null) {
+      if (this.form.image_src.size <= '2000000') {
+        if (this.isAdd) {
+          this.addProduct(this.form);
+        } else {
+          this.editProduct(this.form);
+        }
+      } else {
+        this.setDialogMessage("La imagen no debe ser mayor a 2MB.");
+      }
+    } else {
+      if (this.isAdd) {
+        this.addProduct(this.form);
+      } else {
+        this.editProduct(this.form);
+      }
+    }
+
+  }
+
+  async getCategories(menu_id: number): Promise<void> {
+    this.loadCategories({menu_id});
+  }
+
+  handleClose() {
+    this.setModalVisible(false);
+  }
+}
 </script>
 
 <template lang="pug">
@@ -99,6 +101,7 @@
         b-form-input#price(
           type='number',
           min="0"
+          step="0.01"
           v-model='form.price',
         )
 

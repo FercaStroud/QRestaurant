@@ -38,6 +38,7 @@ return [
     'actions'=>'Acciones',
     'delete'=>'Eliminar',
     'edit'=>'Editar',
+    'update_table' => 'Actualizar tabla',
 
     // Pages
     'dashboard'=>'Panel de Administración',
