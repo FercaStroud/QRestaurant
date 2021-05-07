@@ -45,6 +45,8 @@ Route::group(['middleware' => ['jwt.auth'],], function () {
     Route::resource('menus', 'Resources\MenuController', [
         'except' => ['create', 'edit', 'show'],
     ]);
+    Route::post('menus/add/file', 'Resources\MenuController@addFile');
+
 });
 
 Route::group([

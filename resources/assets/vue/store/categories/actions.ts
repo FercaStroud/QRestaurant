@@ -41,7 +41,7 @@ const loadCategories = async ({ commit }, payload) => {
 
 const addCategory = async ({ commit }, payload) => {
 
-  if (payload.description === undefined ){
+  if (payload.description === undefined) {
     payload.description = '';
   }
 

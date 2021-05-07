@@ -20,8 +20,10 @@ class CreateMenusTable extends Migration
             $table->string('name');
             $table->longText('description')->nullable();
             $table->string('image_src')->nullable();
-
+            $table->string('file')->nullable();
+            $table->enum('type', ['NORMAL', 'TEXT', 'PDF'])->default('NORMAL');
             $table->timestamps();
+
         });
     }
 

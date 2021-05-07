@@ -53,4 +53,22 @@
           required,
         )
 
+      b-form-group(
+        :label='$t("menus.type")'
+        label-for='type',
+      )
+        b-form-select#type(
+          v-model='form.type',
+          :select-size="3"
+        )
+          b-form-select-option(
+            :value="'NORMAL'"
+          ) NORMAL
+          b-form-select-option(
+            :value="'TEXT'"
+          ) TEXT
+          b-form-select-option(
+            :value="'PDF'"
+          ) PDF
+
 </template>

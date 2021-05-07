@@ -45,6 +45,23 @@ class MenuController extends Controller
         return response()->json($menu, 201);
     }
 
+    public function addFile(Request $request){
+        $menu = Menu::find($request->get("id"));
+
+        if ($request->has('file') and $request->file('file') !== null) {
+            $image = $request->file('file');
+            $name = Str::slug($menu->name) . '_' . time();
+            $folder = '/uploads/menus/pdfs/';
+            $filePath = $name . '.' . $image->getClientOriginalExtension();
+
+            $this->uploadOne($image, $folder, 'public', $name);
+            $menu->file = $filePath;
+        }
+
+        $menu->save();
+        return response()->json($menu, 201);
+    }
+
     public function destroy(Menu $menu)
     {
         $menu->delete();

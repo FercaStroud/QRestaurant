@@ -14,6 +14,12 @@ export default {
       key: 'categories',
     },
     {
+      key: 'type',
+    },
+    {
+      key: 'file',
+    },
+    {
       key: 'created_at',
     },
     {

@@ -20,7 +20,7 @@ class Menu extends Model
     ];
 
     protected $fillable = [
-        'user_id', 'name',
+        'user_id', 'name', 'type'
     ];
 
     protected $hidden = [

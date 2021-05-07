@@ -26,7 +26,6 @@ import App from './App.vue';
 
 Vue.component('v-icon', Icon);
 Vue.component(VueQrcode.name, VueQrcode);
-
 Vue.config.productionTip = false;
 
 const apolloClient = new ApolloClient({

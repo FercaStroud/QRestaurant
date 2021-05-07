@@ -19,6 +19,7 @@ export default class MenuList extends Vue {
   @mStore.Action setModalVisible;
   @mStore.Action setModalAdd;
   @mStore.Action setForm;
+  @mStore.Action addFileToMenu;
 
   currentPage = 1;
   menuQRData = {
@@ -27,6 +28,11 @@ export default class MenuList extends Vue {
     data: {},
   };
 
+  formFile = {
+    image: null,
+    id: null,
+    modal:false,
+  }
 
   mounted() {
     this.menuQRData.modal = false;
@@ -80,6 +86,23 @@ export default class MenuList extends Vue {
   handleEditCategory(menu_id):void{
     this.$router.push({path: '/categories/' + menu_id});
   }
+
+  handleAddFile(menu_id): void{
+    this.formFile.id = menu_id;
+    this.formFile.modal = true;
+  }
+
+  uploadFile(): void{
+    this.addFileToMenu(this.formFile);
+  }
+
+  handleCloseModalFile(){
+    this.formFile = {
+      image: null,
+      id: null,
+      modal:false,
+    }
+  }
 }
 </script>
 
@@ -110,6 +133,10 @@ export default class MenuList extends Vue {
         span {{$t("products.text")}}
       template(v-slot:head(categories)="data")
         span {{$t("categories.text")}}
+      template(v-slot:head(type)="data")
+        span {{$t("menus.type")}}
+      template(v-slot:head(file)="data")
+        span {{$t("menus.file")}}
       template(v-slot:head(created_at)="data")
         span {{$t("strings.created_at")}}
       template(v-slot:head(updated_at)="data")
@@ -121,6 +148,7 @@ export default class MenuList extends Vue {
 
       template(v-slot:cell(products)="data")
         b-button.btn.table-btn.mb-2(
+          v-if="data.item.type !== 'PDF'"
           @click="handleEditProduct(data.item.id)"
           size="sm"
           :title="$t('products.text')"
@@ -133,6 +161,7 @@ export default class MenuList extends Vue {
 
       template(v-slot:cell(categories)="data")
         b-button.btn.table-btn.mb-2(
+          v-if="data.item.type !== 'PDF'"
           size="sm"
           @click="handleEditCategory(data.item.id)"
           :title="$t('categories.text')"
@@ -143,6 +172,37 @@ export default class MenuList extends Vue {
           )
           span {{$t('strings.edit')}}
 
+      template(v-slot:cell(file)="data")
+        b-button.btn.table-btn.mb-2(
+          v-if="data.item.type === 'PDF'"
+          size="sm"
+          @click="handleAddFile(data.item.id)"
+          :title="$t('menus.add_file')"
+        )
+          b-icon(
+            icon="cloud-upload"
+            style="color: #fff;"
+          )
+        //b-button.btn.table-btn.mb-2(
+        //  v-if="data.item.type === 'PDF'"
+        //  size="sm"
+        //  @click="handleViewFile(data.item.id)"
+        //  :title="$t('menus.view_file')"
+        //)
+        //  b-icon(
+        //    icon="search"
+        //    style="color: #fff;"
+        //  )
+        //b-button.btn-danger.table-btn.mb-2(
+        //  v-if="data.item.type === 'PDF'"
+        //  :title="$t('strings.delete')"
+        //  @click="deleteFileConfirm(data.item)"
+        //  size="sm"
+        //)
+        //  b-icon(
+        //    icon="trash-fill"
+        //    style="color: #fff"
+        //  )
       template(v-slot:cell(actions)="data")
         b-button.btn.table-btn.mb-2(
           size="sm"
@@ -198,6 +258,33 @@ export default class MenuList extends Vue {
           style="color: #fff;"
         )
         span &ensp; {{$t('strings.download')}}
+    b-modal(
+      :title="$t('menus.add_file')"
+      centered
+      v-model="formFile.modal"
+      @ok.prevent='uploadFile'
+      hide-header-close=true
+      :ok-disabled='isLoading',
+      :cancel-title='$t("buttons.cancel")',
+      :ok-title='isLoading ? $t("buttons.sending") : $t("buttons.add")',
+      @hide='handleCloseModalFile'
+    )
+      b-form
+        b-form-group(
+          :label='$t("menus.file")'
+          label-for='file',
+        )
+          b-form-file#file(
+            type='text',
+            accept="pdf/*",
+            :browse-text='$t("strings.browse")',
+            :state="Boolean(formFile.file)"
+            v-model='formFile.file',
+            maxlength='191',
+            :placeholder='$t("strings.choose_file")'
+            :drop-placeholder='$t("strings.drop_file")'
+          )
+
 </template>
 
 

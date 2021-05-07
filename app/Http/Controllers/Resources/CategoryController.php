@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Resources;
 
+use App\Menu;
 use App\Product;
 use App\User;
 use Illuminate\Database\QueryException;
@@ -74,7 +75,7 @@ class CategoryController extends Controller
         $category->name = $request->get("name", $category->name);
         $description = $request->get("description");
 
-        if($description == "null"){
+        if ($description == "null") {
             $description = '';
         }
         $category->description = $description;
@@ -109,27 +110,41 @@ class CategoryController extends Controller
 
     public function withProducts(Request $request)
     {
-        $categories = Category::where("menu_id", "=", $request->get("id"))->get();
+        $menu = Menu::find($request->get("id"));
+        $user = User::find($menu->user_id);
 
-        $user = User::find($categories[0]->user_id);
-
-        $i = 0;
-        foreach ($categories as $category) {
-            $categories[$i]['products'] = Product::where('category_id', '=', $category->id)->get();
-            $categories[$i]['parent'] = Category::where('id', '=', $category->parent_id)->first();
-
-            $i++;
-        };
-
-        return response()->json(
-            [
+        if ($menu->type === 'PDF') {
+            return response()->json([
                 'user' => [
                     'name' => $user->restaurant_name,
                     //'address' => $user->address,
                     //'image_src' => $user->image_src,
                     'logo_src' => $user->logo_src
                 ],
-                'categories' => $categories
+                'settings' => $menu,
+                'categories' => null,
             ], 201);
+        } else {
+            $categories = Category::where("menu_id", "=", $request->get("id"))->get();
+            $i = 0;
+
+            foreach ($categories as $category) {
+                $categories[$i]['products'] = Product::where('category_id', '=', $category->id)->get();
+                $categories[$i]['parent'] = Category::where('id', '=', $category->parent_id)->first();
+
+                $i++;
+            };
+            return response()->json(
+                [
+                    'user' => [
+                        'name' => $user->restaurant_name,
+                        //'address' => $user->address,
+                        //'image_src' => $user->image_src,
+                        'logo_src' => $user->logo_src
+                    ],
+                    'settings' => $menu,
+                    'categories' => $categories
+                ], 201);
+        }
     }
 }
