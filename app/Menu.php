@@ -20,7 +20,12 @@ class Menu extends Model
     ];
 
     protected $fillable = [
-        'user_id', 'name', 'type'
+        'user_id',
+        'name',
+        'description',
+        'slug',
+        'file_src',
+        'type'
     ];
 
     protected $hidden = [

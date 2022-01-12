@@ -7,15 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Menu;
 use App\Util\Utils;
-use App\Traits\UploadTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Response;
 
 class MenuController extends Controller
 {
-    use UploadTrait;
-
     public function index(Request $request)
     {
         return Menu::where("user_id", "=", $request->user()->id)->orderBy('id', 'ASC')->get();
@@ -25,6 +22,8 @@ class MenuController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'slug' => 'required',
+            'type' => 'required',
         ]);
 
         $menu = new Menu($request->all());
@@ -48,15 +47,11 @@ class MenuController extends Controller
     public function addFile(Request $request){
         $menu = Menu::find($request->get("id"));
 
-        if ($request->has('file') and $request->file('file') !== null) {
-            $image = $request->file('file');
-            $name = Str::slug($menu->name) . '_' . time();
-            $folder = '/uploads/menus/pdfs/';
-            $filePath = $name . '.' . $image->getClientOriginalExtension();
+        $fileName = Str::random(68).'.'.$request->file('file')->getClientOriginalExtension();
+        $destinationPath = "uploads/menus/pdfs/";
 
-            $this->uploadOne($image, $folder, 'public', $name);
-            $menu->file = $filePath;
-        }
+        $request->file('imgFile')->move($destinationPath, $fileName);
+        $menu->file_src = $fileName;
 
         $menu->save();
         return response()->json($menu, 201);

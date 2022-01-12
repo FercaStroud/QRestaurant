@@ -50,8 +50,6 @@ const addCategory = async ({ commit }, payload) => {
   formData.append('menu_id', payload.menu_id);
   formData.append('name', payload.name);
   formData.append('description', payload.description);
-  formData.append('image_src', payload.image_src);
-
   commit('SET_MODAL_LOADING', true);
 
   try {
@@ -62,6 +60,30 @@ const addCategory = async ({ commit }, payload) => {
       commit('SET_DIALOG_MESSAGE', checkErrors.message, { root: true });
     } else {
       commit('ADD_CATEGORY', response.data);
+      commit('SET_MODAL_VISIBLE', false);
+    }
+  } catch {
+    commit('SET_DIALOG_MESSAGE', 'errors.generic_error', { root: true });
+  } finally {
+    commit('SET_MODAL_LOADING', false);
+  }
+};
+
+const addFile = async ({ commit }, payload) => {
+
+  const formData = new FormData();
+  formData.append('id', payload.id);
+  formData.append('image_src', payload.image_src);
+
+  commit('SET_MODAL_LOADING', true);
+
+  try {
+    const response = await axios.post('category/add/file', formData);
+    const checkErrors = checkResponse(response);
+
+    if (checkErrors) {
+      commit('SET_DIALOG_MESSAGE', checkErrors.message, { root: true });
+    } else {
       commit('SET_MODAL_VISIBLE', false);
     }
   } catch {
@@ -121,6 +143,10 @@ const setModalVisible = ({ commit }, payload) => {
   commit('SET_MODAL_VISIBLE', payload);
 };
 
+const setAddFileModalVisible = ({ commit }, payload) => {
+  commit('SET_ADD_FILE_MODAL_VISIBLE', payload);
+};
+
 const setModalAdd = ({ commit }, payload) => {
   commit('SET_MODAL_ADD', payload);
 };
@@ -131,9 +157,11 @@ const setForm = ({ commit }, payload) => {
 
 export default {
   setForm,
+  addFile,
   setModalAdd,
   loadCategories,
   loadCategoriesWithProducts,
+  setAddFileModalVisible,
   addCategory,
   editCategory,
   deleteCategory,

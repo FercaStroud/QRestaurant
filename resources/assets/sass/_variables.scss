@@ -16,24 +16,26 @@ $theme-colors: ("danger": $danger_color, "primary": $primary_color);
 
 @font-face {
   font-family: 'Gotham-Black';
-  src: url('/fonts/Gotham-Black.woff2') format('woff2'),
-  url('/fonts/Gotham-Black.woff') format('woff');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-.Gotham-Black{
-  font-family: 'Gotham-Black';
-}
-@font-face {
-  font-family: 'Gotham-Medium';
-  src: url('/fonts/Gotham-Medium.woff2') format('woff2'),
-  url('/fonts/Gotham-Medium.woff') format('woff');
+  src: url('/assets/fonts/Gotham-Black.woff2') format('woff2'),
+  url('/assets/fonts/Gotham-Black.woff') format('woff');
   font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
 
-.Gotham-Medium{
+.Gotham-Black {
+  font-family: 'Gotham-Black';
+}
+
+@font-face {
+  font-family: 'Gotham-Medium';
+  src: url('/assets/fonts/Gotham-Medium.woff2') format('woff2'),
+  url('/assets/fonts/Gotham-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+.Gotham-Medium {
   font-family: 'Gotham-Medium';
 }

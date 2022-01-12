@@ -55,6 +55,10 @@ const SET_FORM = (state, payload) => {
   state.form = payload;
 };
 
+const SET_ADD_FILE_MODAL_VISIBLE = (state, payload) => {
+  state.isAddFileModalVisible = payload;
+};
+
 export default {
   SET_FORM,
   SET_MODAL_ADD,
@@ -66,4 +70,5 @@ export default {
   SET_LOADING,
   SET_MODAL_LOADING,
   SET_MODAL_VISIBLE,
+  SET_ADD_FILE_MODAL_VISIBLE,
 };

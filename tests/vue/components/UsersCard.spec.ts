@@ -11,7 +11,7 @@ import faker from 'faker';
 import configStore from '../mocks/config-store';
 import storeMock from '../mocks/store-mock';
 
-import UsersCard from '../../../resources/assets/vue/components/users/UsersCard.vue';
+import UsersCard from '@/components/UsersCard.vue';
 
 const user = {
   id: 1,

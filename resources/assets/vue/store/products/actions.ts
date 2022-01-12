@@ -20,6 +20,30 @@ const loadProducts = async ({ commit }, payload) => {
   }
 };
 
+const addFile = async ({ commit }, payload) => {
+
+  const formData = new FormData();
+  formData.append('id', payload.id);
+  formData.append('image_src', payload.image_src);
+
+  commit('SET_MODAL_LOADING', true);
+
+  try {
+    const response = await axios.post('product/add/file', formData);
+    const checkErrors = checkResponse(response);
+
+    if (checkErrors) {
+      commit('SET_DIALOG_MESSAGE', checkErrors.message, { root: true });
+    } else {
+      commit('SET_MODAL_VISIBLE', false);
+    }
+  } catch {
+    commit('SET_DIALOG_MESSAGE', 'errors.generic_error', { root: true });
+  } finally {
+    commit('SET_MODAL_LOADING', false);
+  }
+};
+
 const addProduct = async ({ commit }, payload) => {
 
   if (payload.description === undefined) {
@@ -31,7 +55,6 @@ const addProduct = async ({ commit }, payload) => {
   formData.append('name', payload.name);
   formData.append('description', payload.description);
   formData.append('price', payload.price);
-  formData.append('image_src', payload.image_src);
 
   commit('SET_MODAL_LOADING', true);
 
@@ -112,12 +135,18 @@ const setForm = ({ commit }, payload) => {
   commit('SET_FORM', payload);
 };
 
+const setAddFileModalVisible = ({ commit }, payload) => {
+  commit('SET_ADD_FILE_MODAL_VISIBLE', payload);
+};
+
 export default {
   setForm,
+  addFile,
   setModalAdd,
   loadProducts,
   addProduct,
   editProduct,
   deleteProduct,
   setModalVisible,
+  setAddFileModalVisible,
 };

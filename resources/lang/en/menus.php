@@ -10,4 +10,5 @@ return [
     'file' => 'File',
     'add_file' => 'Add File',
     'view_file' => 'View File',
+    'slug' => 'Slug',
 ];

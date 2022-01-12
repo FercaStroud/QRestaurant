@@ -1,9 +1,0 @@
-mutation EditCategory($input: UserInput!) {
-  editCategory(input: $input) {
-    id
-    user_id
-    parent_id
-    name
-    image_src
-  }
-}

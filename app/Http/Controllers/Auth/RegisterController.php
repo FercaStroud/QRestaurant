@@ -6,7 +6,6 @@ use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -49,9 +48,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'user_name' => 'required|string|max:191',
-            'restaurant_name' => 'required|string|max:191',
-            'email' => 'required|string|email|max:191|unique:users',
+            'name' => 'required|string|max:25',
+            'lastname' => 'required|string|max:15',
+            'restaurant_name' => 'required|string|max:50',
+            'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -64,39 +64,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'user_name' => $data['user_name'],
-            'restaurant_name' => $data['restaurant_name'],
-            'email' => $data['email'],
-            'phone' => $data['phone'],
-            'city' => $data['city'],
+        return User::create([
+            'name' => $data['name'],
+            'lastname' => $data['lastname'],
+            'second_lastname' => $data['second_lastname'],
+            'address' => $data['address'],
             'state' => $data['state'],
-            'type_id' => 2,
+            'municipality' => $data['municipality'],
+            'city' => $data['city'],
+            'country' => $data['country'],
+            'email' => $data['email'],
             'password' => bcrypt($data['password']),
+            'phone' => $data['phone'],
+            'restaurant_name' => $data['restaurant_name'],
         ]);
-
-        self::sendEmailOnCreatedUser($user);
-
-        return $user;
     }
-
-    public function sendEmailOnCreatedUser(&$user)
-    {
-        $to_name = $user->user_name;
-        $to_email = $user->email;
-
-        $data = [
-            'name' => $user->user_name,
-            'email' => $user->email
-        ];
-
-        Mail::send("emails.createUser", $data,
-            function ($message) use ($to_name, $to_email) {
-                $message->to($to_email, $to_name)->subject("¡Gracias por registrarte en Q-Restaurant!");
-                $message->from(getenv("MAIL_FROM_ADDRESS"), "Q-Restaurant");
-                $message->cc(getenv("MAIL_FROM_ADDRESS"), "Q-Restaurant");
-            }
-        );
-    }
-
 }

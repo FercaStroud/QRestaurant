@@ -1,37 +1,20 @@
 @import 'variables';
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
+@import '~bootstrap/dist/css/bootstrap.css';
+@import '~bootstrap-vue/dist/bootstrap-vue.css';
 
-@import '~bootstrap/scss/alert';
-@import '~bootstrap/scss/reboot';
-@import '~bootstrap/scss/badge';
-@import '~bootstrap/scss/modal';
-@import '~bootstrap/scss/card';
-@import '~bootstrap/scss/buttons';
-@import '~bootstrap/scss/grid';
-@import '~bootstrap/scss/forms';
-@import '~bootstrap/scss/custom-forms';
-@import '~bootstrap/scss/pagination';
-@import '~bootstrap/scss/tables';
-@import '~bootstrap/scss/dropdown';
-@import '~bootstrap/scss/navbar';
-@import '~bootstrap/scss/nav';
-@import '~bootstrap/scss/type';
-@import '~bootstrap/scss/close';
-@import '~bootstrap/scss/transitions';
-@import '~bootstrap/scss/input-group';
-@import '~bootstrap/scss/list-group';
-
-@import '~bootstrap/scss/utilities/align';
-@import '~bootstrap/scss/utilities/display';
-@import '~bootstrap/scss/utilities/flex';
-@import '~bootstrap/scss/utilities/spacing';
-@import '~bootstrap/scss/utilities/text';
-
-@import '~bootstrap-vue/src/index.scss';
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+
+.bg-auth {
+  background: url("/assets/images/Sample 16.png");
+  background-position: center;
+  background-size: 200px;
+  height: 100vh;
+}
+
+.text-size-small {
+  font-size: .8em;
+}
 
 .bg-white {
   background-color: white;
@@ -51,21 +34,26 @@
   width: 100%
 }
 
-html {
-  height: 100%;
+.size-for-titles {
+  font-size: 2.2em;
+}
+
+#app-footer {
+  position: absolute;
+  bottom: 0;
+
+  a {
+    color: white !important;
+  }
 }
 
 body {
-  font-family: "Gotham-Medium" !important;
+  font-size: .8em;
 
   .glass-effect {
-    background-color: rgba(255, 255, 255, .15);
-    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, .65);
+    backdrop-filter: blur(25px);
   }
-
-  background: #fff;
-  height: 100%;
-  overflow-x: hidden;
 
   .color-primary {
     color: $primary_color;
@@ -140,18 +128,19 @@ body {
     box-shadow: 0px 0px 5px #000;
   }
 
-  .btn-primary{
-    border:1px solid $primary_color;
+  .btn-primary {
+    border: 1px solid $primary_color;
     color: $primary_color;
-    background:white;
+    background: white;
+
     &:hover {
-      border:1px solid $primary_color !important;
+      border: 1px solid $primary_color !important;
       color: white !important;
       background: $primary_color;
     }
   }
 
-  .parallax{
+  .parallax {
     position: relative;
     background-attachment: fixed;
     background-position: center;
@@ -174,8 +163,19 @@ body {
     font-size: 25px;
     letter-spacing: 10px;
   }
-  .box-shadow{
+
+  .box-shadow {
     box-shadow: 0px 1px 10px #3f3f3f;
   }
 
+}
+
+
+@media (max-width: 767px) {
+  #app-footer {
+    position: relative;
+  }
+  .bg-auth {
+    height: auto;
+  }
 }

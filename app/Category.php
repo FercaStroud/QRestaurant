@@ -20,7 +20,12 @@ class Category extends Model
     ];
 
     protected $fillable = [
-        'user_id', 'menu_id', 'parent_id', 'name', 'description', 'image_src'
+        'user_id',
+        'menu_id',
+        'parent_id',
+        'name',
+        'description',
+        'image_src'
     ];
 
     protected $hidden = [

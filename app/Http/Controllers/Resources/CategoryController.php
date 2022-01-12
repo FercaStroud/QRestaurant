@@ -10,13 +10,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Category;
 use App\Util\Utils;
-use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
 use Response;
 
 class CategoryController extends Controller
 {
-    use UploadTrait;
 
     /**
      * @param Request $request
@@ -37,24 +35,28 @@ class CategoryController extends Controller
             'name' => 'required',
         ]);
 
-        //$category = new Category($request->all());
-        $category = new Category();
+        $category = new Category($request->all());
         $category->user_id = $request->user()->id;
-        $category->menu_id = $request->get("menu_id");
-        $category->parent_id = $request->get("parent_id", 0);
-        $category->name = $request->get("name");
-        $category->description = $request->get("description", "");
         $category->image_src = null;
 
-        if ($request->has('image_src') and $request->file('image_src') !== null) {
-            $image = $request->file('image_src');
-            $name = Str::slug($request->input('name')) . '_' . time();
-            $folder = '/uploads/images/categories/';
-            $filePath = $name . '.' . $image->getClientOriginalExtension();
+        $category->save();
+        return response()->json($category, 201);
+    }
 
-            $this->uploadOne($image, $folder, 'public', $name);
-            $category->image_src = $filePath;
-        }
+    public function addFile(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'image_src' => 'required',
+        ]);
+
+
+        $category = Category::find($request->get('id'));
+        $fileName = Str::random(68).'.'.$request->file('image_src')->getClientOriginalExtension();
+        $destinationPath = 'uploads/images/categories/';
+
+        $request->file('image_src')->move($destinationPath, $fileName);
+        $category->image_src = $fileName;
 
         $category->save();
         return response()->json($category, 201);
@@ -81,13 +83,11 @@ class CategoryController extends Controller
         $category->description = $description;
 
         if ($request->has('image_src') and $request->file('image_src') !== null) {
-            $image = $request->file('image_src');
-            $name = Str::slug($request->input('name')) . '_' . time();
-            $folder = '/uploads/images/categories/';
-            $filePath = $name . '.' . $image->getClientOriginalExtension();
+            $fileName = Str::random(68).'.'.$request->file('image_src')->getClientOriginalExtension();
+            $destinationPath = '/uploads/images/categories/';
 
-            $this->uploadOne($image, $folder, 'public', $name);
-            $category->image_src = $filePath;
+            $request->file('image_src')->move($destinationPath, $fileName);
+            $category->image_src = $fileName;
         }
 
         $category->save();

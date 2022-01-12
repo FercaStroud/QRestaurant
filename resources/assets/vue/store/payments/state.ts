@@ -3,27 +3,79 @@ export default {
     {
       key: 'index',
       label: '#',
+      class: 'text-center',
     },
     {
-      key: 'user_name',
+      key: 'id',
+      label: 'ID',
+      class: 'text-center',
+    },
+    {
+      key: 'price',
+      class: 'text-center',
+    },
+    {
+      key: 'total',
+      class: 'text-center',
+    },
+    {
+      key: 'collection_id',
+      class: 'text-center',
+    },
+    {
+      key: 'collection_status',
+      class: 'text-center',
+    },
+    {
+      key: 'payment_id',
+      class: 'text-center',
     },
     {
       key: 'status',
+      class: 'text-center',
     },
     {
-      key: 'payment_details',
+      key: 'payment_type',
+      class: 'text-center',
+    },
+    {
+      key: 'external_reference',
+      class: 'text-center',
+    },
+    {
+      key: 'merchant_order_id',
+      class: 'text-center',
+    },
+    {
+      key: 'preference_id',
+      class: 'text-center',
+    },
+    {
+      key: 'site_id',
+      class: 'text-center',
+    },
+    {
+      key: 'processing_mode',
+      class: 'text-center',
+    },
+    {
+      key: 'merchant_account_id',
+      class: 'text-center',
+    },
+    {
+      key: 'start_date',
+      class: 'text-center',
+    },
+    {
+      key: 'end_date',
+      class: 'text-center',
     },
     {
       key: 'created_at',
-    },
-    {
-      key: 'updated_at',
-    },
-    {
-      key: 'actions',
+      class: 'text-center',
     },
   ],
-  status: [],
   payments: [],
+  paymentStatus: false,
   isLoading: false,
 };

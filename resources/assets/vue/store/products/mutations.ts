@@ -3,12 +3,6 @@ import Vue from 'vue';
 const SET_PRODUCTS = (state, payload) => {
   state.products = payload.data;
 
-  /*state.pagination = {
-    currentPage: payload.current_page,
-    perPage: payload.per_page,
-    totalProducts: payload.total,
-    totalPages: payload.last_page,
-  };*/
 };
 
 const ADD_PRODUCT = (state, payload) => {
@@ -54,6 +48,10 @@ const SET_FORM = (state, payload) => {
   state.form = payload;
 };
 
+const SET_ADD_FILE_MODAL_VISIBLE = (state, payload) => {
+  state.isAddFileModalVisible = payload;
+};
+
 export default {
   SET_FORM,
   SET_DIALOG_MESSAGE,
@@ -65,4 +63,5 @@ export default {
   SET_LOADING,
   SET_MODAL_LOADING,
   SET_MODAL_VISIBLE,
+  SET_ADD_FILE_MODAL_VISIBLE,
 };

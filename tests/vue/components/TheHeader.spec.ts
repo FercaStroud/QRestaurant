@@ -17,10 +17,6 @@ Vue.use(Router);
 
 const localState = {
   settings: {
-    image_src: '',
-    logo_src: '',
-    address: '',
-    name: '',
     example: 'test',
   },
   menu: [{

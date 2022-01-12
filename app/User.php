@@ -2,15 +2,16 @@
 
 namespace App;
 
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements JWTSubject
+class User extends Authenticatable
 {
     use Notifiable;
     use SoftDeletes;
+    use HasApiTokens;
 
     protected $appends = [
         'home_path',
@@ -21,11 +22,26 @@ class User extends Authenticatable implements JWTSubject
     ];
 
     protected $fillable = [
-        'user_name', 'restaurant_name', 'email', 'password', 'type_id', 'address', 'city', 'state', 'phone', 'logo_src'
+        'name',
+        'lastname',
+        'second_lastname',
+        'address',
+        'state',
+        'municipality',
+        'city',
+        'country',
+        'email',
+        'phone',
+        'restaurant_name',
+        'description',
+        'cover',
+        'logo',
+        'birthday',
+        'password',
     ];
 
     protected $hidden = [
-        'password', 'remember_token', 'updated_at',
+        'password', 'remember_token', 'created_at', 'updated_at',
     ];
 
     const TYPE_ADMIN = 1;
@@ -50,29 +66,9 @@ class User extends Authenticatable implements JWTSubject
     {
         switch ($this->type_id) {
             case 1:
-            return '/';
+            return 'home';
             default:
-            return '/dashboard';
+            return 'example'; // TODO change
         }
-    }
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
     }
 }

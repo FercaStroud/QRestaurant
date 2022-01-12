@@ -14,8 +14,6 @@ yarn-error.log
 .env.testing
 .settings
 .phpunit.result.cache
-.DS_Store
-public/.DS_Store
 
 /tests-jest.xml
 /tests-phpunit.xml
@@ -24,3 +22,6 @@ public/.DS_Store
 public/js
 public/css
 resources/assets/vue/vue-i18n-locales.generated.js
+
+public/service-worker.*
+public/mix-manifest.json

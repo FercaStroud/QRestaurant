@@ -20,9 +20,30 @@ class Payment extends Model
     ];
 
     protected $fillable = [
-        'user_id', 'status',
+        'user_id',
+        'price',
+        'total',
+        'collection_id',
+        'collection_status',
+        'payment_id',
+        'status',
+        'payment_type',
+        'external_reference',
+        'merchant_order_id',
+        'preference_id',
+        'site_id',
+        'processing_mode',
+        'merchant_account_id',
+        'feedback_status',
+        'preference_status',
     ];
+
 
     protected $hidden = [
     ];
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\belongsTo
+    {
+        return $this->belongsTo('App\User');
+    }
 }

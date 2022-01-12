@@ -1,45 +1,33 @@
 <script lang="ts">
-import axios from 'axios';
 import { Component, Vue, Watch } from 'vue-property-decorator';
-import { Action, State } from 'vuex-class';
+import { Action, State, namespace } from 'vuex-class';
 
-import Landing from './views/Landing.vue';
-import Dashboard from './views/Dashboard.vue';
+import BaseAuth from './views/auth/components/BaseAuth.vue';
 import TheHeader from './components/TheHeader.vue';
-import PublicHeader from './components/headers/PublicHeader.vue';
 
 import dialog from '@/utils/dialog';
-import userTypes from '@/utils/userTypes';
+
+const aStore = namespace('auth');
 
 @Component({
   components: {
-    Dashboard,
+    BaseAuth,
     TheHeader,
-    PublicHeader,
-    Landing,
   },
 })
 export default class App extends Vue {
   @Action loadData;
   @State dialogMessage;
+  @aStore.State user;
 
   /**
    * Yeah, I will use emoji here.
    * I recommend Noto Color Emoji font if you use Linux.
   */
   locales = [
-    { flag: '🇲🇽', name: 'es', title: 'Cambiar a Español', language: 'Español' },
     { flag: '🇺🇸', name: 'en', title: 'Switch to English', language: 'English' },
-    //{ flag: '🇧🇷', name: 'pt', title: 'Mudar para Português' , language: 'Português' },
+    { flag: '🇪🇸', name: 'es', title: 'Cambiar a Español', language: 'Español' },
   ];
-
-  mounted() {
-    this.$auth.ready(async () => {
-      if (this.$auth.check()) {
-        await this.loadData();
-      }
-    });
-  }
 
   get activeLocale() {
     return this.$i18n.locale();
@@ -59,29 +47,35 @@ export default class App extends Vue {
 </script>
 
 <template lang="pug">
-div.app(v-show='$auth.ready()')
+.app
   dialogs-wrapper
-  div(v-if='$auth.check()')
-    the-header
-    dashboard
-  div(v-else)
-    public-header
-    router-view
-    .languages
-      b-button(
-        v-for='(locale, i) in locales',
-        :class='{ active: activeLocale === locale.name }',
-        :key='i',
-        :title='locale.title',
-        @click='changeLocale(locale.name)',
-      ) {{ locale.flag }}
+  div(style='height: 100%;')
+    the-header(v-if='user.id')
+    router-view#router
+  footer#app-footer.bg-primary.w-100
+    b-container
+      b-row.p-3
+        b-col
+          b-link.p-1(href='https://appsgorilasonline.com/' target="_blank" style="float:left") {{ $t('strings.by_gorillas') }}
+
+        b-col
+          router-link.p-1(to='/privacy-policy' style="float:right") {{ $t('strings.privacy_policy') }}
+          router-link.p-1(to="#" style="float:right") /
+          router-link.p-1(to='/terms-of-use' style="float:right") {{ $t('strings.terms_of_use') }}
+  .languages
+    b-button(
+      v-for='(locale, i) in locales',
+      :class='{ active: activeLocale === locale.name }',
+      :key='i',
+      :title='locale.title',
+      @click='changeLocale(locale.name)',
+    ) {{ locale.flag }}
 </template>
 
 <style lang="scss">
 .app {
-  height: 100%;
   .languages {
-    bottom: 16px;
+    bottom: 42px;
     position: fixed;
     right: 16px;
     z-index: 2;
@@ -90,4 +84,5 @@ div.app(v-show='$auth.ready()')
     }
   }
 }
+
 </style>

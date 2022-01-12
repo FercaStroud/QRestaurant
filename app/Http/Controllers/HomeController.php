@@ -23,23 +23,7 @@ class HomeController extends Controller
      */
     public function vue()
     {
-        $homeItems = [
-            /*[
-                'name' => 'strings.users',
-                'icon' => 'users',
-                'link' => 'users',
-            ],*/
-            [
-                'name' => 'strings.users',
-                'icon' => 'users',
-                'link' => 'users',
-            ],
-            /*[
-                'name' => 'strings.messages',
-                'icon' => 'envelope',
-                'link' => 'messages',
-            ],*/
-        ];
+        $homeItems = [];
 
         $settingsFile = Utils::getSettingsFile();
 
@@ -55,5 +39,9 @@ class HomeController extends Controller
         ];
 
         return $data;
+    }
+
+    public function user() {
+        return Auth::user();
     }
 }

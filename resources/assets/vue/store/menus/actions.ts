@@ -25,6 +25,7 @@ const addMenu = async ({ commit }, payload) => {
   try {
     const response = await axios.post('menus', {
       name: payload.name,
+      slug: payload.slug,
       description: payload.description,
       type: payload.type,
     });
@@ -51,6 +52,7 @@ const editMenu = async ({ commit }, payload) => {
   formData.append('description', payload.description);
   formData.append('type', payload.type);
   formData.append('image_src', payload.image_src);
+  formData.append('slug', payload.slug);
 
   commit('SET_MODAL_LOADING', true);
 
@@ -89,6 +91,10 @@ const deleteMenu = async ({ commit }, payload) => {
 
 const setModalVisible = ({ commit }, payload) => {
   commit('SET_MODAL_VISIBLE', payload);
+};
+
+const setAddFileModalVisible = ({ commit }, payload) => {
+  commit('SET_ADD_FILE_MODAL_VISIBLE', payload);
 };
 
 const setModalAdd = ({ commit }, payload) => {
@@ -130,4 +136,5 @@ export default {
   editMenu,
   deleteMenu,
   setModalVisible,
+  setAddFileModalVisible,
 };

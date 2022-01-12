@@ -6,27 +6,43 @@ export default {
     },
     {
       key: 'image_src',
+      class: 'text-center',
+
     },
     {
       key: 'name',
+      class: 'text-center',
+
     },
     {
       key: 'category_name',
+      class: 'text-center',
+
     },
     {
       key: 'description',
+      class: 'text-center',
+
     },
     {
       key: 'price',
+      class: 'text-center',
+
     },
     {
       key: 'created_at',
+      class: 'text-center',
+
     },
     {
       key: 'updated_at',
+      class: 'text-center',
+
     },
     {
       key: 'actions',
+      class: 'text-center',
+
     },
   ],
   products: [],
@@ -36,9 +52,10 @@ export default {
     totalProducts: 0,
     totalPages: 0,
   },
-  form:{},
+  form: {},
   isModalAdd: false,
   isLoading: false,
   isModalLoading: false,
   isModalVisible: false,
+  isAddFileModalVisible: false,
 };

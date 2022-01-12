@@ -8,22 +8,24 @@ import getters from './getters';
 import mutations from './mutations';
 import state from './state';
 
-//import messages from './messages';
-import users from './users';
-import products from './products';
-import categories from './categories';
 import menus from './menus';
+import categories from './categories';
+import products from './products';
 import payments from './payments';
+import messages from './messages';
+import users from './users';
+import auth from './auth';
 
 Vue.use(Vuex);
 
 const modules = {
-  //messages,
-  users,
-  products,
-  categories,
   menus,
+  categories,
+  products,
+  messages,
   payments,
+  users,
+  auth,
 };
 
 const store = new Vuex.Store({

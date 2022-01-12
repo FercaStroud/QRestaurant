@@ -7,15 +7,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Util\Utils;
-use App\Traits\UploadTrait;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Response;
 
 class ProductController extends Controller
 {
-    use UploadTrait;
-
     public function index(Request $request)
     {
         return Product::select(
@@ -43,15 +40,25 @@ class ProductController extends Controller
         $product = new Product($request->all());
         $product->image_src = null;
 
-        if ($request->has('image_src') and $request->file('image_src') !== null) {
-            $image = $request->file('image_src');
-            $name = Str::slug($request->input('name')) . '_' . time();
-            $folder = '/uploads/images/products/';
-            $filePath = $name . '.' . $image->getClientOriginalExtension();
+        $product->save();
+        return response()->json($product, 201);
+    }
 
-            $this->uploadOne($image, $folder, 'public', $name);
-            $product->image_src = $filePath;
-        }
+
+    public function addFile(Request $request)
+    {
+        $request->validate([
+            'id' => 'required',
+            'image_src' => 'required',
+        ]);
+
+
+        $product = Product::find($request->get('id'));
+        $fileName = Str::random(68).'.'.$request->file('image_src')->getClientOriginalExtension();
+        $destinationPath = 'uploads/images/products/';
+
+        $request->file('image_src')->move($destinationPath, $fileName);
+        $product->image_src = $fileName;
 
         $product->save();
         return response()->json($product, 201);
@@ -69,20 +76,11 @@ class ProductController extends Controller
 
         $description = $request->get("description");
 
-        if($description == "null"){
+        if ($description == "null") {
             $description = '';
         }
+
         $product->description = $description;
-
-        if ($request->has('image_src') and $request->file('image_src') !== null) {
-            $image = $request->file('image_src');
-            $name = Str::slug($request->input('name')) . '_' . time();
-            $folder = '/uploads/images/products/';
-            $filePath = $name . '.' . $image->getClientOriginalExtension();
-
-            $this->uploadOne($image, $folder, 'public', $name);
-            $product->image_src = $filePath;
-        }
 
         $product->save();
         return response()->json($product, 201);

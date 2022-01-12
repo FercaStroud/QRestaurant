@@ -6,21 +6,27 @@ export default {
     },
     {
       key: 'name',
+      class: 'text-center',
     },
     {
       key: 'image_src',
+      class: 'text-center',
     },
     {
       key: 'description',
+      class: 'text-center',
     },
     {
       key: 'created_at',
+      class: 'text-center',
     },
     {
       key: 'updated_at',
+      class: 'text-center',
     },
     {
       key: 'actions',
+      class: 'text-center',
     },
   ],
   categories: [],
@@ -36,4 +42,5 @@ export default {
   isLoading: false,
   isModalLoading: false,
   isModalVisible: false,
+  isAddFileModalVisible: false,
 };

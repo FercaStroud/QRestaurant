@@ -6,27 +6,43 @@ export default {
     },
     {
       key: 'name',
+      class: 'text-center',
     },
     {
-      key: 'products',
+      key: 'slug',
+      class: 'text-center',
+    },
+    {
+      key: 'description',
+      class: 'text-center',
     },
     {
       key: 'categories',
+      class: 'text-center',
+    },
+    {
+      key: 'products',
+      class: 'text-center',
     },
     {
       key: 'type',
+      class: 'text-center',
     },
     {
       key: 'file',
+      class: 'text-center',
     },
     {
       key: 'created_at',
+      class: 'text-center',
     },
     {
       key: 'updated_at',
+      class: 'text-center',
     },
     {
       key: 'actions',
+      class: 'text-center',
     },
   ],
   menus: [],

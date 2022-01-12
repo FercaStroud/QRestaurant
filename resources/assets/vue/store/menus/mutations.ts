@@ -2,13 +2,6 @@ import Vue from 'vue';
 
 const SET_MENUS = (state, payload) => {
   state.menus = payload.data;
-
-  /*state.pagination = {
-    currentPage: payload.current_page,
-    perPage: payload.per_page,
-    totalMenus: payload.total,
-    totalPages: payload.last_page,
-  };*/
 };
 
 const ADD_MENU = (state, payload) => {
@@ -43,6 +36,10 @@ const SET_MODAL_VISIBLE = (state, payload) => {
   state.isModalVisible = payload;
 };
 
+const SET_ADD_FILE_MODAL_VISIBLE = (state, payload) => {
+  state.isAddFileModalVisible = payload;
+};
+
 const SET_MODAL_ADD = (state, payload) => {
   state.isModalAdd = payload;
 };
@@ -66,4 +63,5 @@ export default {
   SET_MODAL_LOADING,
   SET_MODAL_VISIBLE,
   SET_DIALOG_MESSAGE,
+  SET_ADD_FILE_MODAL_VISIBLE,
 };

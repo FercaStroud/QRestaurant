@@ -1,23 +1,29 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import AuthLogin from '../views/AuthLogin.vue';
-const AuthRegister = () => import('../views/AuthRegister.vue');
-const AuthResetLink = () => import('../views/AuthResetLink.vue');
-const AuthResetForm = () => import('../views/AuthResetForm.vue');
+import NProgress from 'nprogress';
 
-const Dashboard = () => import('../views/Dashboard.vue');
-const Home = () => import('../views/Home.vue');
-const Landing = () => import('../views/Landing.vue');
-const Menu = () => import('../views/Menu.vue');
-const Menus = () => import('../views/MyMenus.vue');
-//const Messages = () => import('../views/Messages.vue');
-const Users = () => import('../views/Users.vue');
-const Categories = () => import('../views/Categories.vue');
-const Products = () => import('../views/Products.vue');
-const Payments = () => import('../views/Payments.vue');
+const BaseAuth = () => import(/* webpackChunkName: "login" */'@/views/auth/components/BaseAuth.vue');
+const AuthLogin = () => import(/* webpackChunkName: "login" */'../views/auth/AuthLogin.vue');
+const AuthRegister = () => import('../views/auth/AuthRegister.vue');
+const AuthResetLink = () => import('../views/auth/AuthResetLink.vue');
+const AuthResetForm = () => import('../views/auth/AuthResetForm.vue');
+
+const Example = () => import(/* webpackChunkName: "example" */'../views/example/Example.vue');
+const Home = () => import('../views/home/Home.vue');
+const Messages = () => import('../views/messages/Messages.vue');
+const Users = () => import('../views/users/Users.vue');
+const UsersGraphQL = () => import('../views/users/UsersGraphQL.vue');
+
+const Menus = () => import('../views/menus/Menus.vue');
+const Categories = () => import('../views/categories/Categories.vue');
+const Products = () => import('../views/products/Products.vue');
+const Payments = () => import('../views/payments/Payments.vue');
+const Settings = () => import('../views/settings/Settings.vue');
 
 import userTypes from '@/utils/userTypes';
+
+import store from '../store';
 
 Vue.use(Router);
 
@@ -26,31 +32,37 @@ const router = new Router({
   routes: [
     {
       path: '/',
-      name: 'landing',
-      component: Landing,
-      meta: {
-        title: Vue.i18n.translate('strings.home', null),
-        auth: false,
-      },
-    },
-    {
-      path: '/admin',
       name: 'home',
       component: Home,
       meta: {
-        title: Vue.i18n.translate('strings.home', null),
+        title: {
+          key: 'strings.home',
+        },
         auth: {
-          roles: userTypes.ADMIN,
-          forbiddenRedirect: '/dashboard',
+          roles: [userTypes.ADMIN],
+          forbiddenRedirect: '/example',
         },
       },
     },
     {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: Dashboard,
+      path: '/example',
+      name: 'example',
+      component: Example,
       meta: {
-        title: Vue.i18n.translate('strings.dashboard', null),
+        title: {
+          key: 'strings.example',
+        },
+        auth: true,
+      },
+    },
+    {
+      path: '/menus',
+      name: 'menus',
+      component: Menus,
+      meta: {
+        title: {
+          key: 'strings.menus',
+        },
         auth: true,
       },
     },
@@ -59,7 +71,9 @@ const router = new Router({
       name: 'categories',
       component: Categories,
       meta: {
-        title: Vue.i18n.translate('categories.text', null),
+        title: {
+          key: 'strings.categories',
+        },
         auth: {
           roles: userTypes.NORMAL,
           forbiddenRedirect: '/',
@@ -71,7 +85,9 @@ const router = new Router({
       name: 'products',
       component: Products,
       meta: {
-        title: Vue.i18n.translate('products.text', null),
+        title: {
+          key: 'strings.products',
+        },
         auth: {
           roles: userTypes.NORMAL,
           forbiddenRedirect: '/',
@@ -79,95 +95,124 @@ const router = new Router({
       },
     },
     {
-      path: '/menus',
-      name: 'menus',
-      component: Menus,
-      meta: {
-        title: Vue.i18n.translate('strings.my_menus', null),
-        auth: {
-          roles: userTypes.NORMAL,
-          forbiddenRedirect: '/',
-        },
-      },
-    },
-    {
-      path: '/payments',
-      name: 'payments',
+      path: '/user/payments',
+      name: 'user_payments',
       component: Payments,
       meta: {
-        title: Vue.i18n.translate('payments.title', null),
+        title: {
+          key: 'strings.payments',
+        },
         auth: {
           roles: userTypes.NORMAL,
           forbiddenRedirect: '/',
         },
       },
     },
-    /*{
+    {
+      path: '/user/settings',
+      name: 'user_settings',
+      component: Settings,
+      meta: {
+        title: {
+          key: 'strings.settings',
+        },
+        auth: {
+          roles: userTypes.NORMAL,
+          forbiddenRedirect: '/',
+        },
+      },
+    },
+    {
       path: '/messages',
       name: 'messages',
       component: Messages,
       meta: {
-        title: Vue.i18n.translate('strings.messages', null),
+        title: {
+          key: 'strings.messages',
+        },
         auth: true,
       },
-    },*/
+    },
     {
       path: '/users',
       name: 'users',
       component: Users,
       meta: {
-        title: Vue.i18n.translate('strings.users', null),
+        title: {
+          key: 'users.title',
+          length: 2,
+        },
         auth: {
-          roles: userTypes.ADMIN,
-          forbiddenRedirect: '/dashboard',
+          roles: [userTypes.ADMIN],
+          forbiddenRedirect: '/example',
         },
       },
     },
     {
-      path: '/login',
-      name: 'auth.login',
-      component: AuthLogin,
+      path: '/users/graphql',
+      name: 'users.graphql',
+      component: UsersGraphQL,
       meta: {
-        title: Vue.i18n.translate('login.login', null),
-        auth: false,
+        title: {
+          key: 'users.title',
+          length: 2,
+        },
+        auth: {
+          roles: [userTypes.ADMIN],
+          forbiddenRedirect: '/example',
+        },
       },
     },
+
     {
-      path: '/registrations/new',
-      name: 'auth.register',
-      component: AuthRegister,
-      meta: {
-        title: Vue.i18n.translate('login.register', null),
-        auth: false,
+      path: '/auth',
+      component: BaseAuth,
+      children: [{
+        path: 'login',
+        name: 'auth.login',
+        component: AuthLogin,
+        meta: {
+          title: {
+            key: 'login.login',
+          },
+          auth: false,
+        },
       },
+        {
+          path: '/registrations/new',
+          name: 'auth.register',
+          component: AuthRegister,
+          meta: {
+            title: {
+              key: 'login.register',
+            },
+            auth: false,
+          },
+        },
+        {
+          path: 'password/reset',
+          name: 'auth.reset',
+          component: AuthResetLink,
+          meta: {
+            title: {
+              key: 'login.reset_password',
+            },
+            auth: false,
+          },
+        },
+        {
+          path: 'password/reset/:token',
+          name: 'auth.reset.token',
+          component: AuthResetForm,
+          meta: {
+            title: {
+              key: 'login.reset_password',
+            },
+            auth: false,
+          },
+        }],
     },
-    {
-      path: '/password/reset',
-      name: 'auth.reset',
-      component: AuthResetLink,
-      meta: {
-        title: Vue.i18n.translate('login.reset_password', null),
-        auth: false,
-      },
-    },
-    {
-      path: '/password/reset/:token',
-      name: 'auth.reset.token',
-      component: AuthResetForm,
-      meta: {
-        title: Vue.i18n.translate('login.reset_password', null),
-        auth: false,
-      },
-    },
-    {
-      path: '/menu/:id',
-      name: 'menu_view',
-      component: Menu,
-      meta: {
-        title: 'Menu',
-        auth: false,
-      },
-    },
+
     {
       path: '*',
       redirect: '/',
@@ -175,7 +220,93 @@ const router = new Router({
   ],
 });
 
-// It's required for VueAuth
-Vue.router = router;
+declare let authenticated;
+
+const progressShowDelay = 100;
+let routeResolved = false;
+
+router.afterEach(() => {
+  routeResolved = true;
+  NProgress.done();
+});
+
+router.beforeEach((to, from, next) => {
+  let {user} = (<any>store.state).auth;
+  const {auth} = to.meta;
+
+  let homePath = user.home_path;
+
+  if (user.id && to.name == 'auth.login' && from.name == homePath) {
+    next(false);
+    return;
+  }
+
+  if (!authenticated && to.name == 'auth.login') {
+    store.dispatch('setTitle', '');
+    next();
+    return;
+  }
+
+  routeResolved = false;
+  setTimeout(() => {
+    if (!routeResolved) {
+      NProgress.start();
+    }
+  }, progressShowDelay);
+
+  function authCheck() {
+    if (auth && (!user.id)) {
+      authenticated = false;
+      router.push({
+        name: 'auth.login',
+      });
+      return;
+    }
+
+    if (from.name || to.path.includes('/dashboard')) {
+      if (to.name == 'public.home') {
+        store.dispatch('setTitle', '');
+      } else {
+        const { title } = to.meta;
+        store.dispatch('setTitle', Vue.i18n.translate(title.key, null, title.length));
+      }
+    }
+
+    if (user.id) {
+      authenticated = true;
+
+      if (auth) {
+        next();
+      } else {
+        homePath = user.home_path;
+
+        next({
+          name: homePath,
+        });
+      }
+      return;
+    }
+
+    next();
+  }
+
+  if (!user.id) {
+    store.dispatch('auth/checkUser', async (res) => {
+      if (!res) {
+        user = null;
+      } else {
+        await res;
+      }
+
+      user = (<any>store.state).auth.user;
+
+      authCheck();
+    });
+
+    return;
+  }
+
+  authCheck();
+});
 
 export default router;

@@ -10,4 +10,5 @@ return [
     'file' => 'Archivo',
     'add_file' => 'Añadir Archivo',
     'view_file' => 'Ver Archivo',
+    'slug' => 'Slug',
 ];
