@@ -21,6 +21,9 @@ const Products = () => import('../views/products/Products.vue');
 const Payments = () => import('../views/payments/Payments.vue');
 const Settings = () => import('../views/settings/Settings.vue');
 
+const TermsOfUse = () => import('../views/legal/TermsOfUse.vue');
+const PrivacyPolicy = () => import('../views/legal/PrivacyPolicy.vue');
+
 import userTypes from '@/utils/userTypes';
 
 import store from '../store';
@@ -131,6 +134,28 @@ const router = new Router({
           key: 'strings.messages',
         },
         auth: true,
+      },
+    },
+    {
+      path: '/terms-of-use',
+      name: 'termsOFUse',
+      component: TermsOfUse,
+      meta: {
+        title: {
+          key: 'strings.terms_of_use',
+        },
+        auth: false,
+      },
+    },
+    {
+      path: '/privacy-policy',
+      name: 'privacyPolicy',
+      component: PrivacyPolicy,
+      meta: {
+        title: {
+          key: 'strings.privacy_policy',
+        },
+        auth: false,
       },
     },
     {

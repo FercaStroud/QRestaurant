@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\CreatePreferenceMail;
+use App\Mail\FeedbackMail;
 use App\Payment;
 use App\Product;
 use App\User;
@@ -18,6 +20,29 @@ class PaymentController extends Controller
 {
     public function index()
     {
+    }
+
+    public function freeMonth($user){
+        $payment = new Payment();
+        $payment->user_id = $user->id;
+        $payment->price = 0;
+        $payment->total = 0;
+        $payment->preference_status = 1;
+        $payment->feedback_status = 1;
+        $payment->collection_id = 'GOQRFREEMONTH';
+        $payment->collection_status = 'approved';
+        $payment->payment_id = 'GOQRFREEMONTH';
+        $payment->status = 'approved';
+        $payment->external_reference = 'GOQRFREEMONTH';
+        $payment->payment_type = 'GOQRFREEMONTH';
+        $payment->merchant_order_id = 'GOQRFREEMONTH';
+        $payment->preference_id = 'GOQRFREEMONTH';
+        $payment->site_id = 'GOQRFREEMONTH';
+        $payment->processing_mode ='GOQRFREEMONTH';
+        $payment->merchant_account_id = 'GOQRFREEMONTH';
+        $payment->start_date = Carbon::now();
+        $payment->end_date = Carbon::now()->addMonth();
+        $payment->save();
     }
 
     public function getUserStatus()
@@ -96,7 +121,7 @@ class PaymentController extends Controller
         $payment->feedback_status = 0;
         $payment->save();
 
-        //Mail::send(new CreatePreferenceMail($payment));
+        Mail::send(new CreatePreferenceMail($payment));
 
         return response()->json(['id' => $preference->id], 200);
 
@@ -122,12 +147,14 @@ class PaymentController extends Controller
         $payment->site_id = $request->get('site_id');
         $payment->processing_mode = $request->get('processing_mode');
         $payment->merchant_account_id = $request->get('merchant_account_id');
+        $payment->start_date = Carbon::now();
+        $payment->end_date = Carbon::now()->addMonth();
 
         $payment->feedback_status = 1;
         $payment->save();
 
         if ($request->get('status') === 'approved') {
-            //Mail::send(new FeedbackMail($payment));
+            Mail::send(new FeedbackMail($payment));
             return response()->view('responses.feedback_success',
                 [
                     'payment' => $payment

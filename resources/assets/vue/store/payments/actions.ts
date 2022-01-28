@@ -11,7 +11,7 @@ const loadUserPayments = async ({ commit }, payload) => {
     if (checkErrors) {
       commit('SET_DIALOG_MESSAGE', checkErrors.message, { root: true });
     } else {
-      commit('SET_MAINTENANCES', response.data);
+      commit('SET_PAYMENTS', response.data);
     }
   } catch (e) {
     commit('SET_DIALOG_MESSAGE', 'errors.generic_error', { root: true });

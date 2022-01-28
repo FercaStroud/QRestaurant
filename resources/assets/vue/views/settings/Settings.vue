@@ -77,7 +77,8 @@ export default class Products extends Vue {
         strong {{ $t('strings.payment_status') }}:
         span.text-danger.font-weight-bolder(v-if="!paymentStatus") {{ $t('strings.payment_status_false') }}
         span.font-weight-bolder.text-success(v-else) {{ $t('strings.payment_status_true') }}
-    b-row
+
+    b-row(v-if="!paymentStatus" )
       b-col(md="3")
         b-button.mt-3(
           v-if="!isLoading"
@@ -90,7 +91,6 @@ export default class Products extends Vue {
         b-button.mt-3(
           v-else
           style="margin-bottom: 5px;"
-          @click="checkout"
           block
           size="sm"
           variant="warning"
@@ -100,4 +100,83 @@ export default class Products extends Vue {
             variant="light"
             type="grow"
           )
+    b-row
+      b-col(md="6")
+        b-form(@submit="")
+          b-row.mt-5
+            b-col
+              b-form-group(
+                id="input-group-name"
+                :label="$t('strings.name')"
+                label-for="name"
+                :description="$t('strings.name')"
+              )
+                b-form-input(
+                  id="name"
+                  type="text"
+                  :placeholder="$t('strings.name')"
+                  required
+                )
+            b-col
+              b-form-group(
+                id="input-group-lastname"
+                :label="$t('strings.lastname')"
+                label-for="lastname"
+                :description="$t('strings.lastname')"
+              )
+                b-form-input(
+                  id="lastname"
+                  type="text"
+                  :placeholder="$t('strings.lastname')"
+                  required
+                )
+            b-col
+              b-form-group(
+                id="input-group-second_lastname"
+                :label="$t('strings.second_lastname')"
+                label-for="second_lastname"
+                :description="$t('strings.second_lastname')"
+              )
+                b-form-input(
+                  id="second_lastname"
+                  type="text"
+                  :placeholder="$t('strings.second_lastname')"
+                  required
+                )
+          b-row
+            b-col.bg-primary(style="height:1px")
+          b-row.mt-3
+            b-col
+              b-form-group(
+                id="input-group-address"
+                :label="$t('strings.address')"
+                label-for="address"
+                :description="$t('strings.address')"
+              )
+                b-form-input(
+                  id="address"
+                  type="text"
+                  :placeholder="$t('strings.address')"
+                  required
+                )
+
+      b-col(md="6")
+        b-row.mt-5.cover(:style="{backgroundImage: 'url(http://via.placeholder.com/1920x500)'}" align-v="center" )
+          b-col.border.shadow.logo( offset-md="1" :style="{backgroundImage: 'url(http://via.placeholder.com/500x500)'}")
+
 </template>
+
+<style scoped lang="scss">
+.cover, .logo{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 150px;
+}
+.cover{
+  padding: 20px;
+}
+.logo{
+  max-width: 150px;
+}
+</style>

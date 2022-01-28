@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Http\Controllers\Controller;
+
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+
+use App\Mail\CreateUserMail;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -64,7 +68,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'lastname' => $data['lastname'],
             'second_lastname' => $data['second_lastname'],
@@ -78,5 +82,10 @@ class RegisterController extends Controller
             'phone' => $data['phone'],
             'restaurant_name' => $data['restaurant_name'],
         ]);
+
+        (new \App\Http\Controllers\PaymentController)->freeMonth($user);
+
+        Mail::send(new CreateUserMail($user));
+        return $user;
     }
 }

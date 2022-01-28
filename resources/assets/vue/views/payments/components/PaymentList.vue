@@ -10,11 +10,11 @@ export default class PaymentList extends Vue {
   @pStore.State payments;
   @pStore.State fields;
   @pStore.State isLoading;
-  @pStore.Action loadPayments;
+  @pStore.Action loadUserPayments;
   search = '';
 
   async created() {
-      await this.loadPayments();
+      await this.loadUserPayments();
   }
 
   get actualUser() {
@@ -22,7 +22,7 @@ export default class PaymentList extends Vue {
   }
 
   async getPayments(): Promise<void> {
-    this.loadPayments();
+    this.loadUserPayments();
   }
 
 }

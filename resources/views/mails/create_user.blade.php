@@ -44,7 +44,7 @@
                 style="font-size: 0px;">
                 <a target="_blank">
                     <img
-                        src="https://inagave.com/wp-content/uploads/2021/09/INAGAVE-VECTORE.png"
+                        src="https://q-restaurant.com/images/qr1.svg"
                         alt="Logo"
                         style="display: block; font-size: 12px;"
                         width="200" title="Logo">
@@ -58,7 +58,7 @@
         <tbody>
         <tr>
             <td align="center" class="esd-block-text es-m-txt-c">
-                <h2>GRACIAS POR REGISTRARTE EN INAGAVE</h2>
+                <h2>GRACIAS POR REGISTRARTE EN Q-RESTAURANT</h2>
             </td>
         </tr>
         <tr>
@@ -69,6 +69,9 @@
                 <p>
                     Se creó un usuario con su nombre.<br/>
                 </p>
+                <p>
+                   Disfruta tu mes de prueba gratis.<br/>
+                </p>
 
                 <p>
                     <strong>NOTA: </strong><br/>
@@ -78,11 +81,11 @@
                     liberado y la pantalla de
                     confirmación sea mostrada.
                 </p>
-                <p>Contacto: <strong>payments@inagave.com</strong></p>
+                <p>Contacto: <strong>info@appsgorilasonline.com</strong></p>
                 <p>
                     Gracias por su preferencia.
                     <br/>
-                    <strong>Equipo de INAGAVE</strong>
+                    <strong>Equipo de Q-Restaurant</strong>
                 </p>
             </td>
         </tr>

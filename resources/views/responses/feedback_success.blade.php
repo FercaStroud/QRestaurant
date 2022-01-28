@@ -28,10 +28,10 @@
                     </p>
                     <p>
                         <strong>Precio unitario: </strong>
-                        {{ $payment['price'] }}
+                       $ {{ $payment['price'] }} (USD)
                     </p>
                     <p>
-                        <strong>Total: </strong> {{ $payment['total'] }}
+                        <strong>Total: </strong> $ {{ $payment['total'] }} (USD)
                     </p>
 
                     <button onclick="window.print();" type="button" class="btn btn-warning mt-2"
