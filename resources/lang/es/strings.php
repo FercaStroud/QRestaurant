@@ -58,6 +58,7 @@ return [
     'payment_status_true' => ' Cuenta Activa',
     'payment_status_false' => ' Cuenta Inactiva',
     'generate_payment' => 'Generar Pago',
+    'personal_settings' => 'Datos Personales',
 
     // Pages
     'dashboard'=>'Panel de Administración',

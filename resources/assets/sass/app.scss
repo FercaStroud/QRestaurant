@@ -9,7 +9,7 @@
   background: url("/assets/images/pattern.png");
   background-position: center;
   background-size: cover;
-  height: 100vh;
+  height: calc(100vh - 59.19px);
 }
 
 .text-size-small {
@@ -39,7 +39,7 @@
 }
 
 #app-footer {
-  position: absolute;
+  //position: absolute;
   bottom: 0;
 
   a {

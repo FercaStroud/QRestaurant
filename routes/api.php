@@ -40,6 +40,9 @@ Route::group(['middleware' => ['auth:sanctum'],], function () {
     Route::post('menus/add/file', 'Resources\MenuController@addFile');
     Route::post('category/add/file', 'Resources\CategoryController@addFile');
     Route::post('product/add/file', 'Resources\ProductController@addFile');
+    Route::post('user/update', 'Resources\UserController@updateUserByClient');
+    Route::post('user/update/cover', 'Resources\UserController@updateCover');
+    Route::post('user/update/logo', 'Resources\UserController@updateLogo');
 
 
     Route::post('checkout', 'PaymentController@preference');

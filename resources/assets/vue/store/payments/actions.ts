@@ -30,7 +30,6 @@ const loadPaymentStatus = async ({ commit }, payload) => {
     if (checkErrors) {
       commit('SET_DIALOG_MESSAGE', checkErrors.message, { root: true });
     } else {
-      console.log(response);
       commit('SET_PAYMENT_STATUS', response.data);
     }
   } catch (e) {

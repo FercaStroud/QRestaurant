@@ -52,6 +52,7 @@ return [
     'hide' => 'Hide',
     'show' => 'Show',
     'details' => 'Details',
+    'personal_settings' => 'Personal Settings',
 
     // Pages
     'actions'=>'Actions',

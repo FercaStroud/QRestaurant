@@ -110,7 +110,7 @@ export default class ProductModal extends Vue {
               ) {{ category.name }}
 
         b-col(md="12")
-          span {{$t("strings.form_description")}}
+          span {{$t("strings.description")}}
           quill-editor(
             ref="categoryQuillEditor"
             v-model="form.description"

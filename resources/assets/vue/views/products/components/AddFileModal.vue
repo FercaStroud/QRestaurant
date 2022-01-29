@@ -46,7 +46,6 @@ export default class AddFileModal extends Vue {
             description="Se recomiendan las siguientes medidas W1080px / H500px"
           )
             b-form-file#image_src(
-              type='text',
               accept="image/*",
               :browse-text='$t("strings.browse")',
               :state="Boolean(form.image_src)"

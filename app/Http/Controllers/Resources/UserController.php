@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Util\Utils;
 use Response;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -61,6 +62,59 @@ class UserController extends Controller
         return $user;
     }
 
+    public function updateUserByClient(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'lastname' => 'required',
+            'phone' => 'required',
+            'restaurant_name' => 'required',
+        ]);
+
+        $user = User::find(auth()->user()->id);
+        $input = $request->all();
+
+        $user->update($input);
+
+        return response()->json($user, 200);
+
+    }
+
+    public function updateCover(Request $request)
+    {
+        $request->validate([
+            'cover' => 'required',
+        ]);
+
+        $user = User::find(auth()->user()->id);
+        $fileName = Str::random(68).'.'.$request->file('cover')->getClientOriginalExtension();
+        $destinationPath = 'uploads/images/headers/';
+
+        $request->file('cover')->move($destinationPath, $fileName);
+        $user->cover = $fileName;
+
+        $user->save();
+        return response()->json($user, 201);
+    }
+
+    public function updateLogo(Request $request)
+    {
+        $request->validate([
+            'logo' => 'required',
+        ]);
+
+        $user = User::find(auth()->user()->id);
+        $fileName = Str::random(68).'.'.$request->file('logo')->getClientOriginalExtension();
+        $destinationPath = 'uploads/images/logos/';
+
+        $request->file('logo')->move($destinationPath, $fileName);
+        $user->logo = $fileName;
+
+        $user->save();
+        return response()->json($user, 201);
+    }
+
+
     /**
      * Remove the specified resource from storage.
      *
@@ -83,7 +137,7 @@ class UserController extends Controller
         }
 
         $request->validate([
-            'name' => 'required|max:191',
+            'name' => 'required|max:25',
             'email' => $emailValidation,
             'type_id' => 'required|integer|between:1,2',
             'password' => 'sometimes|min:6|confirmed',
