@@ -19,8 +19,8 @@ export default class AuthLogin extends Vue {
   @aStore.Action setUser;
 
   form = {
-    email:'hola@ferca.dev',
-    password:'normal',
+    email:'',
+    password:'',
     rememberMe: false,
   };
   authError = false;
@@ -77,7 +77,7 @@ export default class AuthLogin extends Vue {
 
 <template lang="pug">
 div
-  div(style="height: 100px")
+  div(style="height: 150px")
   b-container.shadow.glass-effect.pt-5.pb-5
     b-row
       b-col(offset-md="5" md="2")

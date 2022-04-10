@@ -110,22 +110,23 @@ class CategoryController extends Controller
 
     public function withProducts(Request $request)
     {
-        $menu = Menu::find($request->get("id"));
+        $menu = Menu::where("slug", "=", $request->get("slug"))->first();
         $user = User::find($menu->user_id);
 
         if ($menu->type === 'PDF') {
             return response()->json([
                 'user' => [
                     'name' => $user->restaurant_name,
-                    //'address' => $user->address,
-                    //'image_src' => $user->image_src,
-                    'logo_src' => $user->logo_src
+                    'address' => $user->address,
+                    'logo' => $user->logo,
+                    'cover' => $user->cover,
+                    'description' => $user->description,
                 ],
                 'settings' => $menu,
                 'categories' => null,
             ], 201);
         } else {
-            $categories = Category::where("menu_id", "=", $request->get("id"))->get();
+            $categories = Category::where("menu_id", "=", $menu->id)->get();
             $i = 0;
 
             foreach ($categories as $category) {
@@ -138,9 +139,10 @@ class CategoryController extends Controller
                 [
                     'user' => [
                         'name' => $user->restaurant_name,
-                        //'address' => $user->address,
-                        //'image_src' => $user->image_src,
-                        'logo_src' => $user->logo_src
+                        'address' => $user->address,
+                        'logo' => $user->logo,
+                        'cover' => $user->cover,
+                        'description' => $user->description,
                     ],
                     'settings' => $menu,
                     'categories' => $categories

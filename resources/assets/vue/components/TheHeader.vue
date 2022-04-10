@@ -109,6 +109,7 @@ export default class TheHeader extends Vue {
           ) {{ $t('strings.settings') }}
 
           b-nav-item.border-navigator(
+            v-if="user.type_id !== undefined"
             @click='logout',
           )  {{ $t('home.logout') }}
 

@@ -11,7 +11,7 @@ export default class BaseAuth extends Vue {
 
 <template lang="pug">
   .bg-auth
-    router-view
+    router-view()
 
 </template>
 

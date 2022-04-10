@@ -23,6 +23,7 @@ const Settings = () => import('../views/settings/Settings.vue');
 
 const TermsOfUse = () => import('../views/legal/TermsOfUse.vue');
 const PrivacyPolicy = () => import('../views/legal/PrivacyPolicy.vue');
+const Menu = () => import('../views/menus/Public.vue');
 
 import userTypes from '@/utils/userTypes';
 
@@ -188,7 +189,17 @@ const router = new Router({
         },
       },
     },
-
+    {
+      path: '/menu/:slug',
+      name: 'strings.menu',
+      component: Menu,
+      meta: {
+        title: {
+          key: 'menu.title',
+        },
+        auth: false,
+      },
+    },
     {
       path: '/auth',
       component: BaseAuth,

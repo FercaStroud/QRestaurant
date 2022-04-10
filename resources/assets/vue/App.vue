@@ -50,7 +50,7 @@ export default class App extends Vue {
 .app
   dialogs-wrapper
   div(style='height: 100%;')
-    the-header(v-if='user.id')
+    the-header
     router-view#router
   footer#app-footer.bg-primary.w-100
     b-container

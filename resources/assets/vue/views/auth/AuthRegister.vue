@@ -47,7 +47,7 @@ export default class AuthRegister extends Vue {
 
 <template lang="pug">
   b-container
-    div(style="height:70px")
+    div(style="height:120px")
     b-row
       b-col.shadow.glass-effect
         div
